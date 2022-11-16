@@ -1,0 +1,29 @@
+body {
+    font-size: 17px;
+    line-height: 1.8;
+    font-family: Roboto;
+}
+a {
+    color: #136bf5;
+}
+footer {
+    font-size: 16px;
+}
+@media (min-width: 768px) {
+    .container {
+        max-width: 650px;
+    }
+}
+@media (min-width: 992px) {
+    .container {
+        max-width: 760px;
+    }
+}
+.container {
+    padding-left: 0;
+    padding-right: 0;
+}
+[builder-element=BlockElement], [builder-element=PricingTableElement] {
+    background-color: #fff;
+}
+

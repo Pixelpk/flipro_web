@@ -1,0 +1,143 @@
+[Thu Jan 27 11:08:47.078519 2022] [autoindex:error] [pid 4042:tid 140631281272576] [client 119.155.35.119:37844] AH01276: Cannot serve directory /home/anasw/flipro.anasw.com/: No matching DirectoryIndex (index.php,index.html.var,index.htm,index.html,index.shtml,index.xhtml,index.wml,index.perl,index.pl,index.plx,index.ppl,index.cgi,index.jsp,index.js,index.jp,index.php4,index.php3,index.phtml,default.htm,default.html,home.htm,index.php5,Default.html,Default.htm,home.html) found, and server-generated directory index forbidden by Options directive
+[Thu Jan 27 11:37:48.411062 2022] [:error] [pid 4042:tid 140631281272576] [client 119.155.35.119:37874] SoftException in Application.cpp:249: File "/home/anasw/flipro.anasw.com/public/index.php" is writeable by group
+[Thu Jan 27 11:37:48.411655 2022] [core:error] [pid 4042:tid 140631281272576] [client 119.155.35.119:37874] End of script output before headers: index.php
+[Thu Jan 27 11:38:57.363716 2022] [:error] [pid 3910:tid 140631112378112] [client 119.155.35.119:37876] SoftException in Application.cpp:249: File "/home/anasw/flipro.anasw.com/public/index.php" is writeable by group
+[Thu Jan 27 11:38:57.363833 2022] [core:error] [pid 3910:tid 140631112378112] [client 119.155.35.119:37876] End of script output before headers: index.php
+[Thu Mar 10 08:01:40.663409 2022] [:error] [pid 15799:tid 140422194091776] [client 182.179.143.30:54432] SoftException in Application.cpp:249: File "/home/anasw/flipro.anasw.com/public/index.php" is writeable by group
+[Thu Mar 10 08:01:40.671795 2022] [core:error] [pid 15799:tid 140422194091776] [client 182.179.143.30:54432] End of script output before headers: index.php
+[Thu Mar 17 12:42:18.651010 2022] [:error] [pid 28532:tid 139731769673472] [client 39.37.179.4:50142] PHP Warning:  POST Content-Length of 9087837 bytes exceeds the limit of 8388608 bytes in Unknown on line 0
+[Thu Mar 24 08:06:33.523753 2022] [:error] [pid 14972:tid 139752363767552] [client 39.37.142.219:56645] SoftException in Application.cpp:249: File "/home/anasw/flipro.anasw.com/public/index.php" is writeable by group
+[Thu Mar 24 08:06:33.540425 2022] [core:error] [pid 14972:tid 139752363767552] [client 39.37.142.219:56645] End of script output before headers: index.php
+[Thu Mar 24 08:06:38.737491 2022] [:error] [pid 14536:tid 139752254662400] [client 39.37.142.219:56649] SoftException in Application.cpp:249: File "/home/anasw/flipro.anasw.com/public/index.php" is writeable by group
+[Thu Mar 24 08:06:38.737587 2022] [core:error] [pid 14536:tid 139752254662400] [client 39.37.142.219:56649] End of script output before headers: index.php
+[Thu Mar 24 08:06:48.435474 2022] [:error] [pid 14972:tid 139752346982144] [client 39.37.142.219:56658] SoftException in Application.cpp:249: File "/home/anasw/flipro.anasw.com/public/index.php" is writeable by group
+[Thu Mar 24 08:06:48.435563 2022] [core:error] [pid 14972:tid 139752346982144] [client 39.37.142.219:56658] End of script output before headers: index.php
+[Thu Mar 24 08:06:53.317723 2022] [:error] [pid 14535:tid 139752237876992] [client 39.37.142.219:56662] SoftException in Application.cpp:249: File "/home/anasw/flipro.anasw.com/public/index.php" is writeable by group
+[Thu Mar 24 08:06:53.317833 2022] [core:error] [pid 14535:tid 139752237876992] [client 39.37.142.219:56662] End of script output before headers: index.php
+[Thu Mar 24 08:06:55.529901 2022] [:error] [pid 14536:tid 139752237876992] [client 39.37.142.219:56665] SoftException in Application.cpp:249: File "/home/anasw/flipro.anasw.com/public/index.php" is writeable by group
+[Thu Mar 24 08:06:55.530017 2022] [core:error] [pid 14536:tid 139752237876992] [client 39.37.142.219:56665] End of script output before headers: index.php
+[Thu Mar 24 08:07:13.502541 2022] [:error] [pid 14536:tid 139752229484288] [client 182.179.160.209:56670] SoftException in Application.cpp:249: File "/home/anasw/flipro.anasw.com/public/index.php" is writeable by group
+[Thu Mar 24 08:07:13.502612 2022] [core:error] [pid 14536:tid 139752229484288] [client 182.179.160.209:56670] End of script output before headers: index.php
+[Thu Mar 24 08:08:20.968682 2022] [:error] [pid 14972:tid 139752321804032] [client 39.37.142.219:56729] SoftException in Application.cpp:249: File "/home/anasw/flipro.anasw.com/public/index.php" is writeable by group
+[Thu Mar 24 08:08:20.968789 2022] [core:error] [pid 14972:tid 139752321804032] [client 39.37.142.219:56729] End of script output before headers: index.php
+[Thu Mar 24 08:13:56.045445 2022] [:error] [pid 14972:tid 139752254662400] [client 182.179.160.209:56674] SoftException in Application.cpp:249: File "/home/anasw/flipro.anasw.com/public/index.php" is writeable by group
+[Thu Mar 24 08:13:56.045563 2022] [core:error] [pid 14972:tid 139752254662400] [client 182.179.160.209:56674] End of script output before headers: index.php
+[Thu Mar 24 08:55:57.257521 2022] [:error] [pid 14972:tid 139752355374848] [client 182.179.160.209:56682] SoftException in Application.cpp:249: File "/home/anasw/flipro.anasw.com/public/index.php" is writeable by group
+[Thu Mar 24 08:55:57.258803 2022] [core:error] [pid 14972:tid 139752355374848] [client 182.179.160.209:56682] End of script output before headers: index.php
+[Thu Mar 24 08:56:17.555011 2022] [:error] [pid 14972:tid 139752338589440] [client 182.179.160.209:56684] SoftException in Application.cpp:249: File "/home/anasw/flipro.anasw.com/public/index.php" is writeable by group
+[Thu Mar 24 08:56:17.555102 2022] [core:error] [pid 14972:tid 139752338589440] [client 182.179.160.209:56684] End of script output before headers: index.php
+[Thu Mar 24 08:56:19.893144 2022] [:error] [pid 14536:tid 139752397338368] [client 182.179.160.209:56686] SoftException in Application.cpp:249: File "/home/anasw/flipro.anasw.com/public/index.php" is writeable by group
+[Thu Mar 24 08:56:19.893290 2022] [core:error] [pid 14536:tid 139752397338368] [client 182.179.160.209:56686] End of script output before headers: index.php
+[Thu Mar 24 11:49:37.717109 2022] [:error] [pid 14536:tid 139752338589440] [client 39.37.142.219:57301] SoftException in Application.cpp:249: File "/home/anasw/flipro.anasw.com/public/index.php" is writeable by group
+[Thu Mar 24 11:49:37.729911 2022] [core:error] [pid 14536:tid 139752338589440] [client 39.37.142.219:57301] End of script output before headers: index.php
+[Thu Mar 24 11:49:46.338347 2022] [:error] [pid 14536:tid 139752305018624] [client 39.37.142.219:57308] SoftException in Application.cpp:249: File "/home/anasw/flipro.anasw.com/public/index.php" is writeable by group
+[Thu Mar 24 11:49:46.338451 2022] [core:error] [pid 14536:tid 139752305018624] [client 39.37.142.219:57308] End of script output before headers: index.php
+[Thu Mar 24 12:40:09.851479 2022] [:error] [pid 14972:tid 139752288233216] [client 39.37.142.219:64333] SoftException in Application.cpp:249: File "/home/anasw/flipro.anasw.com/public/index.php" is writeable by group
+[Thu Mar 24 12:40:09.852134 2022] [core:error] [pid 14972:tid 139752288233216] [client 39.37.142.219:64333] End of script output before headers: index.php
+[Thu Mar 24 12:40:20.767710 2022] [:error] [pid 14972:tid 139752397338368] [client 39.37.142.219:64342] SoftException in Application.cpp:249: File "/home/anasw/flipro.anasw.com/public/index.php" is writeable by group
+[Thu Mar 24 12:40:20.767783 2022] [core:error] [pid 14972:tid 139752397338368] [client 39.37.142.219:64342] End of script output before headers: index.php
+[Thu Mar 24 12:53:14.071118 2022] [:error] [pid 14972:tid 139752246269696] [client 39.37.142.219:64915] SoftException in Application.cpp:249: File "/home/anasw/flipro.anasw.com/public/index.php" is writeable by group
+[Thu Mar 24 12:53:14.071353 2022] [core:error] [pid 14972:tid 139752246269696] [client 39.37.142.219:64915] End of script output before headers: index.php
+[Thu Mar 24 12:53:28.067435 2022] [:error] [pid 14536:tid 139752279840512] [client 39.37.142.219:64927] SoftException in Application.cpp:249: File "/home/anasw/flipro.anasw.com/public/index.php" is writeable by group
+[Thu Mar 24 12:53:28.067580 2022] [core:error] [pid 14536:tid 139752279840512] [client 39.37.142.219:64927] End of script output before headers: index.php
+[Thu Mar 24 12:53:37.509867 2022] [:error] [pid 14536:tid 139752237876992] [client 39.37.142.219:64935] SoftException in Application.cpp:249: File "/home/anasw/flipro.anasw.com/public/index.php" is writeable by group
+[Thu Mar 24 12:53:37.509996 2022] [core:error] [pid 14536:tid 139752237876992] [client 39.37.142.219:64935] End of script output before headers: index.php
+[Fri Mar 25 09:16:43.856357 2022] [:error] [pid 23551:tid 140648594220800] [client 39.37.142.219:49231] SoftException in Application.cpp:249: File "/home/anasw/flipro.anasw.com/public/index.php" is writeable by group
+[Fri Mar 25 09:16:43.879899 2022] [core:error] [pid 23551:tid 140648594220800] [client 39.37.142.219:49231] End of script output before headers: index.php
+[Fri Mar 25 09:16:46.659382 2022] [:error] [pid 23096:tid 140648577435392] [client 39.37.142.219:49233] SoftException in Application.cpp:249: File "/home/anasw/flipro.anasw.com/public/index.php" is writeable by group
+[Fri Mar 25 09:16:46.659468 2022] [core:error] [pid 23096:tid 140648577435392] [client 39.37.142.219:49233] End of script output before headers: index.php
+[Fri Mar 25 09:16:56.404214 2022] [:error] [pid 23551:tid 140648781199104] [client 39.37.142.219:49246] SoftException in Application.cpp:249: File "/home/anasw/flipro.anasw.com/public/index.php" is writeable by group
+[Fri Mar 25 09:16:56.404311 2022] [core:error] [pid 23551:tid 140648781199104] [client 39.37.142.219:49246] End of script output before headers: index.php
+[Fri Mar 25 09:17:51.003079 2022] [:error] [pid 23551:tid 140648569042688] [client 39.37.142.219:49286] SoftException in Application.cpp:249: File "/home/anasw/flipro.anasw.com/public/index.php" is writeable by group
+[Fri Mar 25 09:17:51.003148 2022] [core:error] [pid 23551:tid 140648569042688] [client 39.37.142.219:49286] End of script output before headers: index.php
+[Fri Mar 25 09:17:51.084573 2022] [:error] [pid 23551:tid 140648627791616] [client 39.37.142.219:49287] SoftException in Application.cpp:249: File "/home/anasw/flipro.anasw.com/public/index.php" is writeable by group
+[Fri Mar 25 09:17:51.084729 2022] [core:error] [pid 23551:tid 140648627791616] [client 39.37.142.219:49287] End of script output before headers: index.php
+[Fri Mar 25 09:17:52.959613 2022] [:error] [pid 23096:tid 140648619398912] [client 39.37.142.219:49290] SoftException in Application.cpp:249: File "/home/anasw/flipro.anasw.com/public/index.php" is writeable by group
+[Fri Mar 25 09:17:52.959717 2022] [core:error] [pid 23096:tid 140648619398912] [client 39.37.142.219:49290] End of script output before headers: index.php
+[Tue Mar 29 10:15:24.293653 2022] [:error] [pid 30023:tid 139843043825408] [client 119.155.32.54:45565] SoftException in Application.cpp:249: File "/home/anasw/flipro.anasw.com/public/index.php" is writeable by group
+[Tue Mar 29 10:15:24.309971 2022] [core:error] [pid 30023:tid 139843043825408] [client 119.155.32.54:45565] End of script output before headers: index.php
+[Tue Mar 29 10:15:31.650015 2022] [:error] [pid 30023:tid 139842902017792] [client 119.155.32.54:45566] SoftException in Application.cpp:249: File "/home/anasw/flipro.anasw.com/public/index.php" is writeable by group
+[Tue Mar 29 10:15:31.650160 2022] [core:error] [pid 30023:tid 139842902017792] [client 119.155.32.54:45566] End of script output before headers: index.php
+[Tue Mar 29 10:15:56.923341 2022] [:error] [pid 30023:tid 139842893625088] [client 119.155.32.54:45567] SoftException in Application.cpp:249: File "/home/anasw/flipro.anasw.com/public/index.php" is writeable by group
+[Tue Mar 29 10:15:56.923469 2022] [core:error] [pid 30023:tid 139842893625088] [client 119.155.32.54:45567] End of script output before headers: index.php
+[Tue Mar 29 10:16:07.862657 2022] [:error] [pid 30023:tid 139842843268864] [client 119.155.32.54:45568] SoftException in Application.cpp:249: File "/home/anasw/flipro.anasw.com/public/index.php" is writeable by group
+[Tue Mar 29 10:16:07.863739 2022] [core:error] [pid 30023:tid 139842843268864] [client 119.155.32.54:45568] End of script output before headers: index.php
+[Tue Mar 29 10:16:12.663173 2022] [:error] [pid 30023:tid 139842834876160] [client 119.155.32.54:45569] SoftException in Application.cpp:249: File "/home/anasw/flipro.anasw.com/public/index.php" is writeable by group
+[Tue Mar 29 10:16:12.663305 2022] [core:error] [pid 30023:tid 139842834876160] [client 119.155.32.54:45569] End of script output before headers: index.php
+[Tue Mar 29 10:16:14.267613 2022] [:error] [pid 30460:tid 139843018647296] [client 119.155.32.54:45570] SoftException in Application.cpp:249: File "/home/anasw/flipro.anasw.com/public/index.php" is writeable by group
+[Tue Mar 29 10:16:14.267690 2022] [core:error] [pid 30460:tid 139843018647296] [client 119.155.32.54:45570] End of script output before headers: index.php
+[Tue Mar 29 10:16:16.029162 2022] [:error] [pid 30024:tid 139842784519936] [client 119.155.32.54:45571] SoftException in Application.cpp:249: File "/home/anasw/flipro.anasw.com/public/index.php" is writeable by group
+[Tue Mar 29 10:16:16.029278 2022] [core:error] [pid 30024:tid 139842784519936] [client 119.155.32.54:45571] End of script output before headers: index.php
+[Tue Mar 29 10:18:39.578147 2022] [:error] [pid 30023:tid 139842826483456] [client 119.155.32.54:57175] SoftException in Application.cpp:249: File "/home/anasw/flipro.anasw.com/public/index.php" is writeable by group
+[Tue Mar 29 10:18:39.578291 2022] [core:error] [pid 30023:tid 139842826483456] [client 119.155.32.54:57175] End of script output before headers: index.php
+[Wed Mar 30 14:07:05.663281 2022] [core:error] [pid 8621:tid 140495218853632] [client 119.155.32.54:58995] AH00524: Handler for (null) returned invalid result code 70008
+[Thu Mar 31 08:28:37.016223 2022] [:error] [pid 18005:tid 140570538219264] [client 119.152.128.166:54310] SoftException in Application.cpp:249: File "/home/anasw/flipro.anasw.com/public/index.php" is writeable by group
+[Thu Mar 31 08:28:37.031166 2022] [core:error] [pid 18005:tid 140570538219264] [client 119.152.128.166:54310] End of script output before headers: index.php
+[Thu Mar 31 08:32:02.352986 2022] [:error] [pid 16877:tid 140570647324416] [client 119.152.128.166:54320] SoftException in Application.cpp:249: File "/home/anasw/flipro.anasw.com/public/index.php" is writeable by group
+[Thu Mar 31 08:32:02.353102 2022] [core:error] [pid 16877:tid 140570647324416] [client 119.152.128.166:54320] End of script output before headers: index.php
+[Thu Mar 31 12:06:53.058697 2022] [:error] [pid 18005:tid 140570622146304] [client 119.152.128.154:61396] SoftException in Application.cpp:249: File "/home/anasw/flipro.anasw.com/public/index.php" is writeable by group
+[Thu Mar 31 12:06:53.073143 2022] [core:error] [pid 18005:tid 140570622146304] [client 119.152.128.154:61396] End of script output before headers: index.php
+[Tue Apr 05 09:23:03.057929 2022] [:error] [pid 25996:tid 140230539601664] [client 182.179.156.128:61173] SoftException in Application.cpp:249: File "/home/anasw/flipro.anasw.com/public/index.php" is writeable by group
+[Tue Apr 05 09:23:03.073904 2022] [core:error] [pid 25996:tid 140230539601664] [client 182.179.156.128:61173] End of script output before headers: index.php
+[Tue Apr 05 09:26:37.970222 2022] [:error] [pid 25994:tid 140230396925696] [client 182.179.156.128:61352] SoftException in Application.cpp:249: File "/home/anasw/flipro.anasw.com/public/index.php" is writeable by group
+[Tue Apr 05 09:26:37.970457 2022] [core:error] [pid 25994:tid 140230396925696] [client 182.179.156.128:61352] End of script output before headers: index.php
+[Tue Apr 05 09:31:50.433710 2022] [:error] [pid 25996:tid 140230522816256] [client 182.179.156.128:61594] SoftException in Application.cpp:249: File "/home/anasw/flipro.anasw.com/public/index.php" is writeable by group
+[Tue Apr 05 09:31:50.433828 2022] [core:error] [pid 25996:tid 140230522816256] [client 182.179.156.128:61594] End of script output before headers: index.php
+[Tue Apr 05 09:34:54.400045 2022] [:error] [pid 25996:tid 140230489245440] [client 182.179.156.128:61726] SoftException in Application.cpp:249: File "/home/anasw/flipro.anasw.com/public/index.php" is writeable by group
+[Tue Apr 05 09:34:54.400173 2022] [core:error] [pid 25996:tid 140230489245440] [client 182.179.156.128:61726] End of script output before headers: index.php
+[Tue Apr 05 09:35:52.491114 2022] [:error] [pid 25996:tid 140230480852736] [client 182.179.156.128:61767] SoftException in Application.cpp:249: File "/home/anasw/flipro.anasw.com/public/index.php" is writeable by group
+[Tue Apr 05 09:35:52.491225 2022] [core:error] [pid 25996:tid 140230480852736] [client 182.179.156.128:61767] End of script output before headers: index.php
+[Tue Apr 05 10:25:42.258348 2022] [:error] [pid 25996:tid 140230489245440] [client 182.179.156.128:64460] SoftException in Application.cpp:249: File "/home/anasw/flipro.anasw.com/public/index.php" is writeable by group
+[Tue Apr 05 10:25:42.259356 2022] [core:error] [pid 25996:tid 140230489245440] [client 182.179.156.128:64460] End of script output before headers: index.php
+[Tue Apr 05 10:26:21.024784 2022] [:error] [pid 25996:tid 140230480852736] [client 182.179.156.128:64492] SoftException in Application.cpp:249: File "/home/anasw/flipro.anasw.com/public/index.php" is writeable by group
+[Tue Apr 05 10:26:21.024899 2022] [core:error] [pid 25996:tid 140230480852736] [client 182.179.156.128:64492] End of script output before headers: index.php
+[Tue Apr 05 10:26:43.626652 2022] [:error] [pid 26463:tid 140230506030848] [client 182.179.156.128:52292] SoftException in Application.cpp:249: File "/home/anasw/flipro.anasw.com/public/index.php" is writeable by group
+[Tue Apr 05 10:26:43.626727 2022] [core:error] [pid 26463:tid 140230506030848] [client 182.179.156.128:52292] End of script output before headers: index.php
+[Tue Apr 05 10:54:46.017203 2022] [:error] [pid 25996:tid 140230531208960] [client 182.179.156.128:50834] SoftException in Application.cpp:249: File "/home/anasw/flipro.anasw.com/public/index.php" is writeable by group
+[Tue Apr 05 10:54:46.017382 2022] [core:error] [pid 25996:tid 140230531208960] [client 182.179.156.128:50834] End of script output before headers: index.php
+[Tue Apr 05 10:56:04.509708 2022] [:error] [pid 25996:tid 140230628517632] [client 182.179.156.128:50892] SoftException in Application.cpp:249: File "/home/anasw/flipro.anasw.com/public/index.php" is writeable by group
+[Tue Apr 05 10:56:04.509814 2022] [core:error] [pid 25996:tid 140230628517632] [client 182.179.156.128:50892] End of script output before headers: index.php
+[Tue Apr 05 10:56:05.292066 2022] [:error] [pid 26463:tid 140230636910336] [client 182.179.156.128:50894] SoftException in Application.cpp:249: File "/home/anasw/flipro.anasw.com/public/index.php" is writeable by group
+[Tue Apr 05 10:56:05.292165 2022] [core:error] [pid 26463:tid 140230636910336] [client 182.179.156.128:50894] End of script output before headers: index.php
+[Mon Apr 11 09:08:32.733164 2022] [:error] [pid 514:tid 139737942939392] [client 119.155.31.135:59893] SoftException in Application.cpp:249: File "/home/anasw/flipro.anasw.com/public/index.php" is writeable by group
+[Mon Apr 11 09:08:32.761322 2022] [core:error] [pid 514:tid 139737942939392] [client 119.155.31.135:59893] End of script output before headers: index.php
+[Mon Apr 11 09:08:40.943373 2022] [:error] [pid 31830:tid 139737683646208] [client 119.155.31.135:59897] SoftException in Application.cpp:249: File "/home/anasw/flipro.anasw.com/public/index.php" is writeable by group
+[Mon Apr 11 09:08:40.943548 2022] [core:error] [pid 31830:tid 139737683646208] [client 119.155.31.135:59897] End of script output before headers: index.php
+[Mon Apr 11 09:17:01.879692 2022] [:error] [pid 514:tid 139737834714880] [client 119.155.31.135:60263] SoftException in Application.cpp:249: File "/home/anasw/flipro.anasw.com/public/index.php" is writeable by group
+[Mon Apr 11 09:17:01.881361 2022] [core:error] [pid 514:tid 139737834714880] [client 119.155.31.135:60263] End of script output before headers: index.php
+[Mon Apr 11 10:20:14.506250 2022] [:error] [pid 31830:tid 139737826322176] [client 119.155.31.135:58024] SoftException in Application.cpp:249: File "/home/anasw/flipro.anasw.com/public/index.php" is writeable by group
+[Mon Apr 11 10:20:14.645509 2022] [core:error] [pid 31830:tid 139737826322176] [client 119.155.31.135:58024] End of script output before headers: index.php
+[Mon Apr 11 10:20:24.437700 2022] [:error] [pid 31830:tid 139737809536768] [client 119.155.31.135:51047] SoftException in Application.cpp:249: File "/home/anasw/flipro.anasw.com/public/index.php" is writeable by group
+[Mon Apr 11 10:20:24.437790 2022] [core:error] [pid 31830:tid 139737809536768] [client 119.155.31.135:51047] End of script output before headers: index.php
+[Tue Apr 12 10:25:35.550915 2022] [core:error] [pid 8935:tid 140130581591808] [client 111.119.187.30:35638] malformed header from script 'index.php': Bad header: Content-Type, referer: https://flipro.anasw.com/email/design?id=3
+[Tue Apr 12 10:25:50.080239 2022] [core:error] [pid 8933:tid 140130413143808] [client 111.119.187.30:35645] malformed header from script 'index.php': Bad header: Content-Type, referer: https://flipro.anasw.com/email/design?id=1
+[Thu Apr 14 10:16:11.854770 2022] [core:error] [pid 24350:tid 139787528779520] [client 39.37.181.88:41982] AH00524: Handler for (null) returned invalid result code 70007
+[Thu Apr 14 10:21:00.615261 2022] [:error] [pid 24350:tid 139787706455808] [client 39.37.143.214:33092] SoftException in Application.cpp:249: File "/home/anasw/flipro.anasw.com/public/index.php" is writeable by group
+[Thu Apr 14 10:21:00.615385 2022] [core:error] [pid 24350:tid 139787706455808] [client 39.37.143.214:33092] End of script output before headers: index.php
+[Fri Apr 15 09:31:04.908851 2022] [:error] [pid 1875:tid 140609553680128] [client 39.37.143.214:37980] SoftException in Application.cpp:249: File "/home/anasw/flipro.anasw.com/public/index.php" is writeable by group
+[Fri Apr 15 09:31:04.936537 2022] [core:error] [pid 1875:tid 140609553680128] [client 39.37.143.214:37980] End of script output before headers: index.php
+[Mon Apr 18 08:56:07.198480 2022] [:error] [pid 32514:tid 140646253836032] [client 119.155.34.76:54558] PHP Warning:  Maximum number of allowable file uploads has been exceeded in Unknown on line 0
+[Mon Apr 18 08:56:07.227787 2022] [:error] [pid 32514:tid 140646253836032] [client 119.155.34.76:54558] PHP Warning:  Maximum number of allowable file uploads has been exceeded in Unknown on line 0
+[Mon Apr 18 08:56:07.227955 2022] [:error] [pid 32514:tid 140646253836032] [client 119.155.34.76:54558] PHP Warning:  Maximum number of allowable file uploads has been exceeded in Unknown on line 0
+[Tue Apr 19 08:38:19.540211 2022] [core:error] [pid 6739:tid 139918181377792] [client 39.37.157.39:37318] malformed header from script 'index.php': Bad header: Content-Type, referer: https://flipro.anasw.com/email/design?id=1
+[Tue Apr 19 08:38:54.820482 2022] [core:error] [pid 6740:tid 139918038701824] [client 39.37.157.39:37342] malformed header from script 'index.php': Bad header: Content-Type, referer: https://flipro.anasw.com/email/design?id=1
+[Tue Apr 19 08:39:48.053692 2022] [core:error] [pid 7196:tid 139918198163200] [client 39.37.157.39:37424] malformed header from script 'index.php': Bad header: Content-Type, referer: https://flipro.anasw.com/email/design?id=6
+[Tue Apr 19 08:40:20.410741 2022] [core:error] [pid 6740:tid 139918156199680] [client 39.37.157.39:37440] malformed header from script 'index.php': Bad header: Content-Type, referer: https://flipro.anasw.com/email/design?id=6
+[Tue Apr 19 08:41:23.031695 2022] [core:error] [pid 7196:tid 139918198163200] [client 39.37.157.39:37470] malformed header from script 'index.php': Bad header: Content-Type, referer: https://flipro.anasw.com/email/design?id=6
+[Tue Apr 19 08:41:41.393227 2022] [core:error] [pid 6740:tid 139918047094528] [client 39.37.157.39:37492] malformed header from script 'index.php': Bad header: Content-Type, referer: https://flipro.anasw.com/email/design?id=6
+[Tue Apr 19 08:48:22.714842 2022] [core:error] [pid 6739:tid 139918181377792] [client 39.37.157.39:37506] malformed header from script 'index.php': Bad header: Content-Type, referer: https://flipro.anasw.com/email/design?id=6
+[Tue Apr 19 08:48:51.725467 2022] [core:error] [pid 7196:tid 139918198163200] [client 39.37.157.39:37534] malformed header from script 'index.php': Bad header: Content-Type, referer: https://flipro.anasw.com/email/design?id=6
+[Tue Apr 19 08:50:21.421454 2022] [core:error] [pid 6739:tid 139918172985088] [client 39.37.157.39:37550] malformed header from script 'index.php': Bad header: Content-Type, referer: https://flipro.anasw.com/email/design?id=6
+[Tue Apr 19 08:51:10.404486 2022] [core:error] [pid 7196:tid 139918156199680] [client 39.37.157.39:37584] malformed header from script 'index.php': Bad header: Content-Type, referer: https://flipro.anasw.com/email/design?id=6
+[Tue Apr 19 08:53:37.875231 2022] [core:error] [pid 6740:tid 139918164592384] [client 39.37.157.39:37624] malformed header from script 'index.php': Bad header: Content-Type, referer: https://flipro.anasw.com/email/design?id=6
+[Tue Apr 19 08:53:57.637330 2022] [core:error] [pid 6739:tid 139918156199680] [client 39.37.157.39:37658] malformed header from script 'index.php': Bad header: Content-Type, referer: https://flipro.anasw.com/email/design?id=6
+[Tue Apr 19 09:01:36.347731 2022] [core:error] [pid 6741:tid 139918030309120] [client 39.37.157.39:37690] malformed header from script 'index.php': Bad header: Content-Type, referer: https://flipro.anasw.com/email/design?id=6
+[Tue Apr 19 09:03:01.459809 2022] [core:error] [pid 7196:tid 139918072272640] [client 39.37.157.39:37752] malformed header from script 'index.php': Bad header: Content-Type, referer: https://flipro.anasw.com/email/design?id=6
+[Tue Apr 19 09:09:22.043629 2022] [core:error] [pid 6740:tid 139918038701824] [client 39.37.157.39:37860] malformed header from script 'index.php': Bad header: Content-Type, referer: https://flipro.anasw.com/email/design?id=6
+[Tue Apr 19 09:09:56.388809 2022] [core:error] [pid 6741:tid 139918206555904] [client 39.37.157.39:37886] malformed header from script 'index.php': Bad header: Content-Type
+[Tue Apr 19 09:10:22.418435 2022] [core:error] [pid 6741:tid 139918156199680] [client 39.37.157.39:37890] malformed header from script 'index.php': Bad header: Content-Type
+[Tue Apr 19 09:11:15.825358 2022] [core:error] [pid 7196:tid 139918156199680] [client 39.37.157.39:37900] malformed header from script 'index.php': Bad header: Content-Type
+[Tue Apr 19 09:11:31.901709 2022] [core:error] [pid 6739:tid 139918189770496] [client 39.37.157.39:37898] malformed header from script 'index.php': Bad header: Content-Type
+[Tue Apr 19 09:11:50.740213 2022] [core:error] [pid 7196:tid 139918164592384] [client 39.37.157.39:37902] malformed header from script 'index.php': Bad header: Content-Type
+[Tue Apr 19 09:14:39.480432 2022] [core:error] [pid 6741:tid 139918080665344] [client 39.37.157.39:37948] malformed header from script 'index.php': Bad header: Content-Type
+[Tue Apr 19 09:15:10.427905 2022] [core:error] [pid 6741:tid 139918038701824] [client 39.37.157.39:37954] malformed header from script 'index.php': Bad header: Content-Type

@@ -1,0 +1,66 @@
+/*================================================================================
+	Item Name: Frest HTML Admin Template
+	Version: 1.0
+	Author: PIXINVENT
+	Author URL: http://www.themeforest.net/user/pixinvent
+================================================================================
+
+NOTE:
+------
+PLACE HERE YOUR OWN SCSS CODES AND IF NEEDED, OVERRIDE THE STYLES FROM THE OTHER STYLESHEETS.
+WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BETTER LIKE THIS.  */
+
+
+.select2-container {
+    width: 100% !important;
+}
+
+.select2-selection__rendered {
+	/* padding-left: 30px !important; */
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice__remove{
+	border-right: none !important;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
+	padding-right: 20px !important;
+}
+
+span.select2-selection.select2-selection--multiple {
+	min-height: calc(1.4em + 0.94rem + 3.7px) !important;
+	overflow-y: auto;
+}
+
+.card-header.accordion {
+	padding: 0px;
+	background-color: #cdcdcd;
+	color: #000;
+}
+
+.btn.btn-link {
+	color: #000;
+}
+
+.card.accordion {
+	margin-bottom: 2px;
+}
+
+.card.dashboard {
+	min-height: 209.1px !important;
+}
+
+
+.rotate{
+	vertical-align:top;
+	  transform:rotate(7deg);
+	-ms-transform:rotate(-90deg); /* IE 9 */
+	-moz-transform:rotate(-90deg); /* Firefox */
+	-webkit-transform:rotate(-90deg); /* Safari and Chrome */
+	-o-transform:rotate(-90deg);
+}
+
+.btn-light.primary{
+	background-color: #165C98 !important;
+	color: #fff !important;
+}

@@ -1,0 +1,46 @@
+//Authentication
+#NOTE: Types can be: admin,builder,homeowner,franchise,evaluator
+
+###AUTHENTICATE USER 
+POST http://localhost:8000/api/authenticate HTTP/1.1
+Accept: application/json
+Content-Type: application/json
+
+{
+    "email": "client@mailinator.com",
+    "password": "admin@123",
+    "type": "admin"
+}
+
+###SEARCH USERS WITH FILTERS
+GET http://localhost:8000/api/users HTTP/1.1
+Authorization: Bearer 7|oJBtM2emAEdEgzLn54zDix4GAiZS1PSRmF4bmMRH
+Accept: application/json
+Content-Type: application/json
+
+{
+    "type": "admin",
+    "search": "asfdasdfasfd"
+}
+
+###SEARCH USERS WITH ID
+##NOTE: Id is passed at the end of url
+GET http://localhost:8000/api/users/1 HTTP/1.1
+Authorization: Bearer 7|oJBtM2emAEdEgzLn54zDix4GAiZS1PSRmF4bmMRH
+Accept: application/json
+Content-Type: application/json
+
+{
+    "type": "admin"
+}
+
+###GET PROJECTS BY USERS VIEW CONDITION
+##NOTE: ONLY BEARER TOKEN IS REQUIRED
+GET http://localhost:8000/api/projects HTTP/1.1
+Authorization: Bearer 19|tm8gsq0op71wTBY20E55qe5qC4k2qkCl4fL53NTd
+Accept: application/json
+Content-Type: application/json
+
+{
+
+}
