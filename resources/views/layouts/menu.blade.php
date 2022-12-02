@@ -71,7 +71,7 @@ $user = \Auth::user();
                     </li>
                     @endif
                     @if($user->hasRole("view-franchise"))
-                    <li class="{{Request::path() == 'users/franchise' ? 'active' : ''}}"><a href="/users/franchise"><i class="bx bx-right-arrow-alt"></i><span class="menu-item" data-i18n="2 columns">Franchises</span></a>
+                    <li class="{{Request::path() == 'users/franchise' ? 'active' : ''}}"><a href="/users/franchise"><i class="bx bx-right-arrow-alt"></i><span class="menu-item" data-i18n="2 columns">Partners</span></a>
                     </li>
                     @endif
                     @if($user->hasRole("view-evaluator"))

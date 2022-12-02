@@ -37,9 +37,9 @@ class Project extends Model
     protected $casts = [
         'photos' => 'array',
         'videos' => 'array',
-        'anticipated_budget' => 'integer',
-        'current_property_value' => 'integer',
-        'property_debt' => 'integer',
+        'anticipated_budget' => 'float',
+        'current_property_value' => 'float',
+        'property_debt' => 'float',
         'cross_collaterized' => 'integer'
     ];
 
@@ -52,6 +52,7 @@ class Project extends Model
         'applicant_name',
         'email',
         'phone',
+        'phone_code',
         'applicant_address',
         'registered_owners',
         'current_property_value',

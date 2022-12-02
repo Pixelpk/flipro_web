@@ -45,7 +45,7 @@ class LiveSendEmailWidget extends Component
 
     public function send()
     {
-        dd($this->replyMessage);
+
         $this->validate();
         $messageId = uniqid();
         $emailSettings = $this->emailSettings;

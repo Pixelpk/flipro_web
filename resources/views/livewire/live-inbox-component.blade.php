@@ -497,11 +497,7 @@
                                                             </span>
                                                         </div>
 
-                                                        <button wire:loading.attr='disabled' wire:target='attachments'
-                                                            wire:click='reply' class="btn btn-primary send-btn">
-                                                            <i class='bx bx-send mr-25'></i>
-                                                            <span class="d-none d-sm-inline"> Reply</span>
-                                                        </button>
+
                                                     </div>
                                                 </div>
                                                 <div class="form-group mt-2">
@@ -512,6 +508,11 @@
                                                             file</label>
                                                     </div>
                                                 </div>
+                                                <button wire:loading.attr='disabled' wire:target='attachments'
+                                                            wire:click='reply' class="btn btn-primary send-btn">
+                                                            <i class='bx bx-send mr-25'></i>
+                                                            <span class="d-none d-sm-inline"> Reply</span>
+                                                        </button>
                                             </div>
                                         </div>
                                     </div>

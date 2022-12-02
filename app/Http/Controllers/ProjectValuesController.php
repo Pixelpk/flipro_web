@@ -15,7 +15,7 @@ class ProjectValuesController extends Controller
     public function create(Request $request)
     {
         $request->validate([
-            'value' => 'required|integer',
+            'value' => 'required',
             'project_id' => 'required|exists:projects,id'
         ]);
 

@@ -95,18 +95,19 @@
                                                             <label>Phone</label>
                                                         </div>
                                                         <div class="col-md-4 form-group">
-                                                            <div class="position-relative has-icon-left">
+                                                            <div class="position-relative">
+                                                                <div class="input-group">
+                                                                    <div class="input-group-prepend">
+                                                                        <select wire:model.defer='model.phone_code' class="form-control input-group-text">
 
-                                                                <input wire:model.defer='model.phone' type="text"
-                                                                    id="fphone-icon" class="form-control"
-                                                                    name="fphone-id-icon" placeholder="Phone">
-                                                                <div class="form-control-position six1" style="padding-left: 7px">
-                                                                    {{--  <i class="bx bx-phone" style="margin: 0 7px"></i>  --}}
-                                                                    <span style="color: #6b7280; margin-bootom:3px; inline-block">+61</span>
+                                                                            <option value="61">+61 (Australia)</option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <input wire:model.defer='model.phone' type="number" class="form-control" placeholder="Phone" aria-describedby="basic-addon1">
                                                                 </div>
                                                             </div>
-                                                            @error('model.phone') <span class="text-danger">{{ $message
-                                                                }}</span> @enderror
+                                                            @error('model.phone') <span class="text-danger">{{ $message }}</span> @enderror
+                                                            @error('model.phone_code') <span class="text-danger">{{ $message }}</span> @enderror
                                                         </div>
 
 
@@ -129,8 +130,7 @@
                                                         </div>
 
                                                         <div class="col-12 mb-2">
-                                                            <h1 style="font-size: 25px;"><u>Property's Financial
-                                                                    Value</u></h1>
+                                                            <h1 style="font-size: 25px;"><u>Financial</u></h1>
                                                         </div>
                                                         <div class="col-md-2">
                                                             <label>Current Value</label>

@@ -72,29 +72,34 @@
                                             </div>
                                         </div>
                                         <div class="col-md-5">
-                                            <h2 class="display-4 mb-1">Applicant Information</h2>
+                                            <h4 class="display-4 mb-1" style="font-size:2.5rem;">Applicant Information</h4>
                                             <ul>
                                                 @if(Auth::user()->user_type == 'admin')
                                                 @if($project->approved == 'pending')
                                                 <li class="mb-1">
-                                                    <button wire:loading.attr="disabled" class="btn btn-success" wire:click="confirmProjectStatus('approved')">Approved
+                                                    <button wire:loading.attr="disabled" class="btn btn-success"
+                                                        wire:click="confirmProjectStatus('approved')">Approve
 
-                                                        <span wire:loading wire:target="confirmProjectStatus('approved')"
-                                                        class="spinner-border spinner-border-sm"
-                                                        role="status" aria-hidden="true"></span>
+                                                        <span wire:loading
+                                                            wire:target="confirmProjectStatus('approved')"
+                                                            class="spinner-border spinner-border-sm" role="status"
+                                                            aria-hidden="true"></span>
                                                     </button>
-                                                    <button wire:loading.attr="disabled" class="btn btn-danger" wire:click="confirmProjectStatus('rejected')">
-                                                        <span wire:loading wire:target="confirmProjectStatus('rejected')"
-                                                        class="spinner-border spinner-border-sm"
-                                                        role="status" aria-hidden="true"></span>
+                                                    <button wire:loading.attr="disabled" class="btn btn-danger"
+                                                        wire:click="confirmProjectStatus('rejected')">
+                                                        <span wire:loading
+                                                            wire:target="confirmProjectStatus('rejected')"
+                                                            class="spinner-border spinner-border-sm" role="status"
+                                                            aria-hidden="true"></span>
                                                         Reject</button>
                                                 </li>
                                                 @elseif($project->approved == 'rejected')
-                                                <button wire:loading.attr="disabled" class="btn btn-success" wire:click="confirmProjectStatus('approved')">Approved
+                                                <button wire:loading.attr="disabled" class="btn btn-success"
+                                                    wire:click="confirmProjectStatus('approved')">Approve
 
                                                     <span wire:loading wire:target="confirmProjectStatus('approved')"
-                                                    class="spinner-border spinner-border-sm"
-                                                    role="status" aria-hidden="true"></span>
+                                                        class="spinner-border spinner-border-sm" role="status"
+                                                        aria-hidden="true"></span>
                                                 </button>
 
                                                 @endif
@@ -116,7 +121,7 @@
                                                     <b>Applicant Email:</b> {{$project->email}}
                                                 </li>
                                                 <li class="mb-1">
-                                                    <b>Applicant Phone:</b> {{$project->phone}}
+                                                    <b>Applicant Phone:</b> {{$project->phone_code}}{{$project->phone}}
                                                 </li>
                                                 <li class="mb-1">
                                                     <b>Register Owner:</b> {{$project->registered_owners}}
@@ -130,16 +135,17 @@
                                                 <li class="mb-1">
                                                     <b>Cross Collaterized:</b> {{$project->cross_collaterized ? 'Yes' :
                                                     'No'}}
-                                                </li>  --}}
+                                                </li> --}}
                                             </ul>
-                                            <h2 class="display-4 mb-1">Property Fiancials Value</h2>
+                                            <h4 class="display-4 mb-1" style="font-size:2.5rem;">Financials</h4>
                                             <ul>
                                                 <li class="mb-1">
                                                     <b>Current Value:</b>
-                                                    ${{number_format($project->current_property_value)}}
+                                                    ${{number_format((float)$project->current_property_value, 2, '.', '')}}
                                                 </li>
                                                 <li class="mb-1">
-                                                    <b>Property Debts:</b> ${{number_format($project->property_debt)}}
+                                                    <b>Property Debts:</b>
+                                                    ${{ number_format((float)$project->property_debt, 2, '.', '')}}
                                                 </li>
 
                                                 <li class="mb-1">
@@ -153,9 +159,9 @@
                                                 {{--  <li class="mb-1">
                                                     <b>Anticipated Budget:</b>
                                                     ${{number_format($project->anticipated_budget)}}
-                                                </li>  --}}
+                                                </li> --}}
                                             </ul>
-                                            <h2 class="display-4 mb-1">Project Information</h2>
+                                            <h4 class="display-4 mb-1" style="font-size:2.5rem;">Project Information</h4>
                                             <ul>
                                                 <li class="mb-1">
                                                     <b>Project Address:</b>
@@ -165,12 +171,12 @@
                                                 <li class="mb-1">
                                                     <b>Area (Square Meters):</b>
 
-                                                    {{number_format($project->area)}}
+                                                    {{ number_format((float)$project->area, 2, '.', '')}}
                                                 </li>
                                                 <li class="mb-1">
                                                     <b>Anticipated Budget:</b>
 
-                                                    ${{number_format($project->anticipated_budget)}}
+                                                    ${{ number_format((float)$project->anticipated_budget, 2, '.', '')}}
                                                 </li>
                                                 <li class="mb-1">
                                                     <b>Project Title:</b>
@@ -205,7 +211,7 @@
                                                 {{--  <li class="mb-1">
                                                     <b>Anticipated Budget:</b>
                                                     ${{number_format($project->anticipated_budget)}}
-                                                </li>  --}}
+                                                </li> --}}
                                             </ul>
                                         </div>
                                     </div>
@@ -236,7 +242,7 @@
                                                 <li class="nav-item">
                                                     <a wire:ignore.self class="nav-link" id="contact-tab"
                                                         data-toggle="tab" href="#franchise" role="tab"
-                                                        aria-controls="contact" aria-selected="false">Franchises</a>
+                                                        aria-controls="contact" aria-selected="false">Partners</a>
                                                 </li>
                                                 <li class="nav-item">
                                                     <a wire:ignore.self class="nav-link" id="contact1-tab"
@@ -250,7 +256,8 @@
                                                     <div class="row">
                                                         <div class="col-md-2">
                                                             <label for="">Select User</label>
-                                                            <select wire:loading.attr="disabled" wire:model='selectedUser' class="form-control">
+                                                            <select wire:loading.attr="disabled"
+                                                                wire:model='selectedUser' class="form-control">
                                                                 <option value="">
                                                                     Select
                                                                 </option>
@@ -289,8 +296,8 @@
                                                             <button wire:loading.attr="disabled" class="btn btn-primary"
                                                                 wire:click='addUser("home-owner")'>Add
                                                                 <span wire:loading wire:target="addUser"
-                                                                class="spinner-border spinner-border-sm"
-                                                                role="status" aria-hidden="true"></span>
+                                                                    class="spinner-border spinner-border-sm"
+                                                                    role="status" aria-hidden="true"></span>
                                                             </button>
                                                             @endif
                                                         </div>
@@ -346,7 +353,8 @@
                                                     <div class="row">
                                                         <div class="col-md-2">
                                                             <label for="">Select User</label>
-                                                            <select wire:loading.attr="disabled" wire:model='selectedUser' class="form-control">
+                                                            <select wire:loading.attr="disabled"
+                                                                wire:model='selectedUser' class="form-control">
                                                                 <option value="">
                                                                     Select
                                                                 </option>
@@ -365,8 +373,8 @@
                                                             <label for="">Roles</label><br>
                                                             @foreach ($roles as $item)
                                                             @if (in_array($item, $builderRoles))
-                                                            <input wire:loading.attr="disabled" wire:model="userRoles" type="checkbox"
-                                                                value="{{$item}}"> {{ucfirst(str_replace('_', ' ',
+                                                            <input wire:loading.attr="disabled" wire:model="userRoles"
+                                                                type="checkbox" value="{{$item}}"> {{ucfirst(str_replace('_', ' ',
                                                             $item))}}
                                                             @endif
                                                             @endforeach
@@ -376,8 +384,8 @@
                                                             <button wire:loading.attr="disabled" class="btn btn-primary"
                                                                 wire:click='addUser("builder")'>Add
                                                                 <span wire:loading wire:target="addUser"
-                                                                class="spinner-border spinner-border-sm"
-                                                                role="status" aria-hidden="true"></span>
+                                                                    class="spinner-border spinner-border-sm"
+                                                                    role="status" aria-hidden="true"></span>
                                                             </button>
                                                             @endif
                                                         </div>
@@ -422,7 +430,8 @@
                                                                     </td>
                                                                     <td>
                                                                         {{--  <button class="btn btn-danger"
-                                                                            wire:click="deleteUser({{$builder}})">Delete</button>  --}}
+                                                                            wire:click="deleteUser({{$builder}})">Delete</button>
+                                                                        --}}
                                                                     </td>
                                                                 </tr>
                                                                 @endforeach
@@ -435,7 +444,8 @@
                                                     <div class="row">
                                                         <div class="col-md-2">
                                                             <label for="">Select User</label>
-                                                            <select wire:loading.attr="disabled" wire:model='selectedUser' class="form-control">
+                                                            <select wire:loading.attr="disabled"
+                                                                wire:model='selectedUser' class="form-control">
                                                                 <option value="">
                                                                     Select
                                                                 </option>
@@ -534,7 +544,8 @@
                                                     <div class="row">
                                                         <div class="col-md-2">
                                                             <label for="">Select User</label>
-                                                            <select wire:loading.attr="disabled" wire:model='selectedUser' class="form-control">
+                                                            <select wire:loading.attr="disabled"
+                                                                wire:model='selectedUser' class="form-control">
                                                                 <option value="">
                                                                     Select
                                                                 </option>
@@ -552,8 +563,8 @@
                                                             <label for="">Roles</label><br>
                                                             @foreach ($roles as $item)
                                                             @if (in_array($item, $valuerRoles))
-                                                            <input wire:loading.attr="disabled" wire:model="userRoles" type="checkbox"
-                                                                value="{{$item}}"> {{ucfirst(str_replace('_', ' ',
+                                                            <input wire:loading.attr="disabled" wire:model="userRoles"
+                                                                type="checkbox" value="{{$item}}"> {{ucfirst(str_replace('_', ' ',
                                                             $item))}}
                                                             @endif
                                                             @endforeach
@@ -563,8 +574,8 @@
                                                             <button wire:loading.attr="disabled" class="btn btn-primary"
                                                                 wire:click='addUser("evaluator")'>Add
                                                                 <span wire:loading wire:target="addUser"
-                                                                class="spinner-border spinner-border-sm"
-                                                                role="status" aria-hidden="true"></span>
+                                                                    class="spinner-border spinner-border-sm"
+                                                                    role="status" aria-hidden="true"></span>
                                                             </button>
                                                             @endif
                                                         </div>
@@ -610,7 +621,8 @@
                                                                     </td>
                                                                     <td>
                                                                         {{--  <button class="btn btn-danger"
-                                                                            wire:click='deleteUser({{$evaluator}})'>Delete</button>  --}}
+                                                                            wire:click='deleteUser({{$evaluator}})'>Delete</button>
+                                                                        --}}
                                                                     </td>
                                                                 </tr>
                                                                 @endforeach
@@ -893,7 +905,7 @@
                                                 </tr>
                                                 @foreach ($project->evaluations as $value)
                                                 <tr>
-                                                    <td>${{number_format($value->value)}}</td>
+                                                    <td>${{ number_format((float)$value->value, 2, '.', '')}}</td>
                                                     <td>
                                                         @if ($value->client_satisfied !== null)
                                                         {{$value->client_satisfied == true ? "Yes" : "No"}}
@@ -979,6 +991,7 @@
                                                     <td>Description</td>
                                                     <td>Status</td>
                                                     <td>Reason</td>
+                                                    <td>Media</td>
                                                     @if(Auth::user()->hasRole('administrator'))
                                                     <td>Action</td>
                                                     @endif
@@ -992,19 +1005,85 @@
                                                         {{ ucfirst($item->status) }}
                                                     </td>
                                                     <td>{{$item->reason ?? ''}}</td>
+                                                    <td>
+
+                                                        <button data-toggle="modal" data-target="#exampleModal91{{ $item->id }}"
+                                                            class="btn btn-primary">View</button>
+                                                        <div wire:ignore.self class="modal fade" id="exampleModal91{{ $item->id }}"
+                                                            tabindex="-1" role="dialog"
+                                                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog modal-xl" role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="exampleModalLabel">
+                                                                            Media</h5>
+                                                                        <button type="button" class="close"
+                                                                            data-dismiss="modal" aria-label="Close">
+                                                                            <span aria-hidden="true">&times;</span>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <div class="row">
+                                                                            <div class="col-md-12">
+                                                                                <h3 class="display-4">Photos</h3>
+                                                                            </div>
+                                                                            @foreach ((array)$item->images as $image)
+                                                                            @php
+                                                                            $photo = $image;
+                                                                            if($photo)
+                                                                            if(filter_var($photo, FILTER_VALIDATE_URL)){
+                                                                            $photo = explode("/", $photo);
+                                                                            $photo = $photo[count($photo) -2] . '/' .
+                                                                            $photo[count($photo)-1];
+                                                                            }
+                                                                            @endphp
+
+                                                                            <div class="col-md-2">
+                                                                                <a target="_blank"
+                                                                                    href="/stream/{{$photo}}">
+                                                                                    <img src="/stream/{{$photo}}"
+                                                                                        width="100%" alt="logo">
+                                                                                </a>
+                                                                            </div>
+                                                                            @endforeach
+                                                                            <div class="col-md-12">
+                                                                                <h3 class="display-4">Videos</h3>
+                                                                            </div>
+                                                                            @if ((array)$item->videos)
+                                                                            @foreach ((array)$item->videos as $video)
+                                                                            <div class="col-md-4">
+                                                                                <video src="{{$video['file']}}"
+                                                                                    width="100%" controls="true"
+                                                                                    autoplay="false">
+                                                                                    <source src="{{$video['file']}}">
+                                                                                </video>
+                                                                            </div>
+                                                                            @endforeach
+
+                                                                            @endif
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
                                                     @if(Auth::user()->hasRole('administrator'))
                                                     <td>
+
                                                         @if($project->status != 'complete' || $project->status !=
                                                         'closed')
                                                         @if($item->status == 'pending')
                                                         <button class="btn-success btn"
-                                                            wire:click='openPaymentRequestModel({{ $item->id }}, "approved")'>Approved</button>
+                                                            wire:click='openPaymentRequestModel({{ $item->id }}, "approved")'>Approve</button>
                                                         <button class="btn-danger btn"
                                                             wire:click='openPaymentRequestModel({{ $item->id }}, "rejected")'>Reject</button>
                                                         @endif
                                                         @if($item->status == 'rejected')
                                                         <button class="btn-success btn"
-                                                            wire:click='openPaymentRequestModel({{ $item->id }}, "approved")'>Approved</button>
+                                                            wire:click='openPaymentRequestModel({{ $item->id }}, "approved")'>Approve</button>
                                                         @endif
                                                         @endif
                                                     </td>
@@ -1269,7 +1348,7 @@
                                     <td>Description</td>
                                     <td>Date</td>
                                 </tr>
-                                @foreach ($eventLogs  as $item)
+                                @foreach ($eventLogs as $item)
                                 <tr>
                                     <td>{{$item->user->name}}</td>
                                     <td>{{$item->description}}</td>
@@ -1287,4 +1366,5 @@
         </div>
     </div>
     @endif
+
 </div>

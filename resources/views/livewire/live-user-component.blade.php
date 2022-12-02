@@ -1,4 +1,9 @@
 <div class="app-content content">
+    @php
+        if($type == 'home-owner') {
+            $type = 'Home Owner';
+        }
+    @endphp
     <div class="content-overlay"></div>
     <div class="content-wrapper">
         <div class="content-header row">
@@ -12,7 +17,7 @@
                                 </li>
                                 <li class="breadcrumb-item"><a href="#">Users</a>
                                 </li>
-                                <li class="breadcrumb-item active"><a href="#">{{ucfirst(str_replace('-', ' ', $type))}}</a>
+                                <li class="breadcrumb-item active"><a href="#">{{ucfirst(str_replace('-', ' ', $type == 'franchise' ? 'Partner' : $type))}}</a>
                                 </li>
                             </ol>
                         </div>
@@ -26,12 +31,12 @@
                     <div class="col-md-12 col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">{{str_replace('-', ' ', $type)}}s</h4>
+                                <h4 class="card-title">{{str_replace('-', ' ', $type == 'franchise' ? 'Partner' : $type)}}s</h4>
                             </div>
                             <div class="card-content">
                                 <div class="card-body">
                                     <button type="button" wire:click='openModal' class="btn btn-outline-primary mb-3" data-toggle="modal" data-target="#userCreateModal">
-                                        <i class="bx bx-plus"></i> Add {{$type}}
+                                        <i class="bx bx-plus"></i> Add {{$type == 'franchise' ? 'Partner' : ucfirst($type)}}
                                     </button>
                                     @livewire('tables.users-table', ['params' => [
                                         'usertype' => $type
@@ -41,7 +46,7 @@
                                         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header bg-primary">
-                                                    <h5 class="modal-title white" id="myModalLabel160">Primary Modal</h5>
+                                                    <h5 class="modal-title white" id="myModalLabel160">{{ $type == 'franchise' ? 'Partner' : ucfirst($type) }}</h5>
                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                         <i class="bx bx-x"></i>
                                                     </button>

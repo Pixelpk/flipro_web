@@ -18,35 +18,15 @@
             </div>
             <!-- Compose mail Quill editor -->
 
-            <div class="row px-2 mb-4" wire:ignore>
+            <div class="row px-2 mb-4">
                 <!-- quill editor for reply message -->
                 <div class="col-12 px-0">
                     <div class="card shadow-none border rounded">
-                        <div class="card-body quill-wrapper">
+                        {{--  <div class="card-body quill-wrapper">  --}}
 
-                            <div class="snow-container" id="detail-view-quill">
-                                <div x-data x-ref="quillEditor" x-init="
-                                        quill = new Quill($refs.quillEditor, {theme: 'snow'});
-                                        quill.on('text-change', function () {
-                                            @this.set('replyMessage', quill.root.innerHTML)
-                                        });
-                                    ">
-                                    {!! $replyMessage !!}
-                                </div>
-                                <div class="d-flex justify-content-end">
-                                    <div class="detail-quill-toolbar">
-                                        <span class="ql-formats mr-50">
-                                            <button class="ql-bold"></button>
-                                            <button class="ql-italic"></button>
-                                            <button class="ql-underline"></button>
-                                            <button class="ql-link"></button>
-                                            <button class="ql-image"></button>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
+                            <textarea wire:model.defer="replyMessage" cols="30" rows="10"></textarea>
 
-                        </div>
+                        {{--  </div>  --}}
                     </div>
                 </div>
             </div>

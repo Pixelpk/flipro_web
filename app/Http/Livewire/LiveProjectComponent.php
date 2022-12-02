@@ -35,6 +35,7 @@ class LiveProjectComponent extends Component
     {
         $this->user = Auth::user();
         $this->model = new Project();
+        $this->model['phone_code']  = 61;
         $this->model->cross_collaterized = 0;
         $this->homeowers = User::homeowners()->get();
         $this->model->cross_collaterized = false;
@@ -43,6 +44,7 @@ class LiveProjectComponent extends Component
         $this->builders = User::builders()->get();
         $this->evaluators = User::evaluators()->get();
         $this->partTakers = collect([]);
+
 
     }
 
@@ -57,6 +59,7 @@ class LiveProjectComponent extends Component
         'model.applicant_name' => 'required',
         'model.email' => 'required|email',
         'model.phone' => 'required',
+        'model.phone_code' => 'required',
         'model.applicant_address' => 'required',
         'model.registered_owners' => 'required',
         'model.current_property_value' => 'required',
@@ -72,6 +75,7 @@ class LiveProjectComponent extends Component
         'model.applicant_name' => 'applicant name',
         'model.email' => 'email',
         'model.phone' => 'phone',
+        'model.phone_code' => 'phone code',
         'model.applicant_address' => 'applicant address',
         'model.registered_owners' => 'registered owner',
         'model.current_property_value' => 'property value',
@@ -168,11 +172,14 @@ class LiveProjectComponent extends Component
 
     public function create()
     {
+        $this->model['phone_code'] = "+61";
+
         // dd('asd');
         // dd($this->partTakers);
         $this->validate();
         $data = collect($this->model)->except('pushImage','images', 'videos', 'project_roles', 'action_required', 'builders', 'lead', 'evaluators', 'franchisee', 'assigned', 'cover_photo', 'progress_satisfied', 'evaluation_satisfied', 'final_progress_reviews', 'evaluation_reviews', 'latest_payment_request', 'latest_note', 'latest_progress', 'latest_value', 'progress_reviewed', 'evaluation_reviewed')->toArray();
         // dd($data);
+
         $project = Project::forceCreate($data);
         $images = [];
         $videos = [];

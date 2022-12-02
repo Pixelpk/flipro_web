@@ -309,7 +309,7 @@ class LiveProjectDetailComponent extends Component
     {
 
         $this->validate([
-            'propertyValue' => 'required|integer',
+            'propertyValue' => 'required',
         ]);
 
         $propertyValue = PropertyValue::where('project_id', $this->project->id)->first();

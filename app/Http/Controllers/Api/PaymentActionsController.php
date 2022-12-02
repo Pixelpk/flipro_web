@@ -44,7 +44,7 @@ class PaymentActionsController extends Controller
 
         $request->validate([
             'project_id' => 'required|exists:projects,id',
-            'amount' => 'required|integer',
+            'amount' => 'required',
             'description' => 'required'
         ]);
 

@@ -38,11 +38,11 @@ class LiveUserComponent extends Component
     {
         if(!in_array($this->type, $this->userTypes)){
             return redirect("/404", 404);
-        }      
+        }
 
         $this->user = Auth::user();
 
-        if(!$this->user->hasRole('view-' . $this->type)) abort(403); 
+        if(!$this->user->hasRole('view-' . $this->type)) abort(403);
     }
 
     public function render()
@@ -61,8 +61,8 @@ class LiveUserComponent extends Component
             'address' => $this->address,
             'user_type' => $this->type,
             'password' => \Hash::make($this->password),
-        ]); 
-        
+        ]);
+
         $this->dispatchBrowserEvent('alert', [
             'title'=> "Success",
             'text'=> ucfirst(str_replace('-', ' ', $this->type)) . ' created successfully',
@@ -70,7 +70,7 @@ class LiveUserComponent extends Component
             'confirmButtonClass'=> 'btn btn-primary',
             'buttonsStyling'=> false,
         ]);
-        
+
         $this->emit('refreshTable');
         $this->dispatchBrowserEvent('toggleModal', [
             'id' => "userCreateModal",
@@ -91,7 +91,7 @@ class LiveUserComponent extends Component
             'phone' => 'required',
             'password' => 'nullable|min:6',
         ]);
-        
+
         $this->model->name = $this->name;
         $this->model->email = $this->email;
         $this->model->phone_code = $this->phone_code;
@@ -102,7 +102,7 @@ class LiveUserComponent extends Component
         }
 
         $this->model->update();
-        
+
         $this->dispatchBrowserEvent('alert', [
             'title'=> "Success",
             'text'=> ucfirst(str_replace('-', ' ', $this->type)) . ' updated successfully',
@@ -110,7 +110,7 @@ class LiveUserComponent extends Component
             'confirmButtonClass'=> 'btn btn-primary',
             'buttonsStyling'=> false,
         ]);
-        
+
         $this->emit('refreshTable');
         $this->dispatchBrowserEvent('toggleModal', [
             'id' => "userCreateModal",
@@ -136,7 +136,7 @@ class LiveUserComponent extends Component
         $this->address = $user->address;
         $this->phone_code = $user->phone_code;
         $this->phone = $user->phone;
-        
+
         $this->dispatchBrowserEvent('toggleModal', [
             'id' => "userCreateModal",
             'action' => 'show'

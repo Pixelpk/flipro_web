@@ -23,6 +23,7 @@ class CreateProjectsTable extends Migration
             $table->string('applicant_name');
             $table->string('email')->nullable();
             $table->string('phone')->nullable();
+            $table->string('phone_code')->nullable();
             $table->string('applicant_address')->nullable();
             $table->string('registered_owners')->nullable();
             $table->integer('current_property_value')->nullable();

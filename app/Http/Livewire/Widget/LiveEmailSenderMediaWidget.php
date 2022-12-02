@@ -43,7 +43,7 @@ class LiveEmailSenderMediaWidget extends Component
             'phone' => $this->phone,
             'address' => $this->address,
             'user_id' => $this->user->id,
-        ]); 
+        ]);
 
         foreach($this->selectedSegments as $segment) {
             LeadSegment::forceCreate([
@@ -71,7 +71,7 @@ class LiveEmailSenderMediaWidget extends Component
             'confirmButtonClass'=> 'btn btn-primary',
             'buttonsStyling'=> false,
         ]);
-        
+
         $this->emit('refreshTable');
         $this->dispatchBrowserEvent('toggleModal', [
             'id' => "userCreateModal",
