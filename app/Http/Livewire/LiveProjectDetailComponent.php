@@ -71,7 +71,7 @@ class LiveProjectDetailComponent extends Component
 
     public function getEventLog()
     {
-        $this->eventLogs  = EventLog::where('project_id', $this->project->id)->get();
+        $this->eventLogs  = EventLog::where('project_id', $this->project->id)->orderBy('id', 'desc')->get();
     }
 
     public function openTaskModal()
@@ -263,7 +263,9 @@ class LiveProjectDetailComponent extends Component
         $this->getTeam();
         $this->project = $project;
         $this->getProjectTimeline();
-        $this->tasks = Event::with('attachedUser', 'attachedLead', 'createdBy')->where('project_id', $this->project->id)->get();
+        $this->tasks = Event::with('attachedUser', 'attachedLead', 'createdBy')->where('project_id', $this->project->id)
+        ->orderBy('id', 'desc')
+        ->get();
         $this->leads = Lead::when($this->user->user_type != 'admin', function($q){
             $q->where('user_id', Auth::id());
         })->get();
@@ -301,7 +303,7 @@ class LiveProjectDetailComponent extends Component
 
     public function getProjectTimeline()
     {
-        $this->timeLine = Progress::where('project_id', $this->project->id)->get();
+        $this->timeLine = Progress::where('project_id', $this->project->id)->orderBy('id', 'desc')->get();
         $this->finalProgressReviews = Progress::where('project_id', $this->project->id)->whereIn('client_satisfied', [0,1])->get();
     }
 
@@ -317,7 +319,7 @@ class LiveProjectDetailComponent extends Component
         EventLog::forceCreate([
             'user_id' => $this->user->id,
             'project_id' => $this->project->id,
-            'description' =>  $this->user->name ." added $this->propertyValue value",
+            'description' =>  $this->user->name ." added $".   number_format((float)$this->propertyValue, 2)  ." value",
             'status' => 3,
         ]);
         PropertyValue::forceCreate([

@@ -13,4 +13,20 @@ class Note extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function getProjectIdAttribute($value)
+    {
+        return (int)$value;
+    }
+
+    public function getUserIdAttribute($value)
+    {
+        return (int)$value;
+    }
+
+    public function getPrivateAttribute($value)
+    {
+        // return (int)$value;
+        return $value == 1 ? true : false;
+    }
 }

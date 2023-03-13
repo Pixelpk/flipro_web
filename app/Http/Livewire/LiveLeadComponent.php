@@ -214,7 +214,6 @@ class LiveLeadComponent extends Component
             'action' => 'show'
         ]);
     }
-
     public function delete()
     {
         $this->model->delete();
@@ -235,17 +234,17 @@ class LiveLeadComponent extends Component
         ]);
         return redirect()->to('leads');
     }
-
     public function render()
     {
         return view('livewire.live-lead-component');
     }
-
     public function import()
     {
+    //    dd($this->exelfile);
         $this->validate([
-            'exelfile' => 'required|mimes:xlsx, xls, csv',
+            'exelfile' => 'required|mimes:xlsx,xls,csv',
         ]);
+       
         Excel::import(new LeadImport, $this->exelfile);
         return redirect()->to('leads');
     }

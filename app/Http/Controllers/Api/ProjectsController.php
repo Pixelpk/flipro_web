@@ -164,8 +164,12 @@ class ProjectsController extends Controller
 
         $request->request->add([
             'user_id' => $request->user()->id,
+            'anticipated_budget' => (int)$request->anticipated_budget,
+            'current_property_value' => (int)$request->current_property_value,
+            'property_debt' => (int)$request->property_debt,
         ]);
-
+       
+         
         $project = Project::forceCreate($request->only([
             'title',
             'area',

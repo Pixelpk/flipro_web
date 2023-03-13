@@ -45,13 +45,13 @@ class PaymentActionsController extends Controller
         $request->validate([
             'project_id' => 'required|exists:projects,id',
             'amount' => 'required',
-            'description' => 'required'
+            //'description' => 'required'
         ]);
 
         $payment = PaymentRequest::forceCreate([
             'project_id' => $request->project_id,
             'user_id' => $request->user()->id,
-            'amount' => $request->amount,
+            'amount' => (int)$request->amount,
             'description' => $request->description,
         ]);
 
@@ -84,7 +84,7 @@ class PaymentActionsController extends Controller
         EventLog::forceCreate([
             'user_id' => $request->user()->id,
             'project_id' => $request->project_id,
-            'description' => $request->user()->name. " submitted a new payment request of $".number_format($request->amount),
+            'description' => $request->user()->name. " submitted a new payment request of $".number_format((float)$request->amount, 0),
             'status' => 4,
         ]);
 

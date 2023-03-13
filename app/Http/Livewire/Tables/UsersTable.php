@@ -13,6 +13,7 @@ class UsersTable extends LivewireDatatable
     
     public function builder()
     {
+        // dd($this->params['usertype'])
         return User::where('user_type', $this->params['usertype']);
     }
 

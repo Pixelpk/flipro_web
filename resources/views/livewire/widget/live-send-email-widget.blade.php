@@ -24,7 +24,10 @@
                     <div class="card shadow-none border rounded">
                         {{--  <div class="card-body quill-wrapper">  --}}
 
-                            <textarea wire:model.defer="replyMessage" cols="30" rows="10"></textarea>
+                        <textarea wire:model.defer="replyMessage" cols="30" rows="10"></textarea>
+                        @error('replyMessage')
+                        <span class="text-danger">{{$message}}</span>
+                        @enderror
 
                         {{--  </div>  --}}
                     </div>
@@ -32,14 +35,21 @@
             </div>
             <div class="form-group mt-2">
                 <div class="custom-file">
-                    <input multiple wire:model='attachments' type="file" class="custom-file-input" id="emailAttach">
+                    <input multiple wire:model='attachments' type="file" class="custom-file-input">
                     <label class="custom-file-label" for="emailAttach">Attach
                         file</label>
                 </div>
+                
             </div>
-            @error('replyMessage')
-            <span class="text-danger">{{$message}}</span>
-            @enderror
+            <div class="row">
+                @foreach($files as $key => $emailFile)
+                <div class="col-md-3">
+                    <img src="file.png">
+                    <button class="btn btn-danger" wire:click="delteIndex({{$key}})">Delete</button>
+                </div>
+                @endforeach
+            </div>
+
 
         </div>
     </div>

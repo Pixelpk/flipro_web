@@ -236,7 +236,7 @@
                                                                 }}</span> @enderror
                                                         </div>
 
-                                                        <div class="col-md-2">
+                                                        {{-- <div class="col-md-2">
                                                             <label>Project Title</label>
                                                         </div>
                                                         <div class="col-md-4 form-group">
@@ -251,7 +251,7 @@
                                                             </div>
                                                             @error('model.project_address') <span class="text-danger">{{ $message
                                                                 }}</span> @enderror
-                                                        </div>
+                                                        </div> --}}
 
                                                         <div class="col-md-2">
                                                             <label>Applicant Address</label>
@@ -377,7 +377,7 @@
                                                             <div class="row">
                                                                 @foreach($pushImage as $index => $image)
                                                                 <div class="col-md-2">
-                                                                    <img src="{{ $image->temporaryUrl() }}">
+                                                                    <img src="file.png" style="width: 50px;">
                                                                     <i wire:click="delpushImage({{ $index }})"
                                                                         class="text-danger bx bx-trash" style="cursor:
                                                                     pointer"></i>

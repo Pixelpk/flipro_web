@@ -68,7 +68,7 @@ class ProjectActionsController extends Controller
                 EventLog::forceCreate([
                     'user_id' => $request->user()->id,
                     'project_id' => $project->id,
-                    'description' => $request->final_progress ? $request->user()->name. " submited the final progress" : $request->user()->name. ' submitted the new progress',
+                    'description' => $request->final_progress ? $request->user()->name. " submitted the final progress" : $request->user()->name. ' submitted the new progress',
                     'status' => 2,
                 ]);
                 if($request->final_progress)
@@ -77,7 +77,7 @@ class ProjectActionsController extends Controller
                     EventLog::forceCreate([
                         'user_id' => $request->user()->id,
                         'project_id' => $project->id,
-                        'description' => $request->user()->name . "submited the final progress - Project move to  completed stage ",
+                        'description' => $request->user()->name . " submitted the final progress - Project move to  completed stage ",
                         'status' => 2,
                     ]);
                 }

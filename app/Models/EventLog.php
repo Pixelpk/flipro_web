@@ -16,5 +16,19 @@ class EventLog extends Model
     protected $casts = [
         'data' => 'json',
     ];
+
+    public function getProjectIdAttribute($value)
+    {
+        return (int)$value;
+    }
+
+    public function getUserIdAttribute($value)
+    {
+        return (int)$value;
+    }
+    public function getStatusAttribute($value)
+    {
+        return (int)$value;
+    }
 }
 

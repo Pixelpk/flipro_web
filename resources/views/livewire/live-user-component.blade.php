@@ -1,7 +1,7 @@
 <div class="app-content content">
     @php
         if($type == 'home-owner') {
-            $type = 'Home Owner';
+            $type = 'home-owner';
         }
     @endphp
     <div class="content-overlay"></div>

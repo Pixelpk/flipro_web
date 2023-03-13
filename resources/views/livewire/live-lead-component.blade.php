@@ -61,10 +61,10 @@
                                                     <div class="col-md-4">
                                                         <label>Import</label>
                                                     </div>
-                                                    <div class="col-md-8 form-group ">
+                                                    <div class="col-md-8 form-group">
                                                         <div class="position-relative has-icon-left">
                                                             <input 
-                                                            accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+                                                            accept=".csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
                                                             wire:model='exelfile' type="file" id="import-icon"
                                                                 class="form-control" name="import-icon"
                                                                 placeholder="Name">
@@ -87,10 +87,14 @@
                                                     <span class="d-none d-sm-block">Close</span>
                                                 </button>
                                                 @if(!$model)
-                                                <button type="button" wire:click='import'
+                                                <button  wire:loading.attr="disabled" type="button" wire:click='import'
                                                     class="btn btn-primary ml-1">
                                                     <i class="bx bx-check d-block d-sm-none"></i>
                                                     <span class="d-none d-sm-block">Import</span>
+
+                                                     <span wire:loading wire:target="import"
+                                                        class="spinner-grow spinner-grow-sm" role="status"
+                                                        aria-hidden="true"></span>
                                                 </button>
                                                 @endif
                                                 @if($model)

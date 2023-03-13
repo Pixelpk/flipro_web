@@ -33,6 +33,7 @@ class LiveInboxComponent extends Component
     {
         $this->user = Auth::user();
         $this->getMessages();
+        // $this->fetchEmails();
 
     }
 
@@ -47,8 +48,8 @@ class LiveInboxComponent extends Component
         $mail->SMTPAuth = true;
         $mail->Username = $emailSettings->username;
         $mail->Password = $emailSettings->password;
-        $mail->SMTPSecure = null;
-        $mail->Port = 25;
+        $mail->SMTPSecure = 'ssl';
+        $mail->Port = 465;
 
         $mail->setFrom($emailSettings->username, $emailSettings->sender_name);
         $mail->addAddress($this->openMessage['from']);
@@ -130,6 +131,7 @@ class LiveInboxComponent extends Component
 
     public function fetchEmails()
     {
+       
         $server = UserSmtp::where('user_id', Auth::id())->first();
 
         if(!$server) return;
@@ -146,13 +148,17 @@ class LiveInboxComponent extends Component
         $client->connect();
 
         if(!$client->getFolder('FLIPROMOVED')) $client->createFolder('FLIPROMOVED');
-
+     
         $folders = $client->getFolders();
-
+       
         foreach($folders as $folder){
             if($folder->name == 'INBOX' || $folder->name == 'Sent'){
+                
                 $messages = $folder->messages()->all()->get();
-                foreach($messages as $message){
+              
+                // $this->inbox = $messages;
+                foreach($messages as $message)
+                {
                     if($message->hasTextBody()){
                         $body = $message->getTextBody();
                     }elseif($message->hasHTMLBody()){
@@ -186,7 +192,8 @@ class LiveInboxComponent extends Component
 
                     $moved = $message->move('FLIPROMOVED');
 
-                    if($moved){
+                    // if($moved){
+                      
                         $email = Email::forceCreate([
                             'name' => $name ?? '',
                             'subject' => $subject,
@@ -213,11 +220,12 @@ class LiveInboxComponent extends Component
                         }
                         $email->attachments = json_encode($attachments);
                         $email->update();
-                    }
+                    // }
 
                 }
             }
         }
+     
     }
 
     public function open($message)
@@ -289,6 +297,7 @@ class LiveInboxComponent extends Component
 
     public function render()
     {
+      
         return view('livewire.live-inbox-component');
     }
 

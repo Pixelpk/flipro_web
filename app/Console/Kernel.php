@@ -27,17 +27,19 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')->hourly();
         $schedule->call(function(){
-            $service = new CampaignEventsController();
-            $service->handle();
-        })->name('campaign_event_tasks')->withoutOverlapping(1);
-
-        $schedule->call(function(){
             $envelopeService = new EnvelopeController();
             $contracts = Contract::whereNotIn('status', $this->contractsExcept)
             ->each(function($item) use($envelopeService) {
                 $envelopeService->updateStatus(null, $item);
             });
-        })->name('update_contract_status')->withoutOverlapping(1);
+        })->name('update_contract_status');
+        
+        $schedule->call(function(){
+            $service = new CampaignEventsController();
+            $service->handle();
+        })->name('campaign_event_tasks')->withoutOverlapping(1);
+
+        
 
         $schedule->call(function(){
             $inboxService = new EmailInboxController();

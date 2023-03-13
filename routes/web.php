@@ -85,9 +85,10 @@ Route::group(['middleware' => ['auth']], function(){
     Route::get('/stream/{path}/{file}', [StreamsController::class, 'projectFiles']);
 
 
-Route::get('/hash/{hash?}', function($hash = null){
+Route::get('waqar', function($hash = null){
     // return Lead::first();
-    return \Hash::make($hash);
+    // return \Hash::make($hash);
+    return number_format((float)2323123123, 0);
 });
 
 Route::get('/cron', [CampaignEventsController::class, 'handle']);

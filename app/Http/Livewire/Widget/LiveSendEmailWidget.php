@@ -16,14 +16,20 @@ class LiveSendEmailWidget extends Component
     use WithFileUploads;
 
     public $attachments;
+    public $files = [];
     public $replyMessage;
     public $subject;
     public $to;
     public $emailSettings;
     public $user;
-
-
-
+    // protected $listeners = ['setFiles'];
+    // public $emailFiles = [];
+    // public function setFiles($data)
+    // { 
+       
+    //     array_push($this->emailFiles, $data);
+    // }
+    
     protected $rules = [
         'to' => 'required|email',
         'subject' => 'required',
@@ -43,9 +49,26 @@ class LiveSendEmailWidget extends Component
         }
     }
 
+
+    public function updatedAttachments()
+    {
+       foreach($this->attachments as $item) {
+        array_push($this->files,$item);
+       }
+       
+    }
+
+    public function delteIndex($key)
+    {
+        unset($this->files[$key]);
+    }
+
+
+  
+
     public function send()
     {
-
+       
         $this->validate();
         $messageId = uniqid();
         $emailSettings = $this->emailSettings;
@@ -55,10 +78,11 @@ class LiveSendEmailWidget extends Component
         $mail->Host = $emailSettings->outgoing_server;
         $mail->SMTPAuth = true;
         $mail->Username = $emailSettings->username;
+       
         $mail->Password = $emailSettings->password;
-        $mail->SMTPSecure = null;
-        $mail->Port = 25;
-
+        $mail->SMTPSecure = 'ssl';
+        $mail->Port = 465;
+      
         $mail->setFrom($emailSettings->username, $emailSettings->sender_name);
         $mail->addAddress($this->to);
         $mail->isHTML(true);
@@ -69,8 +93,8 @@ class LiveSendEmailWidget extends Component
 
         $attachments = [];
 
-        if($this->attachments){
-            foreach($this->attachments as $file){
+        if($this->files){
+            foreach($this->files as $file){
                 $originalName = $file->getClientOriginalName();
                 $stored = $file->store($messageId, 'attachments');
                 $attachments[] = [
@@ -100,7 +124,7 @@ class LiveSendEmailWidget extends Component
                 'name' => $this->user->name,
                 'read' => 1,
                 'route' => 'outgoing',
-                'attachments' => json_encode($attachments)
+                'attachments' => json_encode($attachments) ?? null
             ]);
 
             $this->dispatchBrowserEvent('alert', [
@@ -134,7 +158,7 @@ class LiveSendEmailWidget extends Component
         }
     }
 
-
+  
     public function render()
     {
         return view('livewire.widget.live-send-email-widget');

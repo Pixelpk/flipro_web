@@ -13,7 +13,7 @@ class EventLogController extends Controller
         $request->validate([
             'project_id' => 'required|exists:projects,id'
         ]);
-        $eventLog = EventLog::where('project_id', $request->project_id);
+        $eventLog = EventLog::where('project_id', $request->project_id)->orderBy('id', 'desc');
         return [
             'message' => 'success',
             'data' => $eventLog->paginate(config('app.pageSize'))

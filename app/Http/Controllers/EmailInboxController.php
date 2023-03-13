@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Webklex\IMAP\Facades\Client;
 
-class EmailInboxController extends Controller
+class  EmailInboxController extends Controller
 {
     private $server;
 
@@ -21,7 +21,9 @@ class EmailInboxController extends Controller
     public function cron()
     {
         $servers = UserSmtp::all();
-        foreach($servers as $server){
+       
+        foreach($servers as $server)
+        {
             $client = Client::make([
                 'host'          => $server->incomming_server,
                 'port'          => $server->incomming_port,
@@ -33,10 +35,12 @@ class EmailInboxController extends Controller
             ]);
     
             $client->connect();
+        
     
             if(!$client->getFolder('FLIPROMOVED')) $client->createFolder('FLIPROMOVED');
     
             $folders = $client->getFolders();
+         
             
             foreach($folders as $folder){
                 if($folder->name == 'INBOX' || $folder->name == 'Sent'){
@@ -75,7 +79,7 @@ class EmailInboxController extends Controller
     
                         $moved = $message->move('FLIPROMOVED');
     
-                        if($moved){
+                        // if($moved){
                             $email = Email::forceCreate([
                                 'name' => $name ?? '',
                                 'subject' => $subject,
@@ -102,7 +106,7 @@ class EmailInboxController extends Controller
                             }
                             $email->attachments = json_encode($attachments);
                             $email->update();
-                        }
+                        // }
     
                     }
                 }

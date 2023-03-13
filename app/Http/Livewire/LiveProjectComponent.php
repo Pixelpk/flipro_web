@@ -45,7 +45,6 @@ class LiveProjectComponent extends Component
         $this->evaluators = User::evaluators()->get();
         $this->partTakers = collect([]);
 
-
     }
 
     protected $rules = [
@@ -54,7 +53,7 @@ class LiveProjectComponent extends Component
         'model.project_state' => 'required',
         'model.description' => 'required',
         'model.anticipated_budget' => 'required',
-        'model.project_address' => 'required',
+        //'model.project_address' => 'required',
         'model.contractor_supplier_details' => 'required',
         'model.applicant_name' => 'required',
         'model.email' => 'required|email',
@@ -70,7 +69,7 @@ class LiveProjectComponent extends Component
     protected $validationAttributes = [
         'model.title' => 'project address',
         'model.anticipated_budget' => 'anticipated budget',
-        'model.project_address' => 'title',
+        //'model.project_address' => 'title',
         'model.contractor_supplier_details' => 'Existing queries',
         'model.applicant_name' => 'applicant name',
         'model.email' => 'email',
@@ -153,10 +152,12 @@ class LiveProjectComponent extends Component
 
     public function updatedImages()
     {
+      
         $this->validate([
             'images.*' => 'image|max:1024', // 1MB Max
         ]);
-        foreach($this->images as $image){
+        foreach($this->images as $image)
+        {
             array_push($this->pushImage, $image);
         }
     }
@@ -172,12 +173,15 @@ class LiveProjectComponent extends Component
 
     public function create()
     {
+       
+       
         $this->model['phone_code'] = "+61";
 
         // dd('asd');
         // dd($this->partTakers);
         $this->validate();
         $data = collect($this->model)->except('pushImage','images', 'videos', 'project_roles', 'action_required', 'builders', 'lead', 'evaluators', 'franchisee', 'assigned', 'cover_photo', 'progress_satisfied', 'evaluation_satisfied', 'final_progress_reviews', 'evaluation_reviews', 'latest_payment_request', 'latest_note', 'latest_progress', 'latest_value', 'progress_reviewed', 'evaluation_reviewed')->toArray();
+        $data['project_address'] = $this->model['title'];
         // dd($data);
 
         $project = Project::forceCreate($data);

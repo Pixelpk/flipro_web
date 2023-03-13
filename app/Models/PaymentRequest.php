@@ -31,4 +31,19 @@ class PaymentRequest extends Model
             'project_address'
         ]);
     }
+
+    public function getProjectIdAttribute($value)
+    {
+        return (int)$value;
+    }
+
+    public function getUserIdAttribute($value)
+    {
+        return (int)$value;
+    }
+
+    public function getAmountAttribute($value)
+    {
+        return (float)$value;
+    }
 }

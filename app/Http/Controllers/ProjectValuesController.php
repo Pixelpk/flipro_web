@@ -24,14 +24,14 @@ class ProjectValuesController extends Controller
         EventLog::forceCreate([
             'user_id' => $request->user()->id,
             'project_id' => $request->project_id,
-            'description' =>  $propertyValue ? $request->user()->name."updated the value to $request->value" : $request->user()->name."added $request->value value",
+            'description' =>  $propertyValue ? $request->user()->name." updated the value to $".number_format((float)$request->value, 2) : $request->user()->name." added $".number_format((float)$request->value, 0). " value",
             'status' => 3,
         ]);
 
 
         PropertyValue::forceCreate([
             'user_id' => $request->user()->id,
-            'value' => $request->value,
+            'value' => (int)$request->value,
             'project_id' => $request->project_id
         ]);
 

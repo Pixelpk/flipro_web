@@ -71,13 +71,13 @@
                                             <b>Cross Collaterized:</b> {{$item->cross_collaterized ? 'Yes' : 'No'}}
                                         </li>
                                         <li>
-                                            <b>Current Value:</b> ${{number_format($item->current_property_value)}}
+                                            <b>Current Value:</b> ${{ number_format((float)$item->current_property_value, 2)}}
                                         </li>
                                         <li>
-                                            <b>Current Debts:</b> ${{number_format($item->property_debt)}}
+                                            <b>Current Debts:</b>  ${{ number_format((float)$item->property_debt, 2)}}
                                         </li>
                                         <li>
-                                            <b>Anticipated Budget:</b> ${{number_format($item->anticipated_budget)}}
+                                            <b>Anticipated Budget:</b> ${{ number_format((float)$item->anticipated_budget, 2)}}
                                         </li>
                                     </ul>
                                     <a href="/projects/{{$item->id}}"><button class="btn btn-primary">View</button></a>
@@ -139,13 +139,13 @@
                                             <b>Cross Collaterized:</b> {{$item->cross_collaterized ? 'Yes' : 'No'}}
                                         </li>
                                         <li>
-                                            <b>Current Value:</b> ${{number_format($item->current_property_value)}}
+                                            <b>Current Value:</b> ${{ number_format((float)$item->current_property_value, 2)}}
                                         </li>
                                         <li>
-                                            <b>Current Debts:</b> ${{number_format($item->property_debt)}}
+                                            <b>Current Debts:</b> ${{ number_format((float)$item->property_debt, 2)}}
                                         </li>
                                         <li>
-                                            <b>Anticipated Budget:</b> ${{number_format($item->anticipated_budget)}}
+                                            <b>Anticipated Budget:</b> ${{ number_format((float)$item->anticipated_budget, 2)}}
                                         </li>
                                     </ul>
                                     <a href="/projects/{{$item->id}}"><button class="btn btn-primary">View</button></a>
@@ -211,13 +211,13 @@
                                                     <b>Cross Collaterized:</b> {{$item->cross_collaterized ? 'Yes' : 'No'}}
                                                 </li>
                                                 <li>
-                                                    <b>Current Value:</b> ${{ number_format((float)$item->current_property_value, 2, '.', '')}}
+                                                    <b>Current Value:</b> ${{ number_format((float)$item->current_property_value, 2)}}
                                                 </li>
                                                 <li>
-                                                    <b>Current Debts:</b> ${{ number_format((float)$item->property_debt, 2, '.', '')}}
+                                                    <b>Current Debts:</b> ${{ number_format((float)$item->property_debt, 2)}}
                                                 </li>
                                                 <li>
-                                                    <b>Anticipated Budget:</b> ${{ number_format((float)$item->anticipated_budget, 2, '.', '')}}
+                                                    <b>Anticipated Budget:</b> ${{ number_format((float)$item->anticipated_budget, 2)}}
                                                 </li>
                                             </ul>
                                             <a href="/projects/{{$item->id}}"><button class="btn btn-primary">View</button></a>
@@ -285,13 +285,14 @@
                                                     <b>Cross Collaterized:</b> {{$item->cross_collaterized ? 'Yes' : 'No'}}
                                                 </li>
                                                 <li>
-                                                    <b>Current Value:</b> ${{number_format($item->current_property_value)}}
+                                                    <b>Current Value:</b> ${{ number_format((float)$item->current_property_value, 2)}}
+
                                                 </li>
                                                 <li>
-                                                    <b>Current Debts:</b> ${{number_format($item->property_debt)}}
+                                                    <b>Current Debts:</b> ${{ number_format((float)$item->property_debt, 2)}}
                                                 </li>
                                                 <li>
-                                                    <b>Anticipated Budget:</b> ${{number_format($item->anticipated_budget)}}
+                                                    <b>Anticipated Budget:</b> ${{ number_format((float)$item->anticipated_budget, 2)}}
                                                 </li>
                                             </ul>
                                             <a href="/projects/{{$item->id}}"><button class="btn btn-primary">View</button></a>
@@ -370,13 +371,13 @@
                                             <b>Cross Collaterized:</b> {{$item->cross_collaterized ? 'Yes' : 'No'}}
                                         </li>
                                         <li>
-                                            <b>Current Value:</b> ${{number_format($item->current_property_value)}}
+                                            <b>Current Value:</b> ${{ number_format((float)$item->current_property_value, 2)}}
                                         </li>
                                         <li>
-                                            <b>Current Debts:</b> ${{number_format($item->property_debt)}}
+                                            <b>Current Debts:</b> ${{ number_format((float)$item->property_debt, 2)}}
                                         </li>
                                         <li>
-                                            <b>Anticipated Budget:</b> ${{number_format($item->anticipated_budget)}}
+                                            <b>Anticipated Budget:</b> ${{ number_format((float)$item->anticipated_budget, 2)}}
                                         </li>
                                     </ul>
                                     <a href="/projects/{{$item->id}}"><button class="btn btn-primary">View</button></a>
@@ -440,13 +441,13 @@
                                                     <b>Cross Collaterized:</b> {{$item->cross_collaterized ? 'Yes' : 'No'}}
                                                 </li>
                                                 <li>
-                                                    <b>Current Value:</b> ${{number_format($item->current_property_value)}}
+                                                    <b>Current Value:</b> ${{ number_format((float)$item->current_property_value, 2)}}
                                                 </li>
                                                 <li>
-                                                    <b>Current Debts:</b> ${{number_format($item->property_debt)}}
+                                                    <b>Current Debts:</b> ${{ number_format((float)$item->property_debt, 2)}}
                                                 </li>
                                                 <li>
-                                                    <b>Anticipated Budget:</b> ${{number_format($item->anticipated_budget)}}
+                                                    <b>Anticipated Budget:</b> ${{ number_format((float)$item->anticipated_budget, 2)}}
                                                 </li>
                                             </ul>
                                             <a href="/projects/{{$item->id}}"><button class="btn btn-primary">View</button></a>
@@ -524,13 +525,13 @@
                                         <b>Cross Collaterized:</b> {{$item->cross_collaterized ? 'Yes' : 'No'}}
                                     </li>
                                     <li>
-                                        <b>Current Value:</b> ${{number_format($item->current_property_value)}}
+                                        <b>Current Value:</b> ${{number_format((float)$item->current_property_value, 2)}}
                                     </li>
                                     <li>
-                                        <b>Current Debts:</b> ${{number_format($item->property_debt)}}
+                                        <b>Current Debts:</b> ${{ number_format((float)$item->property_debt, 2)}}
                                     </li>
                                     <li>
-                                        <b>Anticipated Budget:</b> ${{number_format($item->anticipated_budget)}}
+                                        <b>Anticipated Budget:</b> ${{ number_format((float)$item->anticipated_budget, 2)}}
                                     </li>
                                 </ul>
                                 <a href="/projects/{{$item->id}}"><button class="btn btn-primary">View</button></a>
@@ -594,13 +595,13 @@
                                                 <b>Cross Collaterized:</b> {{$item->cross_collaterized ? 'Yes' : 'No'}}
                                             </li>
                                             <li>
-                                                <b>Current Value:</b> ${{number_format($item->current_property_value)}}
+                                                <b>Current Value:</b> ${{ number_format((float)$item->current_property_value, 2)}}
                                             </li>
                                             <li>
-                                                <b>Current Debts:</b> ${{number_format($item->property_debt)}}
+                                                <b>Current Debts:</b> ${{ number_format((float)$item->property_debt, 2)}}
                                             </li>
                                             <li>
-                                                <b>Anticipated Budget:</b> ${{number_format($item->anticipated_budget)}}
+                                                <b>Anticipated Budget:</b> ${{ number_format((float)$item->anticipated_budget, 2)}}
                                             </li>
                                         </ul>
                                         <a href="/projects/{{$item->id}}"><button class="btn btn-primary">View</button></a>
@@ -662,13 +663,13 @@
                                                 <b>Cross Collaterized:</b> {{$item->cross_collaterized ? 'Yes' : 'No'}}
                                             </li>
                                             <li>
-                                                <b>Current Value:</b> ${{number_format($item->current_property_value)}}
+                                                <b>Current Value:</b> ${{ number_format((float)$item->current_property_value, 2)}}
                                             </li>
                                             <li>
-                                                <b>Current Debts:</b> ${{number_format($item->property_debt)}}
+                                                <b>Current Debts:</b> ${{ number_format((float)$item->property_debt, 2)}}
                                             </li>
                                             <li>
-                                                <b>Anticipated Budget:</b> ${{number_format($item->anticipated_budget)}}
+                                                <b>Anticipated Budget:</b> ${{ number_format((float)$item->anticipated_budget, 2)}}
                                             </li>
                                         </ul>
                                         <a href="/projects/{{$item->id}}"><button class="btn btn-primary">View</button></a>
@@ -736,13 +737,13 @@
                                                 <b>Cross Collaterized:</b> {{$item->cross_collaterized ? 'Yes' : 'No'}}
                                             </li>
                                             <li>
-                                                <b>Current Value:</b> ${{number_format($item->current_property_value)}}
+                                                <b>Current Value:</b> ${{ number_format((float)$item->current_property_value, 2)}}
                                             </li>
                                             <li>
-                                                <b>Current Debts:</b> ${{number_format($item->property_debt)}}
+                                                <b>Current Debts:</b> ${{ number_format((float)$item->property_debt, 2)}}
                                             </li>
                                             <li>
-                                                <b>Anticipated Budget:</b> ${{number_format($item->anticipated_budget)}}
+                                                <b>Anticipated Budget:</b> ${{ number_format((float)$item->anticipated_budget, 2)}}
                                             </li>
                                         </ul>
                                         <a href="/projects/{{$item->id}}"><button class="btn btn-primary">View</button></a>
@@ -818,13 +819,13 @@
                                                 <b>Cross Collaterized:</b> {{$item->cross_collaterized ? 'Yes' : 'No'}}
                                             </li>
                                             <li>
-                                                <b>Current Value:</b> ${{number_format($item->current_property_value)}}
+                                                <b>Current Value:</b> ${{ number_format((float)$item->current_property_value, 2)}}
                                             </li>
                                             <li>
-                                                <b>Current Debts:</b> ${{number_format($item->property_debt)}}
+                                                <b>Current Debts:</b> ${{ number_format((float)$item->property_debt, 2)}}
                                             </li>
                                             <li>
-                                                <b>Anticipated Budget:</b> ${{number_format($item->anticipated_budget)}}
+                                                <b>Anticipated Budget:</b> ${{ number_format((float)$item->anticipated_budget, 2)}}
                                             </li>
                                         </ul>
                                         <a href="/projects/{{$item->id}}"><button class="btn btn-primary">View</button></a>

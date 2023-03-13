@@ -11,7 +11,7 @@ class ProjectContractTable extends LivewireDatatable
 {
     public function builder()
     {
-        $contracts = Contract::where('user_id', Auth::id())->where('project_id', '!=', 0);
+        $contracts = Contract::where('user_id', Auth::id())->where('project_id', '!=', 0)->orderBy('id', 'desc');
 
         if(isset($this->params['withoutProject']) && $this->params['withoutProject'] == 'withoutProject'){
             $contracts = Contract::where('project_id', 0);

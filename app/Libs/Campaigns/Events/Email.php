@@ -40,8 +40,8 @@ class Email implements Event
             $mail->SMTPAuth = true;
             $mail->Username = $emailSettings->username;
             $mail->Password = $emailSettings->password;
-            $mail->SMTPSecure = false;
-            $mail->Port = 25;
+            $mail->SMTPSecure = 'ssl';
+            $mail->Port = 465;
     
             $mail->setFrom($emailSettings->username, $emailSettings->sender_name);
             $mail->addAddress($lead->email);

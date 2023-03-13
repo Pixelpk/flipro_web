@@ -1,6 +1,6 @@
-hello {{$name}},
+Hello {{$name}},
 <p>
-    Your account at flipro has been created successfully.
+    Your account at Flipro has been created successfully.
 </p>
 
 <p>

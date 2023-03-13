@@ -61,6 +61,8 @@ class Project extends Model
         'photos',
         'videos',
         'final_progress',
+        'area',
+        'description',
     ];
 
     public function getProgressReviewedAttribute()
@@ -289,12 +291,12 @@ class Project extends Model
     {
         $value = PropertyValue::where('project_id', $this->id)->orderByDesc('id')->first();
         if($value) return $value->value;
-        if(!$value) return 0;
+        if(!$value) return '0';
     }
 
     public function evaluations()
     {
-        return $this->hasMany(PropertyValue::class);
+        return $this->hasMany(PropertyValue::class)->orderBy('id', 'desc');
     }
     public function paymentRequest()
     {
@@ -302,7 +304,7 @@ class Project extends Model
     }
     public function eventLog()
     {
-        return $this->hasMany(EventLog::class);
+        return $this->hasMany(EventLog::class)->orderBy('id', 'desc');
     }
 
     public function partTakerFcmTokens($except = [])
@@ -339,6 +341,6 @@ class Project extends Model
 
     public function notes()
     {
-        return $this->hasMany(Note::class);
+        return $this->hasMany(Note::class)->orderBy('id', 'desc');
     }
 }

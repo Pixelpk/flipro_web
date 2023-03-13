@@ -72,7 +72,8 @@
                                             </div>
                                         </div>
                                         <div class="col-md-5">
-                                            <h4 class="display-4 mb-1" style="font-size:2.5rem;">Applicant Information</h4>
+                                            <h4 class="display-4 mb-1" style="font-size:2.5rem;">Applicant Information
+                                            </h4>
                                             <ul>
                                                 @if(Auth::user()->user_type == 'admin')
                                                 @if($project->approved == 'pending')
@@ -104,6 +105,11 @@
 
                                                 @endif
                                                 @endif
+
+                                                <li class="mb-1">
+                                                    <b>Created date:</b>
+                                                    {{ date('d-m-Y', strtotime($project->created_at)) }}
+                                                </li>
                                                 @if($project->approved == 'rejected')
                                                 <li class="mb-1">
                                                     <b>Project Status:</b> Rejected
@@ -121,7 +127,7 @@
                                                     <b>Applicant Email:</b> {{$project->email}}
                                                 </li>
                                                 <li class="mb-1">
-                                                    <b>Applicant Phone:</b> {{$project->phone_code}}{{$project->phone}}
+                                                    <b>Applicant Phone:</b> {{$project->phone}}
                                                 </li>
                                                 <li class="mb-1">
                                                     <b>Register Owner:</b> {{$project->registered_owners}}
@@ -141,11 +147,11 @@
                                             <ul>
                                                 <li class="mb-1">
                                                     <b>Current Value:</b>
-                                                    ${{number_format((float)$project->current_property_value, 2, '.', '')}}
+                                                    ${{number_format((float)$project->current_property_value, 2)}}
                                                 </li>
                                                 <li class="mb-1">
                                                     <b>Property Debts:</b>
-                                                    ${{ number_format((float)$project->property_debt, 2, '.', '')}}
+                                                    ${{ number_format((float)$project->property_debt, 2)}}
                                                 </li>
 
                                                 <li class="mb-1">
@@ -161,7 +167,8 @@
                                                     ${{number_format($project->anticipated_budget)}}
                                                 </li> --}}
                                             </ul>
-                                            <h4 class="display-4 mb-1" style="font-size:2.5rem;">Project Information</h4>
+                                            <h4 class="display-4 mb-1" style="font-size:2.5rem;">Project Information
+                                            </h4>
                                             <ul>
                                                 <li class="mb-1">
                                                     <b>Project Address:</b>
@@ -171,17 +178,17 @@
                                                 <li class="mb-1">
                                                     <b>Area (Square Meters):</b>
 
-                                                    {{ number_format((float)$project->area, 2, '.', '')}}
+                                                    {{ number_format((float)$project->area, 2)}}
                                                 </li>
                                                 <li class="mb-1">
                                                     <b>Anticipated Budget:</b>
 
-                                                    ${{ number_format((float)$project->anticipated_budget, 2, '.', '')}}
+                                                    ${{ number_format((float)$project->anticipated_budget, 2)}}
                                                 </li>
-                                                <li class="mb-1">
+                                                {{-- <li class="mb-1">
                                                     <b>Project Title:</b>
                                                     {{ $project->project_address }}
-                                                </li>
+                                                </li> --}}
 
                                                 <li class="mb-1">
                                                     <b>Applicant Address:</b>
@@ -310,6 +317,9 @@
                                                                     <th>
                                                                         Email
                                                                     </th>
+                                                                      <th>
+                                                                        Phone
+                                                                    </th>
                                                                     <th>
                                                                         Roles
                                                                     </th>
@@ -322,6 +332,9 @@
                                                                     </td>
                                                                     <td>
                                                                         {{$homeOwner->user->email}}
+                                                                    </td>
+                                                                     <td>
+                                                                        {{$homeOwner->user->phone}}
                                                                     </td>
                                                                     <td>
                                                                         <ul>
@@ -398,6 +411,10 @@
                                                                     <th>
                                                                         Email
                                                                     </th>
+                                                                     <th>
+                                                                        Phone
+                                                                    </th>
+
                                                                     <th>
                                                                         Roles
                                                                     </th>
@@ -410,6 +427,9 @@
                                                                     </td>
                                                                     <td>
                                                                         {{$builder->user->email}}
+                                                                    </td>
+                                                                    <td>
+                                                                        {{$builder->user->phone}}
                                                                     </td>
                                                                     <td>
                                                                         <ul>
@@ -500,6 +520,9 @@
                                                                         Email
                                                                     </th>
                                                                     <th>
+                                                                        Phone
+                                                                    </th>
+                                                                    <th>
                                                                         Roles
                                                                     </th>
                                                                     <th></th>
@@ -511,6 +534,9 @@
                                                                     </td>
                                                                     <td>
                                                                         {{$franchise->user->email}}
+                                                                    </td>
+                                                                     <td>
+                                                                        {{$franchise->user->phone}}
                                                                     </td>
                                                                     <td>
                                                                         <ul>
@@ -588,6 +614,9 @@
                                                                     <th>
                                                                         Email
                                                                     </th>
+                                                                      <th>
+                                                                        Phone
+                                                                    </th>
                                                                     <th>
                                                                         Roles
                                                                     </th>
@@ -602,6 +631,9 @@
                                                                     </td>
                                                                     <td>
                                                                         {{$evaluator->user->email}}
+                                                                    </td>
+                                                                      <td>
+                                                                        {{$evaluator->user->phone}}
                                                                     </td>
                                                                     <td>
                                                                         <ul>
@@ -777,11 +809,16 @@
                                                             </div>
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary"
+                                                            <button wire:loading.attr="disabled"  type="button" class="btn btn-secondary"
                                                                 data-dismiss="modal">Close</button>
                                                             <button type="button" wire:click='saveTask'
                                                                 class="btn btn-primary">Save
-                                                                changes</button>
+                                                                changes
+                                                                
+                                                                 <span wire:loading wire:target="saveTask"
+                                                        class="spinner-grow spinner-grow-sm" role="status"
+                                                        aria-hidden="true"></span>
+                                                                </button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -813,11 +850,16 @@
                                                             </div>
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary"
+                                                            <button  type="button" class="btn btn-secondary"
                                                                 data-dismiss="modal">Close</button>
-                                                            <button type="button" wire:click='saveValue'
+                                                            <button wire:loading.attr="disabled"  type="button" wire:click='saveValue'
                                                                 class="btn btn-primary">Save
-                                                                changes</button>
+                                                                changes
+                                                                
+                                                                 <span wire:loading wire:target="saveValue"
+                                                        class="spinner-grow spinner-grow-sm" role="status"
+                                                        aria-hidden="true"></span>
+                                                            </button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -905,7 +947,7 @@
                                                 </tr>
                                                 @foreach ($project->evaluations as $value)
                                                 <tr>
-                                                    <td>${{ number_format((float)$value->value, 2, '.', '')}}</td>
+                                                    <td>${{ number_format((float)$value->value, 2)}}</td>
                                                     <td>
                                                         @if ($value->client_satisfied !== null)
                                                         {{$value->client_satisfied == true ? "Yes" : "No"}}
@@ -999,7 +1041,7 @@
                                                 @foreach ($project->paymentRequest as $item)
                                                 <tr>
                                                     <td>{{$item->user->name}}</td>
-                                                    <td> ${{number_format($item->amount)}}</td>
+                                                    <td> ${{number_format($item->amount,2)}}</td>
                                                     <td>{{$item->description}}</td>
                                                     <td>
                                                         {{ ucfirst($item->status) }}
@@ -1007,11 +1049,13 @@
                                                     <td>{{$item->reason ?? ''}}</td>
                                                     <td>
 
-                                                        <button data-toggle="modal" data-target="#exampleModal91{{ $item->id }}"
+                                                        <button data-toggle="modal"
+                                                            data-target="#exampleModal91{{ $item->id }}"
                                                             class="btn btn-primary">View</button>
-                                                        <div wire:ignore.self class="modal fade" id="exampleModal91{{ $item->id }}"
-                                                            tabindex="-1" role="dialog"
-                                                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div wire:ignore.self class="modal fade"
+                                                            id="exampleModal91{{ $item->id }}" tabindex="-1"
+                                                            role="dialog" aria-labelledby="exampleModalLabel"
+                                                            aria-hidden="true">
                                                             <div class="modal-dialog modal-xl" role="document">
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
@@ -1103,7 +1147,7 @@
                     <div class="col-md-12 col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">Timeline Activity</h4>
+                                <h4 class="card-title">Activity Timeline</h4>
                             </div>
                             <div class="card-content">
                                 <div class="card-body">
@@ -1145,8 +1189,7 @@
                                                     <td>Note</td>
                                                     <td>Date</td>
                                                 </tr>
-                                                @foreach ($project->notes()->where('private', 0)->orWhere('user_id',
-                                                \Auth::id())->get() as $value)
+                                                @foreach ($project->notes() as $value)
                                                 <tr>
                                                     <td>{{$value->user->name}}</td>
                                                     <td>

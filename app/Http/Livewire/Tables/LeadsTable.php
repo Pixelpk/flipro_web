@@ -26,7 +26,7 @@ class LeadsTable extends LivewireDatatable
             })->label("Phone")->searchable(),
             Column::name("address")->label("Address"),
             Column::callback('id', function($id){
-                $tags = Lead::find($id)->tags;
+                $tags = Lead::find($id)->tags;  
                 $tagstr = ''; 
                 foreach($tags as $item){
                     $tagstr .= '<div class="chip mr-1">
