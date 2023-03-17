@@ -135,13 +135,15 @@
                                                         <div class="col-md-2">
                                                             <label>Current Value</label>
                                                         </div>
+                                                      
                                                         <div class="col-md-4 form-group">
                                                             <div class="position-relative has-icon-left">
-                                                                <input wire:model.defer='model.current_property_value'
-                                                                    type="number" id="fcurrent_property_value-icon"
-                                                                    class="form-control"
-                                                                    name="fcurrent_property_value-id-icon"
-                                                                    placeholder="Current Value">
+                                                                <input wire:model.defer="model.current_property_value"
+                                                                type="text"
+                                                                id="fcurrent_property_value-icon"
+                                                                class="form-control"
+                                                                name="fcurrent_property_value-id-icon"
+                                                                placeholder="Current Value">
                                                                 <div class="form-control-position">
                                                                     <i class="bx bx-money"></i>
                                                                 </div>
@@ -156,7 +158,7 @@
                                                         <div class="col-md-4 form-group">
                                                             <div class="position-relative has-icon-left">
                                                                 <input wire:model.defer='model.property_debt'
-                                                                    type="number" id="fproperty_debt-icon"
+                                                                    type="text" id="fproperty_debt-icon"
                                                                     class="form-control" name="fproperty_debt-id-icon"
                                                                     placeholder="Property Debts">
                                                                 <div class="form-control-position">
@@ -223,7 +225,7 @@
                                                         <div class="col-md-4 form-group">
                                                             <div class="position-relative has-icon-left">
                                                                 <input wire:model.defer='model.anticipated_budget'
-                                                                    type="number" id="fanticipatedbudget-icon"
+                                                                    type="text" id="fanticipatedbudget-icon"
                                                                     class="form-control"
                                                                     name="fanticipatedbudget-id-icon"
                                                                     placeholder="Anticipated Budget">
@@ -531,3 +533,30 @@
         </div>
     </div>
 </div>
+
+<script>
+
+document.getElementById('fanticipatedbudget-icon').addEventListener('input', function(event) {
+        var inputString = event.target.value.replace(/[^0-9]/g, '');
+        var formattedNumber = inputString.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        event.target.value = formattedNumber;
+        Livewire.components['your-component'].set('model.anticipated_budget', inputString);
+    });
+       document.getElementById('fproperty_debt-icon').addEventListener('input', function(event) {
+        var inputString = event.target.value.replace(/[^0-9]/g, '');
+        var formattedNumber = inputString.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        event.target.value = formattedNumber;
+        Livewire.components['your-component'].set('model.property_debt', inputString);
+    });
+    document.getElementById('fcurrent_property_value-icon').addEventListener('input', function(event) {
+        var inputString = event.target.value.replace(/[^0-9]/g, '');
+        var formattedNumber = inputString.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        event.target.value = formattedNumber;
+        Livewire.components['your-component'].set('model.current_property_value', inputString);
+    });
+ 
+    
+</script>
+
+
+

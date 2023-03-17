@@ -176,8 +176,9 @@ class LiveProjectComponent extends Component
        
        
         $this->model['phone_code'] = "+61";
-
-        // dd('asd');
+        $this->model['anticipated_budget'] = str_replace( ',', '', $this->model['anticipated_budget']);
+        $this->model['property_debt'] = str_replace( ',', '', $this->model['property_debt']);
+        $this->model['current_property_value'] = str_replace( ',', '', $this->model['current_property_value']);
         // dd($this->partTakers);
         $this->validate();
         $data = collect($this->model)->except('pushImage','images', 'videos', 'project_roles', 'action_required', 'builders', 'lead', 'evaluators', 'franchisee', 'assigned', 'cover_photo', 'progress_satisfied', 'evaluation_satisfied', 'final_progress_reviews', 'evaluation_reviews', 'latest_payment_request', 'latest_note', 'latest_progress', 'latest_value', 'progress_reviewed', 'evaluation_reviewed')->toArray();
@@ -251,4 +252,21 @@ class LiveProjectComponent extends Component
     {
         $this->pushImage = [];
     }
+    public function formatNumber()
+    {
+        $inputString = $this->model['current_property_value'];
+
+        // Remove any non-numeric characters from the input string
+        $inputString = preg_replace('/[^0-9]/', '', $inputString);
+    
+        // dd('Input string: ' . $inputString);
+    
+        // Format the number with grouped thousands separators (commas) and no decimal places
+        $formattedNumber = number_format($inputString, 0);
+    
+        // dd('Formatted number: ' . $formattedNumber);
+    
+        $this->model['current_property_value'] = $formattedNumber;
+    }
+
 }
