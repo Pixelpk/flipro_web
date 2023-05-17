@@ -46,7 +46,7 @@
 
                             <div id="collapse{{$item->id}}" class="collapse" aria-labelledby="heading{{$item->id}}" data-parent="#accordion">
                                 <div class="card-body" style="padding: 0px;">
-                                    <img class="mt-1" style="width:100%;" src="{{$item->cover_photo}}" alt="">
+                                    <img class="mt-1" style="width:440px;" src="{{$item->cover_photo}}" alt="">
                                     <ul class="mt-1 mb-2">
                                         <li>
                                             <b>Applicant Name:</b> {{$item->applicant_name}}
@@ -71,13 +71,13 @@
                                             <b>Cross Collaterized:</b> {{$item->cross_collaterized ? 'Yes' : 'No'}}
                                         </li>
                                         <li>
-                                            <b>Current Value:</b> ${{ number_format((float)$item->current_property_value, 2)}}
+                                            <b>Current Value:</b> ${{ number_format((float)$item->current_property_value)}}
                                         </li>
                                         <li>
-                                            <b>Current Debts:</b>  ${{ number_format((float)$item->property_debt, 2)}}
+                                            <b>Current Debts:</b>  ${{ number_format((float)$item->property_debt)}}
                                         </li>
                                         <li>
-                                            <b>Anticipated Budget:</b> ${{ number_format((float)$item->anticipated_budget, 2)}}
+                                            <b>Anticipated Budget:</b> ${{ number_format((float)$item->anticipated_budget)}}
                                         </li>
                                     </ul>
                                     <a href="/projects/{{$item->id}}"><button class="btn btn-primary">View</button></a>
@@ -114,7 +114,8 @@
 
                             <div id="collapse{{$item->id}}" class="collapse" aria-labelledby="heading{{$item->id}}" data-parent="#accordion">
                                 <div class="card-body" style="padding: 0px;">
-                                    <img class="mt-1" style="width:100%;" src="{{$item->cover_photo}}" alt="">
+                                 <img class="mt-1" style="width:440px;" src="{{$item->cover_photo}}" alt="">
+                                    {{-- <img class="mt-1" style="width:100%;" src="{{$item->cover_photo}}" alt=""> --}}
                                     <ul class="mt-1 mb-2">
                                         <li>
                                             <b>Applicant Name:</b> {{$item->applicant_name}}
@@ -139,13 +140,13 @@
                                             <b>Cross Collaterized:</b> {{$item->cross_collaterized ? 'Yes' : 'No'}}
                                         </li>
                                         <li>
-                                            <b>Current Value:</b> ${{ number_format((float)$item->current_property_value, 2)}}
+                                            <b>Current Value:</b> ${{ number_format((float)$item->current_property_value)}}
                                         </li>
                                         <li>
-                                            <b>Current Debts:</b> ${{ number_format((float)$item->property_debt, 2)}}
+                                            <b>Current Debts:</b> ${{ number_format((float)$item->property_debt)}}
                                         </li>
                                         <li>
-                                            <b>Anticipated Budget:</b> ${{ number_format((float)$item->anticipated_budget, 2)}}
+                                            <b>Anticipated Budget:</b> ${{ number_format((float)$item->anticipated_budget)}}
                                         </li>
                                     </ul>
                                     <a href="/projects/{{$item->id}}"><button class="btn btn-primary">View</button></a>
@@ -185,6 +186,7 @@
                                     </div>
                                     <div id="collapse{{$item->id}}" class="collapse" aria-labelledby="heading{{$item->id}}" data-parent="#accordion">
                                         <div class="card-body" style="padding: 0px;">
+                                         <img class="mt-1" style="width:440px;" src="{{$item->cover_photo}}" alt="">
                                             {{-- <img class="mt-1" style="width:100%;" src="{{$item->cover_photo}}" alt=""> --}}
                                             <h1 class="mt-1" style="text-align: center;font-size: 35px;"> {{$item->title}}</h1>
                                             <ul class="mt-1 mb-2">
@@ -211,13 +213,13 @@
                                                     <b>Cross Collaterized:</b> {{$item->cross_collaterized ? 'Yes' : 'No'}}
                                                 </li>
                                                 <li>
-                                                    <b>Current Value:</b> ${{ number_format((float)$item->current_property_value, 2)}}
+                                                    <b>Current Value:</b> ${{ number_format((float)$item->current_property_value)}}
                                                 </li>
                                                 <li>
-                                                    <b>Current Debts:</b> ${{ number_format((float)$item->property_debt, 2)}}
+                                                    <b>Current Debts:</b> ${{ number_format((float)$item->property_debt)}}
                                                 </li>
                                                 <li>
-                                                    <b>Anticipated Budget:</b> ${{ number_format((float)$item->anticipated_budget, 2)}}
+                                                    <b>Anticipated Budget:</b> ${{ number_format((float)$item->anticipated_budget)}}
                                                 </li>
                                             </ul>
                                             <a href="/projects/{{$item->id}}"><button class="btn btn-primary">View</button></a>
@@ -250,15 +252,17 @@
                                 <div class="card accordion">
                                     <div class="card-header accordion" id="heading{{$item->id}}">
                                         <h5 class="mb-0">
-                                            <button class="btn btn-link" data-toggle="collapse" data-target="#collapse{{$item->id}}" aria-expanded="true" aria-controls="collapse{{$item->id}}">
+                                            <button class="btn btn-link w-100 text-left" data-toggle="collapse" data-target="#collapse{{$item->id}}" aria-expanded="true" aria-controls="collapse{{$item->id}}">
                                                 {{$item->title}}
+                                                   <i class="bx bx-caret-down float-right"></i>
                                             </button>
                                         </h5>
                                     </div>
 
                                     <div id="collapse{{$item->id}}" class="collapse" aria-labelledby="heading{{$item->id}}" data-parent="#accordion">
                                         <div class="card-body" style="padding: 0px;">
-                                            <img class="mt-1" style="width:100%;" src="{{$item->cover_photo}}" alt="">
+                                         <img class="mt-1" style="width:440px;" src="{{$item->cover_photo}}" alt="">
+                                            {{-- <img class="mt-1" style="width:100%;" src="{{$item->cover_photo}}" alt=""> --}}
                                             <ul class="mt-1 mb-2">
                                                 <li>
                                                     <b>Applicant Name:</b> {{$item->applicant_name}}
@@ -275,9 +279,7 @@
                                                 <li>
                                                     <b>Property Address:</b> {{$item->title}}
                                                 </li>
-                                                <li>
-                                                    <b>Property Address:</b> {{$item->title}}
-                                                </li>
+                                              
                                                 <li>
                                                     <b>Property Title:</b> {{$item->project_address}}
                                                 </li>
@@ -285,14 +287,14 @@
                                                     <b>Cross Collaterized:</b> {{$item->cross_collaterized ? 'Yes' : 'No'}}
                                                 </li>
                                                 <li>
-                                                    <b>Current Value:</b> ${{ number_format((float)$item->current_property_value, 2)}}
+                                                    <b>Current Value:</b> ${{ number_format((float)$item->current_property_value)}}
 
                                                 </li>
                                                 <li>
-                                                    <b>Current Debts:</b> ${{ number_format((float)$item->property_debt, 2)}}
+                                                    <b>Current Debts:</b> ${{ number_format((float)$item->property_debt)}}
                                                 </li>
                                                 <li>
-                                                    <b>Anticipated Budget:</b> ${{ number_format((float)$item->anticipated_budget, 2)}}
+                                                    <b>Anticipated Budget:</b> ${{ number_format((float)$item->anticipated_budget)}}
                                                 </li>
                                             </ul>
                                             <a href="/projects/{{$item->id}}"><button class="btn btn-primary">View</button></a>
@@ -344,7 +346,8 @@
 
                             <div id="collapse{{$item->id}}" class="collapse" aria-labelledby="heading{{$item->id}}" data-parent="#accordion">
                                 <div class="card-body" style="padding: 0px;">
-                                    <img class="mt-1" style="width:100%;" src="{{$item->cover_photo}}" alt="">
+                                 <img class="mt-1" style="width:440px;" src="{{$item->cover_photo}}" alt="">
+                                    {{-- <img class="mt-1" style="width:100%;" src="{{$item->cover_photo}}" alt=""> --}}
                                     <ul class="mt-1 mb-2">
                                         <li>
                                             <b>Applicant Name:</b> {{$item->applicant_name}}
@@ -361,9 +364,7 @@
                                         <li>
                                             <b>Property Address:</b> {{$item->title}}
                                         </li>
-                                        <li>
-                                            <b>Property Address:</b> {{$item->title}}
-                                        </li>
+                                      
                                         <li>
                                             <b>Property Title:</b> {{$item->project_address}}
                                         </li>
@@ -371,13 +372,13 @@
                                             <b>Cross Collaterized:</b> {{$item->cross_collaterized ? 'Yes' : 'No'}}
                                         </li>
                                         <li>
-                                            <b>Current Value:</b> ${{ number_format((float)$item->current_property_value, 2)}}
+                                            <b>Current Value:</b> ${{ number_format((float)$item->current_property_value)}}
                                         </li>
                                         <li>
-                                            <b>Current Debts:</b> ${{ number_format((float)$item->property_debt, 2)}}
+                                            <b>Current Debts:</b> ${{ number_format((float)$item->property_debt)}}
                                         </li>
                                         <li>
-                                            <b>Anticipated Budget:</b> ${{ number_format((float)$item->anticipated_budget, 2)}}
+                                            <b>Anticipated Budget:</b> ${{ number_format((float)$item->anticipated_budget)}}
                                         </li>
                                     </ul>
                                     <a href="/projects/{{$item->id}}"><button class="btn btn-primary">View</button></a>
@@ -417,7 +418,8 @@
 
                                     <div id="collapse{{$item->id}}" class="collapse" aria-labelledby="heading{{$item->id}}" data-parent="#accordion">
                                         <div class="card-body" style="padding: 0px;">
-                                            <img class="mt-1" style="width:100%;" src="{{$item->cover_photo}}" alt="">
+                                         <img class="mt-1" style="width:440px;" src="{{$item->cover_photo}}" alt="">
+                                            {{-- <img class="mt-1" style="width:100%;" src="{{$item->cover_photo}}" alt=""> --}}
                                             <ul class="mt-1 mb-2">
                                                 <li>
                                                     <b>Applicant Name:</b> {{$item->applicant_name}}
@@ -441,13 +443,13 @@
                                                     <b>Cross Collaterized:</b> {{$item->cross_collaterized ? 'Yes' : 'No'}}
                                                 </li>
                                                 <li>
-                                                    <b>Current Value:</b> ${{ number_format((float)$item->current_property_value, 2)}}
+                                                    <b>Current Value:</b> ${{ number_format((float)$item->current_property_value)}}
                                                 </li>
                                                 <li>
-                                                    <b>Current Debts:</b> ${{ number_format((float)$item->property_debt, 2)}}
+                                                    <b>Current Debts:</b> ${{ number_format((float)$item->property_debt)}}
                                                 </li>
                                                 <li>
-                                                    <b>Anticipated Budget:</b> ${{ number_format((float)$item->anticipated_budget, 2)}}
+                                                    <b>Anticipated Budget:</b> ${{ number_format((float)$item->anticipated_budget)}}
                                                 </li>
                                             </ul>
                                             <a href="/projects/{{$item->id}}"><button class="btn btn-primary">View</button></a>
@@ -525,13 +527,13 @@
                                         <b>Cross Collaterized:</b> {{$item->cross_collaterized ? 'Yes' : 'No'}}
                                     </li>
                                     <li>
-                                        <b>Current Value:</b> ${{number_format((float)$item->current_property_value, 2)}}
+                                        <b>Current Value:</b> ${{number_format((float)$item->current_property_value)}}
                                     </li>
                                     <li>
-                                        <b>Current Debts:</b> ${{ number_format((float)$item->property_debt, 2)}}
+                                        <b>Current Debts:</b> ${{ number_format((float)$item->property_debt)}}
                                     </li>
                                     <li>
-                                        <b>Anticipated Budget:</b> ${{ number_format((float)$item->anticipated_budget, 2)}}
+                                        <b>Anticipated Budget:</b> ${{ number_format((float)$item->anticipated_budget)}}
                                     </li>
                                 </ul>
                                 <a href="/projects/{{$item->id}}"><button class="btn btn-primary">View</button></a>
@@ -595,13 +597,13 @@
                                                 <b>Cross Collaterized:</b> {{$item->cross_collaterized ? 'Yes' : 'No'}}
                                             </li>
                                             <li>
-                                                <b>Current Value:</b> ${{ number_format((float)$item->current_property_value, 2)}}
+                                                <b>Current Value:</b> ${{ number_format((float)$item->current_property_value)}}
                                             </li>
                                             <li>
-                                                <b>Current Debts:</b> ${{ number_format((float)$item->property_debt, 2)}}
+                                                <b>Current Debts:</b> ${{ number_format((float)$item->property_debt)}}
                                             </li>
                                             <li>
-                                                <b>Anticipated Budget:</b> ${{ number_format((float)$item->anticipated_budget, 2)}}
+                                                <b>Anticipated Budget:</b> ${{ number_format((float)$item->anticipated_budget)}}
                                             </li>
                                         </ul>
                                         <a href="/projects/{{$item->id}}"><button class="btn btn-primary">View</button></a>
@@ -663,13 +665,13 @@
                                                 <b>Cross Collaterized:</b> {{$item->cross_collaterized ? 'Yes' : 'No'}}
                                             </li>
                                             <li>
-                                                <b>Current Value:</b> ${{ number_format((float)$item->current_property_value, 2)}}
+                                                <b>Current Value:</b> ${{ number_format((float)$item->current_property_value)}}
                                             </li>
                                             <li>
-                                                <b>Current Debts:</b> ${{ number_format((float)$item->property_debt, 2)}}
+                                                <b>Current Debts:</b> ${{ number_format((float)$item->property_debt)}}
                                             </li>
                                             <li>
-                                                <b>Anticipated Budget:</b> ${{ number_format((float)$item->anticipated_budget, 2)}}
+                                                <b>Anticipated Budget:</b> ${{ number_format((float)$item->anticipated_budget)}}
                                             </li>
                                         </ul>
                                         <a href="/projects/{{$item->id}}"><button class="btn btn-primary">View</button></a>
@@ -737,13 +739,13 @@
                                                 <b>Cross Collaterized:</b> {{$item->cross_collaterized ? 'Yes' : 'No'}}
                                             </li>
                                             <li>
-                                                <b>Current Value:</b> ${{ number_format((float)$item->current_property_value, 2)}}
+                                                <b>Current Value:</b> ${{ number_format((float)$item->current_property_value)}}
                                             </li>
                                             <li>
-                                                <b>Current Debts:</b> ${{ number_format((float)$item->property_debt, 2)}}
+                                                <b>Current Debts:</b> ${{ number_format((float)$item->property_debt)}}
                                             </li>
                                             <li>
-                                                <b>Anticipated Budget:</b> ${{ number_format((float)$item->anticipated_budget, 2)}}
+                                                <b>Anticipated Budget:</b> ${{ number_format((float)$item->anticipated_budget)}}
                                             </li>
                                         </ul>
                                         <a href="/projects/{{$item->id}}"><button class="btn btn-primary">View</button></a>
@@ -819,13 +821,13 @@
                                                 <b>Cross Collaterized:</b> {{$item->cross_collaterized ? 'Yes' : 'No'}}
                                             </li>
                                             <li>
-                                                <b>Current Value:</b> ${{ number_format((float)$item->current_property_value, 2)}}
+                                                <b>Current Value:</b> ${{ number_format((float)$item->current_property_value)}}
                                             </li>
                                             <li>
-                                                <b>Current Debts:</b> ${{ number_format((float)$item->property_debt, 2)}}
+                                                <b>Current Debts:</b> ${{ number_format((float)$item->property_debt)}}
                                             </li>
                                             <li>
-                                                <b>Anticipated Budget:</b> ${{ number_format((float)$item->anticipated_budget, 2)}}
+                                                <b>Anticipated Budget:</b> ${{ number_format((float)$item->anticipated_budget)}}
                                             </li>
                                         </ul>
                                         <a href="/projects/{{$item->id}}"><button class="btn btn-primary">View</button></a>

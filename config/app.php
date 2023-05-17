@@ -181,6 +181,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         //App\Providers\TelescopeServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
+        Webklex\IMAP\Providers\LaravelServiceProvider::class,
 
 
     ],
@@ -242,6 +243,7 @@ return [
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'Image' => Intervention\Image\Facades\Image::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
+        'Client' => Webklex\IMAP\Facades\Client::class,
     ],
 
 ];

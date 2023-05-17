@@ -68,7 +68,7 @@ class LiveSendEmailWidget extends Component
 
     public function send()
     {
-       
+      
         $this->validate();
         $messageId = uniqid();
         $emailSettings = $this->emailSettings;
@@ -80,6 +80,7 @@ class LiveSendEmailWidget extends Component
         $mail->Username = $emailSettings->username;
        
         $mail->Password = $emailSettings->password;
+        
         $mail->SMTPSecure = 'ssl';
         $mail->Port = 465;
       
@@ -107,6 +108,7 @@ class LiveSendEmailWidget extends Component
         }
 
         try{
+              // dd($this->replyMessage);
             $mail->send();
             $lead = Lead::where('email', $this->to)->first();
             Email::forceCreate([

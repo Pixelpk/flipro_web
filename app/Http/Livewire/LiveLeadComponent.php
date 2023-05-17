@@ -35,15 +35,18 @@ class LiveLeadComponent extends Component
         'admin', 'franchise', 'builder', 'evaluator', 'home-owner'
     ];
     public $model;
-
-    protected $rules = [
+    protected function rules()
+    {
+        return  [
         'name' => 'required',
         'email' => 'required|email|unique:leads,email',
         'address' => 'required',
         'phone_code' => 'required',
         'phone' => 'required',
         'model' => 'nullable',
-    ];
+        ];
+    }
+    
 
     public function mount()
     {
@@ -108,9 +111,10 @@ class LiveLeadComponent extends Component
 
     public function update()
     {
+        // dd($this->model->id);
         $this->validate([
             'name' => 'required',
-            'email' => 'required|email|unique:users,email,'.$this->model->id,
+            'email' => 'required|email|unique:leads,email,'.$this->model->id,
             'address' => 'required',
             'phone_code' => 'required',
             'phone' => 'required',

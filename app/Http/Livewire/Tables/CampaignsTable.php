@@ -21,6 +21,8 @@ class CampaignsTable extends LivewireDatatable
     public function columns()
     {
         return [
+            
+            Column::name("id")->defaultSort('desc')->hide(),
             Column::name("name")->label("Name")->searchable(),
             Column::callback(['segment_id'], function($id){
                 $segment = Segment::find($id);

@@ -27,14 +27,26 @@ class ProjectTable extends LivewireDatatable
     public function columns()
     {
         return [
+            Column::name("id")->defaultSort('desc')->hide(),
             DateColumn::raw('created_at')
             ->label('Created date')
             ->format('d-m-Y'),
-            Column::name('title')->searchable(),
+
+            // Column::name('title')->searchable(),
+           
+
+            Column::callback(['id', 'title'], function ($id, $title) {
+                return "<a href='projects/$id'>$title</a>";
+            })->label('Title'),
+
+
+            
             Column::name('applicant_name')->searchable(),
+            
             Column::callback(['anticipated_budget'], function($value){
-                return '$'.number_format((float)$value, 2);
+                return '$'.number_format((float)$value);
             })->label('anticipated_budget'),
+            
             // Column::name('anticipated_budget')->searchable(),
             Column::name('project_address')->searchable(),
             Column::name('project_state')->searchable(),
@@ -45,11 +57,11 @@ class ProjectTable extends LivewireDatatable
             Column::name('email')->searchable(),
             // Column::name('current_property_value')->searchable(),
             Column::callback(['current_property_value'], function($value){
-                return '$'.number_format((float)$value, 2);
+                return '$'.number_format((float)$value);
             })->label('current_property_value'),
             // Column::name('property_debt'),
             Column::callback(['property_debt'], function($value){
-                return '$'.number_format((float)$value, 2);
+                return '$'.number_format((float)$value);
             })->label('current_property_value'),
             Column::callback(['cross_collaterized'], function($value){
                 return $value ? 'Yes' : 'No';

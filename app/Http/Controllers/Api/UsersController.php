@@ -39,7 +39,7 @@ class UsersController extends Controller
         return response([
             "message" => 'success',
             #NOTE: if resource id is provided return resource object else return resource array list
-            "data" => $users->paginate(config('app.pageSize'))
+            "data" => $users->orderBy('id', 'desc')->paginate(config('app.pageSize'))
         ]);
         
     }

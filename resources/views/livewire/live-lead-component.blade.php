@@ -28,86 +28,106 @@
                             </div>
                             <div class="card-content">
                                 <div class="card-body">
-                                    @if($user->hasRole('create-leads'))
-                                    <button type="button" wire:click='openModal' class="btn btn-outline-primary mb-3"
-                                        data-toggle="modal" data-target="#userCreateModal">
-                                        <i class="bx bx-plus"></i> Add {{$type}}
-                                    </button>
-                                    <button type="button" wire:click='openModalexel' class="btn btn-outline-primary mb-3"
-                                        data-toggle="modal" data-target="#openModalexel">
-                                        <i class="bx bx-import"></i> Excel Import {{$type}}
-                                    </button>
+                                    @if ($user->hasRole('create-leads'))
+                                        <button type="button" wire:click='openModal'
+                                            class="btn btn-outline-primary mb-3" data-toggle="modal"
+                                            data-target="#userCreateModal">
+                                            <i class="bx bx-plus"></i> Add {{ $type }}
+                                        </button>
+                                        <button type="button" wire:click='openModalexel'
+                                            class="btn btn-outline-primary mb-3" data-toggle="modal"
+                                            data-target="#openModalexel">
+                                            <i class="bx bx-import"></i> Excel Import {{ $type }}
+                                        </button>
                                     @endif
-                                    @livewire('tables.leads-table', ['params' => [
-                                        'user_id' => $user->id
-                                    ]])
+                                    @livewire('tables.leads-table', [
+                                        'params' => [
+                                            'user_id' => $user->id,
+                                        ],
+                                    ])
                                     <!--Exel Import/ Modal -->
-                                    <div class="modal fade text-left" id="openModalexel" wire:ignore.self
-                                    tabindex="-1" role="dialog" aria-labelledby="myModalLabel160"
-                                    aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
-                                        role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header bg-primary">
-                                                <h5 class="modal-title white" id="myModalLabel160">Excel import
-                                                </h5>
-                                                <button type="button" class="close" data-dismiss="modal"
-                                                    aria-label="Close">
-                                                    <i class="bx bx-x"></i>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <div class="row">
-                                                    <div class="col-md-4">
-                                                        <label>Import</label>
-                                                    </div>
-                                                    <div class="col-md-8 form-group">
-                                                        <div class="position-relative has-icon-left">
-                                                            <input 
+                                    <div class="modal fade text-left" id="openModalexel" wire:ignore.self tabindex="-1"
+                                        role="dialog" aria-labelledby="myModalLabel160" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
+                                            role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header bg-primary">
+                                                    <h5 class="modal-title white" id="myModalLabel160">Excel import
+                                                    </h5>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                        <i class="bx bx-x"></i>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            <label>Import</label>
+                                                        </div>
+                                                        <div class="col-md-8 form-group">
+                                                            <div class="position-relative has-icon-left">
+                                                                <div x-data="{ isUploading: false, progress: 0 }"
+                                                                    x-on:livewire-upload-start="isUploading = true"
+                                                                    x-on:livewire-upload-finish="isUploading = false"
+                                                                    x-on:livewire-upload-error="isUploading = false"
+                                                                    x-on:livewire-upload-progress="progress = $event.detail.progress">
+                                                                    <!-- File Input -->
+                                                                    <input type="file" wire:model="exelfile"
+                                                                    class="form-control"
+                                                                        accept=".csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+
+                                                                    <!-- Progress Bar -->
+                                                                    <div x-show="isUploading">
+                                                                        <progress max="100"
+                                                                            x-bind:value="progress"></progress>
+                                                                    </div>
+                                                                </div>
+                                                                {{-- <input 
                                                             accept=".csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
                                                             wire:model='exelfile' type="file" id="import-icon"
                                                                 class="form-control" name="import-icon"
-                                                                placeholder="Name">
-                                                            <div class="form-control-position">
-                                                                <i class="bx bx-import"></i>
+                                                                placeholder="Name"> --}}
+                                                                <div class="form-control-position">
+                                                                    <i class="bx bx-import"></i>
+                                                                </div>
                                                             </div>
+                                                            @error('exelfile')
+                                                                <span class="text-danger">{{ $message }}</span>
+                                                            @enderror
                                                         </div>
-                                                        @error('exelfile') <span class="text-danger">{{ $message
-                                                            }}</span> @enderror
-                                                    </div>
-                                                    
-                                                   
-                                                
-                                                </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-light-secondary"
-                                                    data-dismiss="modal">
-                                                    <i class="bx bx-x d-block d-sm-none"></i>
-                                                    <span class="d-none d-sm-block">Close</span>
-                                                </button>
-                                                @if(!$model)
-                                                <button  wire:loading.attr="disabled" type="button" wire:click='import'
-                                                    class="btn btn-primary ml-1">
-                                                    <i class="bx bx-check d-block d-sm-none"></i>
-                                                    <span class="d-none d-sm-block">Import</span>
 
-                                                     <span wire:loading wire:target="import"
-                                                        class="spinner-grow spinner-grow-sm" role="status"
-                                                        aria-hidden="true"></span>
-                                                </button>
-                                                @endif
-                                                @if($model)
-                                                <button type="button" wire:click='update'
-                                                    class="btn btn-primary ml-1">
-                                                    <i class="bx bx-check d-block d-sm-none"></i>
-                                                    <span class="d-none d-sm-block">Update</span>
-                                                </button>
-                                                @endif
+
+
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-light-secondary"
+                                                        data-dismiss="modal">
+                                                        <i class="bx bx-x d-block d-sm-none"></i>
+                                                        <span class="d-none d-sm-block">Close</span>
+                                                    </button>
+                                                    @if (!$model)
+                                                        <button wire:loading.attr="disabled" type="button"
+                                                            wire:click='import' class="btn btn-primary ml-1">
+                                                            <i class="bx bx-check d-block d-sm-none"></i>
+                                                            <span class="d-none d-sm-block">Import</span>
+
+                                                            <span wire:loading wire:target="import"
+                                                                class="spinner-grow spinner-grow-sm" role="status"
+                                                                aria-hidden="true"></span>
+                                                        </button>
+                                                    @endif
+                                                    @if ($model)
+                                                        <button type="button" wire:click='update'
+                                                            class="btn btn-primary ml-1">
+                                                            <i class="bx bx-check d-block d-sm-none"></i>
+                                                            <span class="d-none d-sm-block">Update</span>
+                                                        </button>
+                                                    @endif
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
                                     <!--Create/Edit Modal -->
                                     <div class="modal fade text-left" id="userCreateModal" wire:ignore.self
                                         tabindex="-1" role="dialog" aria-labelledby="myModalLabel160"
@@ -130,30 +150,32 @@
                                                         </div>
                                                         <div class="col-md-8 form-group ">
                                                             <div class="position-relative has-icon-left">
-                                                                <input wire:model='name' type="text" id="fname-icon"
-                                                                    class="form-control" name="fname-icon"
-                                                                    placeholder="Name">
+                                                                <input wire:model='name' type="text"
+                                                                    id="fname-icon" class="form-control"
+                                                                    name="fname-icon" placeholder="Name">
                                                                 <div class="form-control-position">
                                                                     <i class="bx bx-user"></i>
                                                                 </div>
                                                             </div>
-                                                            @error('name') <span class="text-danger">{{ $message
-                                                                }}</span> @enderror
+                                                            @error('name')
+                                                                <span class="text-danger">{{ $message }}</span>
+                                                            @enderror
                                                         </div>
                                                         <div class="col-md-4">
                                                             <label>Email</label>
                                                         </div>
                                                         <div class="col-md-8 form-group">
                                                             <div class="position-relative has-icon-left">
-                                                                <input wire:model='email' type="email" id="email-icon"
-                                                                    class="form-control" name="email-id-icon"
-                                                                    placeholder="Email">
+                                                                <input wire:model='email' type="email"
+                                                                    id="email-icon" class="form-control"
+                                                                    name="email-id-icon" placeholder="Email">
                                                                 <div class="form-control-position">
                                                                     <i class="bx bx-mail-send"></i>
                                                                 </div>
                                                             </div>
-                                                            @error('email') <span class="text-danger">{{ $message
-                                                                }}</span> @enderror
+                                                            @error('email')
+                                                                <span class="text-danger">{{ $message }}</span>
+                                                            @enderror
                                                         </div>
                                                         <div class="col-md-4">
                                                             <label>Phone</label>
@@ -174,42 +196,52 @@
                                                                         aria-describedby="basic-addon1">
                                                                 </div>
                                                             </div>
-                                                            @error('phone') <span class="text-danger">{{ $message
-                                                                }}</span> @enderror
-                                                            @error('phone_code') <span class="text-danger">{{
-                                                                $message }}</span> @enderror
+                                                            @error('phone')
+                                                                <span class="text-danger">{{ $message }}</span>
+                                                            @enderror
+                                                            @error('phone_code')
+                                                                <span class="text-danger">{{ $message }}</span>
+                                                            @enderror
                                                         </div>
                                                         <div class="col-md-4">
                                                             <label>Segments</label>
                                                         </div>
                                                         <div class="col-md-8 form-group">
                                                             <div class="position-relative">
-                                                                <select wire:model='selectedSegments' class="form-control" multiple>
+                                                                <select wire:model='selectedSegments'
+                                                                    class="form-control" multiple>
                                                                     @foreach ($segments as $item)
-                                                                        <option value="{{$item->id}}">{{$item->name}}</option>
+                                                                        <option value="{{ $item->id }}">
+                                                                            {{ $item->name }}</option>
                                                                     @endforeach
                                                                 </select>
                                                             </div>
-                                                            @error('selectedSegments') <span class="text-danger">{{ $message
-                                                                }}</span> @enderror
-                                                            @error('selectedSegments') <span class="text-danger">{{
-                                                                $message }}</span> @enderror
+                                                            @error('selectedSegments')
+                                                                <span class="text-danger">{{ $message }}</span>
+                                                            @enderror
+                                                            @error('selectedSegments')
+                                                                <span class="text-danger">{{ $message }}</span>
+                                                            @enderror
                                                         </div>
                                                         <div class="col-md-4">
                                                             <label>Tags</label>
                                                         </div>
                                                         <div class="col-md-8 form-group">
                                                             <div class="position-relative">
-                                                                <select wire:model='selectedTags' class="form-control" multiple>
+                                                                <select wire:model='selectedTags' class="form-control"
+                                                                    multiple>
                                                                     @foreach ($tags as $item)
-                                                                        <option value="{{$item->id}}">{{$item->name}}</option>
+                                                                        <option value="{{ $item->id }}">
+                                                                            {{ $item->name }}</option>
                                                                     @endforeach
                                                                 </select>
                                                             </div>
-                                                            @error('selectedTags') <span class="text-danger">{{ $message
-                                                                }}</span> @enderror
-                                                            @error('selectedTags') <span class="text-danger">{{
-                                                                $message }}</span> @enderror
+                                                            @error('selectedTags')
+                                                                <span class="text-danger">{{ $message }}</span>
+                                                            @enderror
+                                                            @error('selectedTags')
+                                                                <span class="text-danger">{{ $message }}</span>
+                                                            @enderror
                                                         </div>
                                                         <div class="col-md-4">
                                                             <label>Address</label>
@@ -223,8 +255,9 @@
                                                                     <i class="bx bx-pin"></i>
                                                                 </div>
                                                             </div>
-                                                            @error('address') <span class="text-danger">{{ $message
-                                                                }}</span> @enderror
+                                                            @error('address')
+                                                                <span class="text-danger">{{ $message }}</span>
+                                                            @enderror
                                                         </div>
                                                     </div>
                                                 </div>
@@ -234,19 +267,19 @@
                                                         <i class="bx bx-x d-block d-sm-none"></i>
                                                         <span class="d-none d-sm-block">Close</span>
                                                     </button>
-                                                    @if(!$model)
-                                                    <button type="button" wire:click='create'
-                                                        class="btn btn-primary ml-1">
-                                                        <i class="bx bx-check d-block d-sm-none"></i>
-                                                        <span class="d-none d-sm-block">Create</span>
-                                                    </button>
+                                                    @if (!$model)
+                                                        <button type="button" wire:click='create'
+                                                            class="btn btn-primary ml-1">
+                                                            <i class="bx bx-check d-block d-sm-none"></i>
+                                                            <span class="d-none d-sm-block">Create</span>
+                                                        </button>
                                                     @endif
-                                                    @if($model)
-                                                    <button type="button" wire:click='update'
-                                                        class="btn btn-primary ml-1">
-                                                        <i class="bx bx-check d-block d-sm-none"></i>
-                                                        <span class="d-none d-sm-block">Update</span>
-                                                    </button>
+                                                    @if ($model)
+                                                        <button type="button" wire:click='update'
+                                                            class="btn btn-primary ml-1">
+                                                            <i class="bx bx-check d-block d-sm-none"></i>
+                                                            <span class="d-none d-sm-block">Update</span>
+                                                        </button>
                                                     @endif
                                                 </div>
                                             </div>
@@ -260,7 +293,8 @@
                                             role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header bg-primary">
-                                                    <h5 class="modal-title white" id="myModalLabel160">Delete Lead Confirmation
+                                                    <h5 class="modal-title white" id="myModalLabel160">Delete Lead
+                                                        Confirmation
                                                     </h5>
                                                     <button type="button" class="close" data-dismiss="modal"
                                                         aria-label="Close">
@@ -280,12 +314,12 @@
                                                         <i class="bx bx-x d-block d-sm-none"></i>
                                                         <span class="d-none d-sm-block">No</span>
                                                     </button>
-                                                    @if($model)
-                                                    <button type="button" wire:click='delete'
-                                                        class="btn btn-primary ml-1">
-                                                        <i class="bx bx-check d-block d-sm-none"></i>
-                                                        <span class="d-none d-sm-block">Yes</span>
-                                                    </button>
+                                                    @if ($model)
+                                                        <button type="button" wire:click='delete'
+                                                            class="btn btn-primary ml-1">
+                                                            <i class="bx bx-check d-block d-sm-none"></i>
+                                                            <span class="d-none d-sm-block">Yes</span>
+                                                        </button>
                                                     @endif
                                                 </div>
                                             </div>

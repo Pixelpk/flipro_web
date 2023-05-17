@@ -405,7 +405,7 @@ class LiveProjectDetailComponent extends Component
         EventLog::forceCreate([
             'user_id' => Auth::user()->id,
             'project_id' => $this->project->id,
-            'description' => "Project move to close stage",
+            'description' => "Project moved to close stage",
             'status' => 2,
         ]);
        $this->project->status = "closed";

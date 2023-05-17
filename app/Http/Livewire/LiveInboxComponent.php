@@ -39,6 +39,7 @@ class LiveInboxComponent extends Component
 
     public function reply()
     {
+        
         $messageId = uniqid();
         $emailSettings = UserSmtp::where('user_id', Auth::id())->first();
         $mail = new PHPMailer(true);
@@ -57,7 +58,7 @@ class LiveInboxComponent extends Component
 
         $mail->Subject = "RE:" .  $this->openMessage['subject'];
         $mail->Body = $this->replyMessage;
-
+      
         $attachments = [];
 
         if($this->attachments){
@@ -77,7 +78,7 @@ class LiveInboxComponent extends Component
             $mail->send();
             Email::forceCreate([
                 'subject' => "RE:" .  $this->openMessage['subject'],
-                'message' => $this->replyMessage,
+                'message' => $this->replyMessage ?? 'null',
                 'from' => $emailSettings->username,
                 'to' => $this->openMessage['from'],
                 'spf' => 'pass',
@@ -132,21 +133,24 @@ class LiveInboxComponent extends Component
     public function fetchEmails()
     {
        
+      
         $server = UserSmtp::where('user_id', Auth::id())->first();
-
+       
         if(!$server) return;
         $client = Client::make([
             'host'          => $server->incomming_server,
             'port'          => $server->incomming_port,
             'encryption'    => $server->auth,
-            'validate_cert' => false,
+            'verify_host'   => true,
             'username'      => $server->username,
             'password'      => $server->password,
             'protocol'      => $server->authentication_type
         ]);
 
+      
+     
         $client->connect();
-
+        // dd($client);
         if(!$client->getFolder('FLIPROMOVED')) $client->createFolder('FLIPROMOVED');
      
         $folders = $client->getFolders();

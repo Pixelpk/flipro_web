@@ -19,6 +19,7 @@ class TagsTable extends LivewireDatatable
     public function columns()
     {
         return [
+            Column::name("id")->defaultSort('desc')->hide(),
             Column::name("name")->label("Name")->searchable(),
             Column::callback(['id'], function($id){
                 $editAction = "<span wire:click='edit($id)'><i class='bx bx-pencil'></i></span>";

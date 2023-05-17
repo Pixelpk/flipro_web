@@ -20,6 +20,7 @@ class UsersTable extends LivewireDatatable
     public function columns()
     {
         return [
+            Column::name("id")->defaultSort('desc')->hide(),
             Column::name("name")->label("Name")->searchable(),
             Column::name("email")->label("Email")->searchable(),
             Column::callback(['phone_code', 'phone'], function($phoneCode, $phone){

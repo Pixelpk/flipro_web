@@ -5,7 +5,7 @@ namespace App\Http\Livewire\Tables;
 use App\Models\Lead;
 use Mediconesystems\LivewireDatatables\Column;
 use Mediconesystems\LivewireDatatables\Http\Livewire\LivewireDatatable;
-
+use Mediconesystems\LivewireDatatables\DateColumn;
 class LeadsTable extends LivewireDatatable
 {
     protected $listeners = ['refreshTable'];
@@ -19,6 +19,10 @@ class LeadsTable extends LivewireDatatable
     public function columns()
     {
         return [
+            Column::name("id")->defaultSort('desc')->hide(),
+            DateColumn::raw('created_at')
+            ->label('Created date')
+            ->format('d-m-Y'),
             Column::name("name")->label("Name")->searchable(),
             Column::name("email")->label("Email")->searchable(),
             Column::callback(['phone_code', 'phone'], function($phoneCode, $phone){

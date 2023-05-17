@@ -26,6 +26,7 @@ class ProjectContractTable extends LivewireDatatable
     public function columns()
     {
         return [
+            Column::name("id")->defaultSort('desc')->hide(),
             Column::name('title'),
             Column::callback(['signatories'], function($signatories){
                 $signatories = json_decode($signatories, false);

@@ -63,7 +63,7 @@
                                                     $photo = $photo[count($photo) -2] . '/' . $photo[count($photo)-1];
                                                     }
                                                     @endphp
-                                                    <img src="/stream/{{$photo}}" width="100%" alt="">
+                                                    <img src="/stream/{{$photo}}" width="440px;" alt="Image">
                                                 </div>
                                                 <div class="col-md-12 text-center mt-2">
                                                     <a href="#gallery"><button class="btn btn-primary">View
@@ -147,11 +147,11 @@
                                             <ul>
                                                 <li class="mb-1">
                                                     <b>Current Value:</b>
-                                                    ${{number_format((float)$project->current_property_value, 2)}}
+                                                    ${{number_format((float)$project->current_property_value)}}
                                                 </li>
                                                 <li class="mb-1">
                                                     <b>Property Debts:</b>
-                                                    ${{ number_format((float)$project->property_debt, 2)}}
+                                                    ${{ number_format((float)$project->property_debt)}}
                                                 </li>
 
                                                 <li class="mb-1">
@@ -178,12 +178,12 @@
                                                 <li class="mb-1">
                                                     <b>Area (Square Meters):</b>
 
-                                                    {{ number_format((float)$project->area, 2)}}
+                                                    {{ number_format((float)$project->area)}}
                                                 </li>
                                                 <li class="mb-1">
                                                     <b>Anticipated Budget:</b>
 
-                                                    ${{ number_format((float)$project->anticipated_budget, 2)}}
+                                                    ${{ number_format((float)$project->anticipated_budget)}}
                                                 </li>
                                                 {{-- <li class="mb-1">
                                                     <b>Project Title:</b>
@@ -707,7 +707,7 @@
                                                     <td>
                                                         {{$task->status}}
                                                     </td>
-                                                    <td><i class="bx bx-show-alt" wire:click='selectTask({{$task}})'
+                                                    <td><i class="bx bx-pencil" wire:click='selectTask({{$task}})'
                                                             data-toggle="modal" data-target="#taskModal"></i></td>
                                                 </tr>
                                                 @endforeach
@@ -839,8 +839,8 @@
                                                             <div class="row">
                                                                 <div class="col-3 mt-1"><b>Add Value:</b></div>
                                                                 <div class="col-9 mt-1">
-                                                                    <input type="text" class="form-control"
-                                                                        wire:model='propertyValue'>
+                                                                    <input onkeyup="format(this)" id="valueadd" type="text" class="form-control"
+                                                                      >
                                                                     @error('propertyValue')
                                                                     <span class="text-danger">{{$message}}</span>
                                                                     @enderror
@@ -947,7 +947,7 @@
                                                 </tr>
                                                 @foreach ($project->evaluations as $value)
                                                 <tr>
-                                                    <td>${{ number_format((float)$value->value, 2)}}</td>
+                                                    <td>${{ number_format((float)$value->value)}}</td>
                                                     <td>
                                                         @if ($value->client_satisfied !== null)
                                                         {{$value->client_satisfied == true ? "Yes" : "No"}}
@@ -1041,7 +1041,7 @@
                                                 @foreach ($project->paymentRequest as $item)
                                                 <tr>
                                                     <td>{{$item->user->name}}</td>
-                                                    <td> ${{number_format($item->amount,2)}}</td>
+                                                    <td> ${{number_format($item->amount)}}</td>
                                                     <td>{{$item->description}}</td>
                                                     <td>
                                                         {{ ucfirst($item->status) }}
@@ -1189,7 +1189,7 @@
                                                     <td>Note</td>
                                                     <td>Date</td>
                                                 </tr>
-                                                @foreach ($project->notes() as $value)
+                                                @foreach ($project->notes as $value)
                                                 <tr>
                                                     <td>{{$value->user->name}}</td>
                                                     <td>
@@ -1411,3 +1411,26 @@
     @endif
 
 </div>
+<script>
+    
+
+    function format(input) 
+    {
+       
+        var nStr = input.value + '';
+        nStr = nStr.replace(/\,/g, "");
+        x = nStr.split('.');
+        x1 = x[0];
+        x2 = x.length > 1 ? '.' + x[1] : '';
+        var rgx = /(\d+)(\d{3})/;
+        while (rgx.test(x1)) {
+            x1 = x1.replace(rgx, '$1' + ',' + '$2');
+        }
+        input.value = x1 + x2;
+        
+        if(input.id == 'valueadd') 
+        {
+            @this.set('propertyValue', nStr);
+        }
+    }
+</script>

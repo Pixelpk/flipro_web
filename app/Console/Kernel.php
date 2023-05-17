@@ -25,14 +25,21 @@ class Kernel extends ConsoleKernel
 
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        $schedule->command('inspire')->hourly();
+        
+
+        $schedule->call(function(){
+            $inboxService = new EmailInboxController();
+            $inboxService->cron();
+        })->name('fetch_inboxes')->withoutOverlapping(1);
+        
         $schedule->call(function(){
             $envelopeService = new EnvelopeController();
             $contracts = Contract::whereNotIn('status', $this->contractsExcept)
             ->each(function($item) use($envelopeService) {
                 $envelopeService->updateStatus(null, $item);
             });
-        })->name('update_contract_status');
+        })->name('update_contract_status')->withoutOverlapping(1);
         
         $schedule->call(function(){
             $service = new CampaignEventsController();
@@ -41,10 +48,7 @@ class Kernel extends ConsoleKernel
 
         
 
-        $schedule->call(function(){
-            $inboxService = new EmailInboxController();
-            $inboxService->cron();
-        })->name('fetch_inboxes')->withoutOverlapping(5);
+        
     }
 
     /**

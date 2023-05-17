@@ -28,15 +28,18 @@
                             </div>
                             <div class="card-content">
                                 <div class="card-body">
-                                    @if($user->hasRole('create-projects'))
-                                    <button type="button" wire:click='openModal' class="btn btn-outline-primary mb-3"
-                                        data-toggle="modal" data-target="#createModal">
-                                        <i class="bx bx-plus"></i> Add Project
-                                    </button>
+                                    @if ($user->hasRole('create-projects'))
+                                        <button type="button" wire:click='openModal'
+                                            class="btn btn-outline-primary mb-3" data-toggle="modal"
+                                            data-target="#createModal">
+                                            <i class="bx bx-plus"></i> Add Project
+                                        </button>
                                     @endif
-                                    @livewire('tables.project-table', ['params' => [
-                                    'user_id' => $user->id
-                                    ]])
+                                    @livewire('tables.project-table', [
+                                        'params' => [
+                                            'user_id' => $user->id,
+                                        ],
+                                    ])
                                     <!--Create/Edit Modal -->
                                     <div class="modal fade text-left" id="createModal" wire:ignore.self tabindex="-1"
                                         role="dialog" aria-labelledby="myModalLabel160" aria-hidden="true">
@@ -72,8 +75,9 @@
                                                                     <i class="bx bx-note"></i>
                                                                 </div>
                                                             </div>
-                                                            @error('model.applicant_name') <span class="text-danger">{{ $message
-                                                                }}</span> @enderror
+                                                            @error('model.applicant_name')
+                                                                <span class="text-danger">{{ $message }}</span>
+                                                            @enderror
                                                         </div>
                                                         <div class="col-md-2">
                                                             <label>Email</label>
@@ -87,8 +91,9 @@
                                                                     <i class="bx bx-envelope"></i>
                                                                 </div>
                                                             </div>
-                                                            @error('model.email') <span class="text-danger">{{ $message
-                                                                }}</span> @enderror
+                                                            @error('model.email')
+                                                                <span class="text-danger">{{ $message }}</span>
+                                                            @enderror
                                                         </div>
 
                                                         <div class="col-md-2">
@@ -98,16 +103,24 @@
                                                             <div class="position-relative">
                                                                 <div class="input-group">
                                                                     <div class="input-group-prepend">
-                                                                        <select wire:model.defer='model.phone_code' class="form-control input-group-text">
+                                                                        <select wire:model.defer='model.phone_code'
+                                                                            class="form-control input-group-text">
 
-                                                                            <option value="61">+61 (Australia)</option>
+                                                                            <option value="61">+61 (Australia)
+                                                                            </option>
                                                                         </select>
                                                                     </div>
-                                                                    <input wire:model.defer='model.phone' type="number" class="form-control" placeholder="Phone" aria-describedby="basic-addon1">
+                                                                    <input wire:model.defer='model.phone' type="number"
+                                                                        class="form-control" placeholder="Phone"
+                                                                        aria-describedby="basic-addon1">
                                                                 </div>
                                                             </div>
-                                                            @error('model.phone') <span class="text-danger">{{ $message }}</span> @enderror
-                                                            @error('model.phone_code') <span class="text-danger">{{ $message }}</span> @enderror
+                                                            @error('model.phone')
+                                                                <span class="text-danger">{{ $message }}</span>
+                                                            @enderror
+                                                            @error('model.phone_code')
+                                                                <span class="text-danger">{{ $message }}</span>
+                                                            @enderror
                                                         </div>
 
 
@@ -125,8 +138,9 @@
                                                                     <i class="bx bx-user-circle"></i>
                                                                 </div>
                                                             </div>
-                                                            @error('model.registered_owners') <span class="text-danger">{{ $message
-                                                                }}</span> @enderror
+                                                            @error('model.registered_owners')
+                                                                <span class="text-danger">{{ $message }}</span>
+                                                            @enderror
                                                         </div>
 
                                                         <div class="col-12 mb-2">
@@ -137,8 +151,9 @@
                                                         </div>
                                                         <div class="col-md-4 form-group">
                                                             <div class="position-relative has-icon-left">
-                                                                <input wire:model.defer='model.current_property_value'
-                                                                    type="number" id="fcurrent_property_value-icon"
+                                                                <input 
+                                                                id="fcurrent_property_value" onkeyup="format(this)"
+                                                                    type="text" 
                                                                     class="form-control"
                                                                     name="fcurrent_property_value-id-icon"
                                                                     placeholder="Current Value">
@@ -146,39 +161,42 @@
                                                                     <i class="bx bx-money"></i>
                                                                 </div>
                                                             </div>
-                                                            @error('model.current_property_value') <span
-                                                                class="text-danger">{{ $message
-                                                                }}</span> @enderror
+                                                            @error('model.current_property_value')
+                                                                <span class="text-danger">{{ $message }}</span>
+                                                            @enderror
                                                         </div>
                                                         <div class="col-md-2">
                                                             <label>Property Debts</label>
                                                         </div>
                                                         <div class="col-md-4 form-group">
                                                             <div class="position-relative has-icon-left">
-                                                                <input wire:model.defer='model.property_debt'
-                                                                    type="number" id="fproperty_debt-icon"
+                                                                <input onkeyup="format(this)"
+                                                                    type="text" id="fproperty_debt"
                                                                     class="form-control" name="fproperty_debt-id-icon"
                                                                     placeholder="Property Debts">
                                                                 <div class="form-control-position">
                                                                     <i class="bx bx-money"></i>
                                                                 </div>
                                                             </div>
-                                                            @error('model.property_debt') <span class="text-danger">{{ $message
-                                                                }}</span> @enderror
+                                                            @error('model.property_debt')
+                                                                <span class="text-danger">{{ $message }}</span>
+                                                            @enderror
                                                         </div>
                                                         <div class="col-md-2">
                                                             <label>Cross Collaterized</label>
                                                         </div>
                                                         <div class="col-md-4 form-group">
                                                             <div class="position-relative has-icon-left">
-                                                                <input type="radio" name="cross_collaterized" value="1"
+                                                                <input type="radio" name="cross_collaterized"
+                                                                    value="1"
                                                                     wire:model.defer='model.cross_collaterized'> Yes
-                                                                <input type="radio" name="cross_collaterized" value="0"
+                                                                <input type="radio" name="cross_collaterized"
+                                                                    value="0"
                                                                     wire:model.defer='model.cross_collaterized'> No
                                                             </div>
-                                                            @error('model.cross_collaterized') <span
-                                                                class="text-danger">{{ $message
-                                                                }}</span> @enderror
+                                                            @error('model.cross_collaterized')
+                                                                <span class="text-danger">{{ $message }}</span>
+                                                            @enderror
                                                         </div>
                                                         <div class="col-12 mb-2">
                                                             <h1 style="font-size: 25px;"><u>Project's Information</u>
@@ -199,31 +217,34 @@
                                                                     <i class="bx bx-pin"></i>
                                                                 </div>
                                                             </div>
-                                                            @error('model.title') <span class="text-danger">{{ $message
-                                                                }}</span> @enderror
+                                                            @error('model.title')
+                                                                <span class="text-danger">{{ $message }}</span>
+                                                            @enderror
                                                         </div>
                                                         <div class="col-md-2">
                                                             <label>Area (square meters)</label>
                                                         </div>
                                                         <div class="col-md-4 form-group ">
                                                             <div class="position-relative has-icon-left">
-                                                                <input wire:model.defer='model.area' type="number"
-                                                                    id="ftitle-icon" class="form-control"
-                                                                    name="ftitle-icon" placeholder="Area (square meters)">
+                                                                <input onkeyup="format(this)" type="text"
+                                                                    id="area" class="form-control"
+                                                                    name="ftitle-icon"
+                                                                    placeholder="Area (square meters)">
                                                                 <div class="form-control-position">
                                                                     <i class="bx bx-text"></i>
                                                                 </div>
                                                             </div>
-                                                            @error('model.area') <span class="text-danger">{{ $message
-                                                                }}</span> @enderror
+                                                            @error('model.area')
+                                                                <span class="text-danger">{{ $message }}</span>
+                                                            @enderror
                                                         </div>
                                                         <div class="col-md-2">
                                                             <label>Anticipated Budget</label>
                                                         </div>
                                                         <div class="col-md-4 form-group">
                                                             <div class="position-relative has-icon-left">
-                                                                <input wire:model.defer='model.anticipated_budget'
-                                                                    type="number" id="fanticipatedbudget-icon"
+                                                                <input  onkeyup="format(this)"
+                                                                    type="text" id="fanticipatedbudget"
                                                                     class="form-control"
                                                                     name="fanticipatedbudget-id-icon"
                                                                     placeholder="Anticipated Budget">
@@ -231,9 +252,9 @@
                                                                     <i class="bx bx-money"></i>
                                                                 </div>
                                                             </div>
-                                                            @error('model.anticipated_budget') <span
-                                                                class="text-danger">{{ $message
-                                                                }}</span> @enderror
+                                                            @error('model.anticipated_budget')
+                                                                <span class="text-danger">{{ $message }}</span>
+                                                            @enderror
                                                         </div>
 
                                                         {{-- <div class="col-md-2">
@@ -267,8 +288,9 @@
                                                                     <i class="bx bx-pin"></i>
                                                                 </div>
                                                             </div>
-                                                            @error('model.applicant_address') <span class="text-danger">{{ $message
-                                                                }}</span> @enderror
+                                                            @error('model.applicant_address')
+                                                                <span class="text-danger">{{ $message }}</span>
+                                                            @enderror
                                                         </div>
 
 
@@ -279,14 +301,16 @@
                                                             <div class="position-relative has-icon-left">
                                                                 <input wire:model.defer='model.project_state'
                                                                     type="text" id="fproject_address-icon"
-                                                                    class="form-control" name="fproject_address-id-icon"
+                                                                    class="form-control"
+                                                                    name="fproject_address-id-icon"
                                                                     placeholder="Suburb, State and Postcode">
                                                                 <div class="form-control-position">
                                                                     <i class="bx bx-pin"></i>
                                                                 </div>
                                                             </div>
-                                                            @error('model.project_state') <span class="text-danger">{{ $message
-                                                                }}</span> @enderror
+                                                            @error('model.project_state')
+                                                                <span class="text-danger">{{ $message }}</span>
+                                                            @enderror
                                                         </div>
                                                         {{--  <div class="col-md-2">
                                                             <label>Contractor/Supplier Details</label>
@@ -318,14 +342,18 @@
                                                         </div>
                                                         <div class="col-md-4 form-group">
                                                             <div class="position-relative has-icon-left">
-                                                                <input type="radio" name="contractor_supplier_details" value="1"
-                                                                    wire:model.defer='model.contractor_supplier_details'> Yes
-                                                                <input type="radio" name="contractor_supplier_details" value="0"
-                                                                    wire:model.defer='model.contractor_supplier_details'> No
+                                                                <input type="radio"
+                                                                    name="contractor_supplier_details" value="1"
+                                                                    wire:model.defer='model.contractor_supplier_details'>
+                                                                Yes
+                                                                <input type="radio"
+                                                                    name="contractor_supplier_details" value="0"
+                                                                    wire:model.defer='model.contractor_supplier_details'>
+                                                                No
                                                             </div>
-                                                            @error('model.contractor_supplier_details') <span
-                                                                class="text-danger">{{ $message
-                                                                }}</span> @enderror
+                                                            @error('model.contractor_supplier_details')
+                                                                <span class="text-danger">{{ $message }}</span>
+                                                            @enderror
                                                         </div>
                                                     </div>
                                                     <div class="row">
@@ -334,15 +362,14 @@
                                                         </div>
                                                         <div class="col-md-12 form-group">
                                                             <div class="position-relative has-icon-left">
-                                                                <textarea wire:model='model.description'
-                                                                    placeholder="Description"
-                                                                    class="form-control"></textarea>
+                                                                <textarea wire:model='model.description' placeholder="Description" class="form-control"></textarea>
                                                                 <div class="form-control-position">
                                                                     <i class="bx bx-note"></i>
                                                                 </div>
                                                             </div>
-                                                            @error('model.description') <span class="text-danger">{{ $message
-                                                                }}</span> @enderror
+                                                            @error('model.description')
+                                                                <span class="text-danger">{{ $message }}</span>
+                                                            @enderror
                                                         </div>
                                                     </div>
                                                     <div class="row">
@@ -373,25 +400,29 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            @if($pushImage)
-                                                            <div class="row">
-                                                                @foreach($pushImage as $index => $image)
-                                                                <div class="col-md-2">
-                                                                    <img src="file.png" style="width: 50px;">
-                                                                    <i wire:click="delpushImage({{ $index }})"
-                                                                        class="text-danger bx bx-trash" style="cursor:
+                                                            @if ($pushImage)
+                                                                <div class="row">
+                                                                    @foreach ($pushImage as $index => $image)
+                                                                        <div class="col-md-2">
+                                                                            <img src="file.png" style="width: 50px;">
+                                                                            <i wire:click="delpushImage({{ $index }})"
+                                                                                class="text-danger bx bx-trash"
+                                                                                style="cursor:
                                                                     pointer"></i>
+                                                                        </div>
+                                                                    @endforeach
                                                                 </div>
-                                                                @endforeach
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="col-md-12">
-                                                                    <button wire:click="delAllImages" type="button"
-                                                                        class="btn btn-primary ml-1">All Delete</button>
+                                                                <div class="row">
+                                                                    <div class="col-md-12">
+                                                                        <button wire:click="delAllImages"
+                                                                            type="button"
+                                                                            class="btn btn-primary ml-1">All
+                                                                            Delete</button>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
                                                             @endif
-                                                            @error('images.*') <span class="error">{{ $message }}</span>
+                                                            @error('images.*')
+                                                                <span class="error">{{ $message }}</span>
                                                             @enderror
                                                         </div>
                                                         <div class="col-md-12 mt-1">
@@ -418,24 +449,28 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            @if($pushVideos)
-                                                            <div class="row">
-                                                                @foreach($pushVideos as $index => $video)
-                                                                <div class="col-md-1">
-                                                                    <i class="bx bx-file" style="font-size:80px;"></i>
-                                                                    <i wire:click="delpushVideos({{ $index }})"
-                                                                        class="text-danger bx bx-trash" style="cursor:
+                                                            @if ($pushVideos)
+                                                                <div class="row">
+                                                                    @foreach ($pushVideos as $index => $video)
+                                                                        <div class="col-md-1">
+                                                                            <i class="bx bx-file"
+                                                                                style="font-size:80px;"></i>
+                                                                            <i wire:click="delpushVideos({{ $index }})"
+                                                                                class="text-danger bx bx-trash"
+                                                                                style="cursor:
                                                                     pointer"></i>
 
+                                                                        </div>
+                                                                    @endforeach
                                                                 </div>
-                                                                @endforeach
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="col-md-12">
-                                                                    <button wire:click="delAllVideos()" type="button"
-                                                                        class="btn btn-primary ml-1">All Delete</button>
+                                                                <div class="row">
+                                                                    <div class="col-md-12">
+                                                                        <button wire:click="delAllVideos()"
+                                                                            type="button"
+                                                                            class="btn btn-primary ml-1">All
+                                                                            Delete</button>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
                                                             @endif
                                                         </div>
                                                     </div>
@@ -446,46 +481,47 @@
                                                         <i class="bx bx-x d-block d-sm-none"></i>
                                                         <span class="d-none d-sm-block">Close</span>
                                                     </button>
-                                                    @if(!isset($model->id))
-                                                    {{-- <button type="button" wire:click='create'
+                                                    @if (!isset($model->id))
+                                                        {{-- <button type="button" wire:click='create'
                                                         wire:loading.attr='disabled' wire:target='videos,images'
                                                         class="btn btn-primary ml-1">
 
                                                       Create
                                                     <span wire:loading>please wait...</span>
                                                     </button> --}}
-                                                    <button wire:loading.attr="disabled" wire:click='create'
-                                                        class="btn btn-primary" type="button">
+                                                        <button wire:loading.attr="disabled" wire:click='create'
+                                                            class="btn btn-primary" type="button">
 
-                                                        Create
-                                                        <span wire:loading wire:target="create"
-                                                        class="spinner-grow spinner-grow-sm" role="status"
-                                                        aria-hidden="true"></span>
-                                                    </button>
+                                                            Create
+                                                            <span wire:loading wire:target="create"
+                                                                class="spinner-grow spinner-grow-sm" role="status"
+                                                                aria-hidden="true"></span>
+                                                        </button>
                                                     @endif
-                                                    @if(isset($model->id))
-                                                    {{-- <button type="button" wire:click='update'
+                                                    @if (isset($model->id))
+                                                        {{-- <button type="button" wire:click='update'
                                                         wire:loading.attr='disabled' class="btn btn-primary ml-1">
 
                                                         Update
                                                         <span wire:loading>Please wait...</span>
                                                     </button> --}}
-                                                    <button wire:loading.attr="disabled" wire:click='update'
-                                                    class="btn btn-primary" type="button">
+                                                        <button wire:loading.attr="disabled" wire:click='update'
+                                                            class="btn btn-primary" type="button">
 
-                                                    Update
-                                                    <span wire:loading wire:target="update"
-                                                    class="spinner-grow spinner-grow-sm" role="status"
-                                                    aria-hidden="true"></span>
-                                                </button>
+                                                            Update
+                                                            <span wire:loading wire:target="update"
+                                                                class="spinner-grow spinner-grow-sm" role="status"
+                                                                aria-hidden="true"></span>
+                                                        </button>
                                                     @endif
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <!--Delete Confirmation Modal -->
-                                    <div class="modal fade text-left" id="deleteModal" wire:ignore.self tabindex="-1"
-                                        role="dialog" aria-labelledby="myModalLabel160" aria-hidden="true">
+                                    <div class="modal fade text-left" id="deleteModal" wire:ignore.self
+                                        tabindex="-1" role="dialog" aria-labelledby="myModalLabel160"
+                                        aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
                                             role="document">
                                             <div class="modal-content">
@@ -511,12 +547,12 @@
                                                         <i class="bx bx-x d-block d-sm-none"></i>
                                                         <span class="d-none d-sm-block">No</span>
                                                     </button>
-                                                    @if($model)
-                                                    <button type="button" wire:click='delete'
-                                                        class="btn btn-primary ml-1">
-                                                        <i class="bx bx-check d-block d-sm-none"></i>
-                                                        <span class="d-none d-sm-block">Yes</span>
-                                                    </button>
+                                                    @if ($model)
+                                                        <button type="button" wire:click='delete'
+                                                            class="btn btn-primary ml-1">
+                                                            <i class="bx bx-check d-block d-sm-none"></i>
+                                                            <span class="d-none d-sm-block">Yes</span>
+                                                        </button>
                                                     @endif
                                                 </div>
                                             </div>
@@ -531,3 +567,38 @@
         </div>
     </div>
 </div>
+<script>
+    
+
+    function format(input) 
+    {
+       
+        var nStr = input.value + '';
+        nStr = nStr.replace(/\,/g, "");
+        x = nStr.split('.');
+        x1 = x[0];
+        x2 = x.length > 1 ? '.' + x[1] : '';
+        var rgx = /(\d+)(\d{3})/;
+        while (rgx.test(x1)) {
+            x1 = x1.replace(rgx, '$1' + ',' + '$2');
+        }
+        input.value = x1 + x2;
+        
+        if(input.id == 'fcurrent_property_value') 
+        {
+            @this.set('model.current_property_value', nStr);
+        }
+        if(input.id == 'fproperty_debt') 
+        {
+            @this.set('model.property_debt', nStr);
+        }
+        if(input.id == 'fanticipatedbudget') 
+        {
+            @this.set('model.anticipated_budget', nStr);
+        }
+        if(input.id == 'area') 
+        {
+            @this.set('model.area', nStr);
+        }
+    }
+</script>

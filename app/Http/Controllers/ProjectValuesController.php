@@ -24,7 +24,7 @@ class ProjectValuesController extends Controller
         EventLog::forceCreate([
             'user_id' => $request->user()->id,
             'project_id' => $request->project_id,
-            'description' =>  $propertyValue ? $request->user()->name." updated the value to $".number_format((float)$request->value, 2) : $request->user()->name." added $".number_format((float)$request->value, 0). " value",
+            'description' =>  $propertyValue ? $request->user()->name." updated the value to $".number_format((float)$request->value, 0) : $request->user()->name." added $".number_format((float)$request->value, 0). " value",
             'status' => 3,
         ]);
 
@@ -62,7 +62,7 @@ class ProjectValuesController extends Controller
             EventLog::forceCreate([
                 'user_id' => $request->user()->id,
                 'project_id' => $request->project_id,
-                'description' => $request->user()->name . "close the project and project is moved to close stage",
+                'description' => $request->user()->name . " closed the project and project moved to closed stage",
                 'status' => 3,
             ]);
         }

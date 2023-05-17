@@ -1,4 +1,4 @@
-<?php
+    <?php
 
 use Illuminate\Support\Str;
 
@@ -155,7 +155,7 @@ return [
     |
     */
 
-    'domain' => env('SESSION_DOMAIN', null),
+    'domain' => env('SESSION_DOMAIN', ''),
 
     /*
     |--------------------------------------------------------------------------

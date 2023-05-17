@@ -23,6 +23,7 @@ class TasksTable extends LivewireDatatable
     public function columns()
     {
         return [
+            Column::name("id")->defaultSort('desc')->hide(),
             Column::name("title")->label("Title")->searchable(),
             Column::name("description")->label("Description")->searchable(),
             Column::callback("lead_id", function($id){

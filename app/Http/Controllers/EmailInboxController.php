@@ -28,7 +28,7 @@ class  EmailInboxController extends Controller
                 'host'          => $server->incomming_server,
                 'port'          => $server->incomming_port,
                 'encryption'    => $server->auth,
-                'validate_cert' => false,
+                'validate_cert' => true,
                 'username'      => $server->username,
                 'password'      => $server->password,
                 'protocol'      => $server->authentication_type

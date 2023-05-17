@@ -23,7 +23,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // URL::forceScheme('http');
-        $this->app['request']->server->set('HTTPS', $this->app->environment() != 'local');
+         URL::forceScheme('http');
+        // $this->app['request']->server->set('HTTPS', $this->app->environment() != 'local');
     }
 }

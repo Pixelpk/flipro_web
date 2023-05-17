@@ -19,6 +19,7 @@ class SegmentsTable extends LivewireDatatable
     public function columns()
     {
         return [
+            Column::name("id")->defaultSort('desc')->hide(),
             Column::name("name")->label("Name")->searchable(),
             Column::name("description")->label("Description")->searchable(),
             Column::callback(['id'], function($id){

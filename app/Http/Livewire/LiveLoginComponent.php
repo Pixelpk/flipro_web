@@ -26,7 +26,8 @@ class LiveLoginComponent extends Component
 
         if(Auth::attempt([
             'email' => $this->email,
-            'password' => $this->password
+            'password' => $this->password,
+            'user_type' => 'admin',
         ])){
             return redirect("/");
         }

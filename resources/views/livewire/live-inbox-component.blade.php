@@ -471,7 +471,7 @@
                                     </div>
                                 </div>
                                 <!-- email details  end-->
-                                <div class="row px-2 mb-4" wire:ignore>
+                                <div class="row px-2" wire:ignore>
                                     <!-- quill editor for reply message -->
                                     <div class="col-12 px-0">
                                         <div class="card shadow-none border rounded">
@@ -500,7 +500,7 @@
 
                                                     </div>
                                                 </div>
-                                                <div class="form-group mt-2">
+                                                <div class="form-group">
                                                     <div class="custom-file">
                                                         <input multiple wire:model='attachments' type="file"
                                                             class="custom-file-input" id="emailAttach">

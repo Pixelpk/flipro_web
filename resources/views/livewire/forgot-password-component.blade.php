@@ -31,7 +31,7 @@
                                                 <label class="text-bold-600" for="exampleInputEmail1">OTP
                                                 </label>
                                                 <input wire:model='otp_code' type="number" class="form-control"
-                                                    id="exampleInputEmail1" placeholder="Otp"></div>
+                                                    id="exampleInputEmail1" placeholder="OTP"></div>
                                             @error('otp_code') <span class="text-danger">{{ $message }}</span> @enderror
                                             <div class="form-group mb-50">
                                                 <label class="text-bold-600" for="asda">New Password
@@ -63,7 +63,7 @@
                                             @if($otp == 'sent')
                                             <button wire:target='verifyotp' wire:loading.attr="disabled" type="submit"
                                                 wire:click='verifyotp'
-                                                class="btn btn-primary glow w-100 position-relative">Verify Otp<i
+                                                class="btn btn-primary glow w-100 position-relative">Verify OTP<i
                                                     id="icon-arrow" class="bx bx-loader bx-spin" wire:loading
                                                     wire:target='verifyotp'></i></button>
                                             @else

@@ -17,6 +17,7 @@ class Lead extends Model
         'phone_code',
         'date',
         'user_id',
+        'address',
     ];
     protected $appends = ['segments', 'tags'];
 
