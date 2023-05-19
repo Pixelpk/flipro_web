@@ -176,7 +176,7 @@
         </div>
     @endif
 
-    @if($afterTableSlot)
+    @if($afterTableSlot) 
     <div class="mt-8">
         @include($afterTableSlot)
     </div>

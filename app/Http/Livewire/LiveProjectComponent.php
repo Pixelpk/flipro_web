@@ -2,11 +2,12 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Project;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
+use App\Models\Project;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Schema;
 
 class LiveProjectComponent extends Component
 {
@@ -14,6 +15,8 @@ class LiveProjectComponent extends Component
     public $projects;
     public $user;
     public $model;
+    public $columns;
+
     public $images = [];
     public $pushImage = [];
     public $pushVideos = [];
@@ -35,6 +38,8 @@ class LiveProjectComponent extends Component
     {
         $this->user = Auth::user();
         $this->model = new Project();
+        $this->columns = Schema::getColumnListing('projects');
+        // dd($this->columns);
         $this->model['phone_code']  = 61;
         $this->model->cross_collaterized = 0;
         $this->homeowers = User::homeowners()->get();
@@ -49,10 +54,10 @@ class LiveProjectComponent extends Component
 
     protected $rules = [
         'model.title' => 'required',
-        'model.area' => 'required',
+        // 'model.area' => 'required',
         'model.project_state' => 'required',
         'model.description' => 'required',
-        'model.anticipated_budget' => 'required',
+        // 'model.anticipated_budget' => 'required',
         //'model.project_address' => 'required',
         'model.contractor_supplier_details' => 'required',
         'model.applicant_name' => 'required',
@@ -61,8 +66,8 @@ class LiveProjectComponent extends Component
         'model.phone_code' => 'required',
         'model.applicant_address' => 'required',
         'model.registered_owners' => 'required',
-        'model.current_property_value' => 'required',
-        'model.property_debt' => 'required',
+        // 'model.current_property_value' => 'required',
+        // 'model.property_debt' => 'required',
         'model.cross_collaterized' => 'nullable|boolean',
     ];
 

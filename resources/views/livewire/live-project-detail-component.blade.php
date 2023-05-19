@@ -68,6 +68,8 @@
                                                 <div class="col-md-12 text-center mt-2">
                                                     <a href="#gallery"><button class="btn btn-primary">View
                                                             All</button></a>
+                                                            <button wire:click="softDelete" class="btn btn-danger">Delete
+                                                                </button>
                                                 </div>
                                             </div>
                                         </div>
@@ -176,7 +178,7 @@
                                                 </li>
 
                                                 <li class="mb-1">
-                                                    <b>Area (Square Meters):</b>
+                                                    <b>Area (Square Metre):</b>
 
                                                     {{ number_format((float)$project->area)}}
                                                 </li>
@@ -254,7 +256,7 @@
                                                 <li class="nav-item">
                                                     <a wire:ignore.self class="nav-link" id="contact1-tab"
                                                         data-toggle="tab" href="#evaluator" role="tab"
-                                                        aria-controls="contact1" aria-selected="false">Evaluator</a>
+                                                        aria-controls="contact1" aria-selected="false">Valuer </a>
                                                 </li>
                                             </ul>
                                             <div class="tab-content" id="myTabContent">
@@ -911,7 +913,7 @@
                     <div class="col-md-12 col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">Price Evaluations</h4>
+                                <h4 class="card-title">Price Valuer</h4>
                             </div>
                             <div class="card-content">
                                 <div class="card-body">

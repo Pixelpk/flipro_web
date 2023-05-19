@@ -58,6 +58,7 @@ class LiveProjectDetailComponent extends Component
         'selectedTask.lead_id' => 'nullable',
     ];
 
+
     protected $validationAttributes = [
 
         'selectedTask.status' => 'status',
@@ -69,6 +70,13 @@ class LiveProjectDetailComponent extends Component
         'selectedTask.lead_id' => 'lead',
     ];
 
+    public function softDelete()
+    {
+        // dd( $this->project->save());
+        $this->project->deleted_at = now();
+        $this->project->save();
+        return redirect('/projects');
+    }
     public function getEventLog()
     {
         $this->eventLogs  = EventLog::where('project_id', $this->project->id)->orderBy('id', 'desc')->get();

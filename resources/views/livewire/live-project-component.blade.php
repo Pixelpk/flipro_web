@@ -26,6 +26,8 @@
                             <div class="card-header">
                                 <h4 class="card-title">Projects</h4>
                             </div>
+                           
+
                             <div class="card-content">
                                 <div class="card-body">
                                     @if ($user->hasRole('create-projects'))
@@ -35,6 +37,8 @@
                                             <i class="bx bx-plus"></i> Add Project
                                         </button>
                                     @endif
+                                
+                                   
                                     @livewire('tables.project-table', [
                                         'params' => [
                                             'user_id' => $user->id,
@@ -110,9 +114,12 @@
                                                                             </option>
                                                                         </select>
                                                                     </div>
-                                                                    <input wire:model.defer='model.phone' type="number"
-                                                                        class="form-control" placeholder="Phone"
-                                                                        aria-describedby="basic-addon1">
+                                                                    <input wire:model.defer='model.phone' 
+                                                                    type="text" class="form-control" placeholder="Phone" 
+                                                                    aria-describedby="basic-addon1"
+                                                                     oninput="formatPhoneNumber(this)">
+
+
                                                                 </div>
                                                             </div>
                                                             @error('model.phone')
@@ -156,7 +163,9 @@
                                                                     type="text" 
                                                                     class="form-control"
                                                                     name="fcurrent_property_value-id-icon"
-                                                                    placeholder="Current Value">
+                                                                    value="0"
+                                                                    placeholder="Current Value"
+                                                                    >
                                                                 <div class="form-control-position">
                                                                     <i class="bx bx-money"></i>
                                                                 </div>
@@ -173,6 +182,7 @@
                                                                 <input onkeyup="format(this)"
                                                                     type="text" id="fproperty_debt"
                                                                     class="form-control" name="fproperty_debt-id-icon"
+                                                                    value="0"
                                                                     placeholder="Property Debts">
                                                                 <div class="form-control-position">
                                                                     <i class="bx bx-money"></i>
@@ -222,14 +232,15 @@
                                                             @enderror
                                                         </div>
                                                         <div class="col-md-2">
-                                                            <label>Area (square meters)</label>
+                                                            <label>Area (square metre)</label>
                                                         </div>
                                                         <div class="col-md-4 form-group ">
                                                             <div class="position-relative has-icon-left">
                                                                 <input onkeyup="format(this)" type="text"
                                                                     id="area" class="form-control"
                                                                     name="ftitle-icon"
-                                                                    placeholder="Area (square meters)">
+                                                                    placeholder="Area (square metre)"
+                                                                    value="0">
                                                                 <div class="form-control-position">
                                                                     <i class="bx bx-text"></i>
                                                                 </div>
@@ -246,6 +257,7 @@
                                                                 <input  onkeyup="format(this)"
                                                                     type="text" id="fanticipatedbudget"
                                                                     class="form-control"
+                                                                    value="0"
                                                                     name="fanticipatedbudget-id-icon"
                                                                     placeholder="Anticipated Budget">
                                                                 <div class="form-control-position">
@@ -303,6 +315,7 @@
                                                                     type="text" id="fproject_address-icon"
                                                                     class="form-control"
                                                                     name="fproject_address-id-icon"
+                                                                    value="0"
                                                                     placeholder="Suburb, State and Postcode">
                                                                 <div class="form-control-position">
                                                                     <i class="bx bx-pin"></i>
@@ -567,13 +580,41 @@
         </div>
     </div>
 </div>
+{{-- <script src="../../demo/assets/vendor/libs/select2/select2.js"></script> --}}
+
 <script>
-    
+    function toggleDiv() {
+    var div = document.getElementById("usersDiv");
+    if (div.style.display === "none") {
+        div.style.display = "block";
+    } else {
+        div.style.display = "none";
+    }
+}
+    function formatPhoneNumber(input) 
+    {
+  // Remove all non-digit characters from the input value
+  var phoneNumber = input.value.replace(/\D/g, '');
+
+  // Check if the phone number exceeds the limit
+  if (phoneNumber.length > 9) {
+    // Truncate the phone number to the limit
+    phoneNumber = phoneNumber.substr(0, 9);
+  }
+
+  // Format the phone number as per the Australian format
+  var formattedPhoneNumber = phoneNumber.replace(/(\d{3})(\d{3})(\d{3})/, '$1 $2 $3');
+
+  // Set the formatted phone number back to the input value
+  input.value = formattedPhoneNumber;
+}
+
+
 
     function format(input) 
     {
        
-        var nStr = input.value + '';
+        var nStr = input.value ? input.value : '0';
         nStr = nStr.replace(/\,/g, "");
         x = nStr.split('.');
         x1 = x[0];
@@ -583,6 +624,7 @@
             x1 = x1.replace(rgx, '$1' + ',' + '$2');
         }
         input.value = x1 + x2;
+        // alert(input.value);
         
         if(input.id == 'fcurrent_property_value') 
         {

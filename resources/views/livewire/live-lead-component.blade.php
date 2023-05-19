@@ -191,9 +191,11 @@
                                                                             </option>
                                                                         </select>
                                                                     </div>
-                                                                    <input wire:model='phone' type="number"
-                                                                        class="form-control" placeholder="Phone"
-                                                                        aria-describedby="basic-addon1">
+                                                                    <input wire:model='phone' 
+                                                                    type="text" class="form-control" placeholder="Phone" 
+                                                                    aria-describedby="basic-addon1"
+                                                                     oninput="formatPhoneNumber(this)">
+                                                                   
                                                                 </div>
                                                             </div>
                                                             @error('phone')
@@ -334,3 +336,21 @@
         </div>
     </div>
 </div>
+<script>
+     function formatPhoneNumber(input) {
+  // Remove all non-digit characters from the input value
+  var phoneNumber = input.value.replace(/\D/g, '');
+
+  // Check if the phone number exceeds the limit
+  if (phoneNumber.length > 9) {
+    // Truncate the phone number to the limit
+    phoneNumber = phoneNumber.substr(0, 9);
+  }
+
+  // Format the phone number as per the Australian format
+  var formattedPhoneNumber = phoneNumber.replace(/(\d{3})(\d{3})(\d{3})/, '$1 $2 $3');
+
+  // Set the formatted phone number back to the input value
+  input.value = formattedPhoneNumber;
+}
+</script>

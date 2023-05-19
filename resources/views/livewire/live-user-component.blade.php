@@ -7,6 +7,10 @@
     <div class="content-overlay"></div>
     <div class="content-wrapper">
         <div class="content-header row">
+            <?php
+            $text = ($type == 'evaluator') ? 'Valuer' : str_replace('-', ' ', ($type == 'franchise') ? 'Partner' : $type);
+
+            ?>
             <div class="content-header-left col-12 mb-2 mt-1">
                 <div class="row breadcrumbs-top">
                     <div class="col-12">
@@ -17,7 +21,7 @@
                                 </li>
                                 <li class="breadcrumb-item"><a href="#">Users</a>
                                 </li>
-                                <li class="breadcrumb-item active"><a href="#">{{ucfirst(str_replace('-', ' ', $type == 'franchise' ? 'Partner' : $type))}}</a>
+                                <li class="breadcrumb-item active"><a href="#">{{$text}}</a>
                                 </li>
                             </ol>
                         </div>
@@ -31,12 +35,13 @@
                     <div class="col-md-12 col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">{{str_replace('-', ' ', $type == 'franchise' ? 'Partner' : $type)}}s</h4>
+                               
+                                <h4 class="card-title">{{$text}}s</h4>
                             </div>
                             <div class="card-content">
                                 <div class="card-body">
                                     <button type="button" wire:click='openModal' class="btn btn-outline-primary mb-3" data-toggle="modal" data-target="#userCreateModal">
-                                        <i class="bx bx-plus"></i> Add {{$type == 'franchise' ? 'Partner' : ucfirst($type)}}
+                                        <i class="bx bx-plus"></i> Add {{$text == 'franchise' ? 'Partner' : ucfirst($text)}}
                                     </button>
                                     @livewire('tables.users-table', ['params' => [
                                         'usertype' => $type
@@ -46,7 +51,7 @@
                                         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header bg-primary">
-                                                    <h5 class="modal-title white" id="myModalLabel160">{{ $type == 'franchise' ? 'Partner' : ucfirst($type) }}</h5>
+                                                    <h5 class="modal-title white" id="myModalLabel160">{{ $text }}</h5>
                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                         <i class="bx bx-x"></i>
                                                     </button>

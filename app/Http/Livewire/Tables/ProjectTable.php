@@ -11,6 +11,7 @@ use Mediconesystems\LivewireDatatables\DateColumn;
 
 class ProjectTable extends LivewireDatatable
 {
+    public $hideable = 'select';
     protected $listeners = ['refreshTable'];
 
     public function builder()
@@ -30,6 +31,7 @@ class ProjectTable extends LivewireDatatable
             Column::name("id")->defaultSort('desc')->hide(),
             DateColumn::raw('created_at')
             ->label('Created date')
+            ->hide()
             ->format('d-m-Y'),
 
             // Column::name('title')->searchable(),
@@ -40,6 +42,10 @@ class ProjectTable extends LivewireDatatable
             })->label('Title'),
 
 
+            Column::name("area")->hide(),
+            Column::name("description")->hide(),
+            Column::name("approved")->hide(),
+            Column::name("registered_owners")->hide(),
             
             Column::name('applicant_name')->searchable(),
             
@@ -51,9 +57,9 @@ class ProjectTable extends LivewireDatatable
             Column::name('project_address')->searchable(),
             Column::name('project_state')->searchable(),
             // Column::name('phone')->searchable(),
-            Column::callback(['phone', 'phone_code'], function($phone,$phone_code){
-                return $phone_code.$phone;
-            })->label('phone'),
+            Column::callback(['phone', 'phone_code'], function($phone, $phone_code) {
+                return   $phone_code . ' ' . chunk_split($phone, 4, ' ');
+            })->label('phone')->searchable(),
             Column::name('email')->searchable(),
             // Column::name('current_property_value')->searchable(),
             Column::callback(['current_property_value'], function($value){
