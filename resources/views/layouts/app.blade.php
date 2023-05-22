@@ -169,6 +169,7 @@ License: You must have a valid license purchased only from themeforest(the above
             })
       })
     </script>
+ 
     <script>
         window.addEventListener('confirmation', event => {
             swal({
@@ -190,11 +191,25 @@ License: You must have a valid license purchased only from themeforest(the above
         });
 
     </script>
+      
 
     <style>
         .fc-license-message {
             display: none !important;
         }
+        #container {
+        width: 1000px;
+        margin: 20px auto;
+    }
+    .ck-editor__editable[role="textbox"] {
+        /* editing area */
+        min-height: 200px;
+    }
+    .ck-content .image {
+        /* block images */
+        max-width: 80%;
+        margin: 20px auto;
+    }
     </style>
     <div id="calendarModal" class="modal fade">
         <div class="modal-dialog">

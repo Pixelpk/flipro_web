@@ -431,4 +431,8 @@ class LiveProjectDetailComponent extends Component
         $this->project->update();
         return redirect('/projects/' . $this->project->id);
     }
+    public function formatNumber()
+    {
+        $this->model['current_property_value'] = number_format($this->model['current_property_value'], 0, '.', ',');
+    }
 }

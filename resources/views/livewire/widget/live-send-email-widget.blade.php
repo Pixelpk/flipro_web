@@ -24,9 +24,7 @@
                     <div class="card shadow-none border rounded">
                         {{--  <div class="card-body quill-wrapper">  --}}
 
-                        {{-- <textarea wire:model.defer="replyMessage" cols="30" rows="10"></textarea> --}}
-                        <textarea style="width:100%" wire:model="replyMessage" cols="30" rows="10" name="replyMessage"
-                                    id="replyMessage"></textarea>
+                        <textarea wire:model="replyMessage" id="editor" cols="30" rows="10"></textarea>
                         @error('replyMessage')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
@@ -75,12 +73,22 @@
         </button>
     </div>
 </div>
-<script src="https://cdn.ckeditor.com/4.16.1/full/ckeditor.js"></script>
+@livewireScripts
 
+<script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
 <script>
-    const editor = CKEDITOR.replace('replyMessage');
-    editor.on('change', function(event) {
-        console.log(event.editor.getData())
-        @this.set('replyMessage', event.editor.getData());
-    })
+    ClassicEditor
+        .create( document.querySelector( '#editor' ) )
+    //     .then( editor => {
+    //     editor.ui.view.editable.element.style.height = '250px';
+    // } )
+              .then(editor => {
+                editor.model.document.on('change:data', () => {
+                    @this.set('replyMessage', editor.getData());
+                });
+            })
+
+        .catch( error => {
+            console.error( error );
+        } );
 </script>

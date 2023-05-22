@@ -149,14 +149,15 @@
                                                         <div class="col-md-2">
                                                             <label>Current Value</label>
                                                         </div>
+                                                      
                                                         <div class="col-md-4 form-group">
                                                             <div class="position-relative has-icon-left">
-                                                                <input 
-                                                                id="fcurrent_property_value" onkeyup="format(this)"
-                                                                    type="text" 
-                                                                    class="form-control"
-                                                                    name="fcurrent_property_value-id-icon"
-                                                                    placeholder="Current Value">
+                                                                <input wire:model.defer="model.current_property_value"
+                                                                type="text"
+                                                                id="fcurrent_property_value-icon"
+                                                                class="form-control"
+                                                                name="fcurrent_property_value-id-icon"
+                                                                placeholder="Current Value">
                                                                 <div class="form-control-position">
                                                                     <i class="bx bx-money"></i>
                                                                 </div>
@@ -170,8 +171,8 @@
                                                         </div>
                                                         <div class="col-md-4 form-group">
                                                             <div class="position-relative has-icon-left">
-                                                                <input onkeyup="format(this)"
-                                                                    type="text" id="fproperty_debt"
+                                                                <input wire:model.defer='model.property_debt'
+                                                                    type="text" id="fproperty_debt-icon"
                                                                     class="form-control" name="fproperty_debt-id-icon"
                                                                     placeholder="Property Debts">
                                                                 <div class="form-control-position">
@@ -243,8 +244,8 @@
                                                         </div>
                                                         <div class="col-md-4 form-group">
                                                             <div class="position-relative has-icon-left">
-                                                                <input  onkeyup="format(this)"
-                                                                    type="text" id="fanticipatedbudget"
+                                                                <input wire:model.defer='model.anticipated_budget'
+                                                                    type="text" id="fanticipatedbudget-icon"
                                                                     class="form-control"
                                                                     name="fanticipatedbudget-id-icon"
                                                                     placeholder="Anticipated Budget">
@@ -567,38 +568,30 @@
         </div>
     </div>
 </div>
-<script>
-    
 
-    function format(input) 
-    {
-       
-        var nStr = input.value + '';
-        nStr = nStr.replace(/\,/g, "");
-        x = nStr.split('.');
-        x1 = x[0];
-        x2 = x.length > 1 ? '.' + x[1] : '';
-        var rgx = /(\d+)(\d{3})/;
-        while (rgx.test(x1)) {
-            x1 = x1.replace(rgx, '$1' + ',' + '$2');
-        }
-        input.value = x1 + x2;
-        
-        if(input.id == 'fcurrent_property_value') 
-        {
-            @this.set('model.current_property_value', nStr);
-        }
-        if(input.id == 'fproperty_debt') 
-        {
-            @this.set('model.property_debt', nStr);
-        }
-        if(input.id == 'fanticipatedbudget') 
-        {
-            @this.set('model.anticipated_budget', nStr);
-        }
-        if(input.id == 'area') 
-        {
-            @this.set('model.area', nStr);
-        }
-    }
+<script>
+
+document.getElementById('fanticipatedbudget-icon').addEventListener('input', function(event) {
+        var inputString = event.target.value.replace(/[^0-9]/g, '');
+        var formattedNumber = inputString.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        event.target.value = formattedNumber;
+        Livewire.components['your-component'].set('model.anticipated_budget', inputString);
+    });
+       document.getElementById('fproperty_debt-icon').addEventListener('input', function(event) {
+        var inputString = event.target.value.replace(/[^0-9]/g, '');
+        var formattedNumber = inputString.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        event.target.value = formattedNumber;
+        Livewire.components['your-component'].set('model.property_debt', inputString);
+    });
+    document.getElementById('fcurrent_property_value-icon').addEventListener('input', function(event) {
+        var inputString = event.target.value.replace(/[^0-9]/g, '');
+        var formattedNumber = inputString.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        event.target.value = formattedNumber;
+        Livewire.components['your-component'].set('model.current_property_value', inputString);
+    });
+ 
+    
 </script>
+
+
+

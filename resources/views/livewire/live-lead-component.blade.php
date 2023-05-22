@@ -95,6 +95,25 @@
                                                                 <span class="text-danger">{{ $message }}</span>
                                                             @enderror
                                                         </div>
+                                                        @error('exelfile') <span class="text-danger">{{ $message
+                                                            }}</span> @enderror
+                                                    </div>
+                                                    
+                                                   
+                                                
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-light-secondary"
+                                                    data-dismiss="modal">
+                                                    <i class="bx bx-x d-block d-sm-none"></i>
+                                                    <span class="d-none d-sm-block">Close</span>
+                                                </button>
+                                                @if(!$model)
+                                                <button  wire:loading.attr="disabled" type="submit" wire:click='import'
+                                                    class="btn btn-primary ml-1">
+                                                    <i class="bx bx-check d-block d-sm-none"></i>
+                                                    <span class="d-none d-sm-block">Import</span>
 
 
 

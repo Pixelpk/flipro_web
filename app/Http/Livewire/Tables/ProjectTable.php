@@ -41,10 +41,14 @@ class ProjectTable extends LivewireDatatable
 
 
             
+            Column::name('title')->searchable()->callback(['id','title'], function($id,$title)
+            {
+              return "<div style='width:100px'> <a href='/projects/$id'>$title</a></div>";
+            })->label('Title'),
             Column::name('applicant_name')->searchable(),
             
             Column::callback(['anticipated_budget'], function($value){
-                return '$'.number_format((float)$value);
+                return '$'.number_format($value);
             })->label('anticipated_budget'),
             
             // Column::name('anticipated_budget')->searchable(),
@@ -57,12 +61,12 @@ class ProjectTable extends LivewireDatatable
             Column::name('email')->searchable(),
             // Column::name('current_property_value')->searchable(),
             Column::callback(['current_property_value'], function($value){
-                return '$'.number_format((float)$value);
+                return '$'.number_format($value);
             })->label('current_property_value'),
             // Column::name('property_debt'),
             Column::callback(['property_debt'], function($value){
-                return '$'.number_format((float)$value);
-            })->label('current_property_value'),
+                return '$'.number_format($value);
+            })->label('cross_property_value'),
             Column::callback(['cross_collaterized'], function($value){
                 return $value ? 'Yes' : 'No';
             })->label('Cross Collaterized'),

@@ -294,7 +294,9 @@ $(function () {
       }
       $('#compose-form').find('input').val(""); // input filed reset when resize screen
       var file_input = $(".custom-file .custom-file-label");// file input content
+      if(file_input != null){
       file_input[0].innerHTML = "Attach File";
+      }
       var quill_editor = $("#compose-form .ql-editor");// quill editor content
       quill_editor[0].innerHTML = "";
     }

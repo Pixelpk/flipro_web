@@ -114,8 +114,7 @@
 
                             <div id="collapse{{$item->id}}" class="collapse" aria-labelledby="heading{{$item->id}}" data-parent="#accordion">
                                 <div class="card-body" style="padding: 0px;">
-                                 <img class="mt-1" style="width:440px;" src="{{$item->cover_photo}}" alt="">
-                                    {{-- <img class="mt-1" style="width:100%;" src="{{$item->cover_photo}}" alt=""> --}}
+                                    <img class="mt-1" style="width:525px; height:525px; object-fit:cover" src="{{$item->cover_photo}}" alt="">
                                     <ul class="mt-1 mb-2">
                                         <li>
                                             <b>Applicant Name:</b> {{$item->applicant_name}}
@@ -251,10 +250,11 @@
                                 @foreach ($inProgressProjects as $item)
                                 <div class="card accordion">
                                     <div class="card-header accordion" id="heading{{$item->id}}">
-                                        <h5 class="mb-0">
-                                            <button class="btn btn-link w-100 text-left" data-toggle="collapse" data-target="#collapse{{$item->id}}" aria-expanded="true" aria-controls="collapse{{$item->id}}">
+                                        <h5 class="mb-0"  data-toggle="collapse" data-target="#collapse{{$item->id}}" aria-expanded="true" aria-controls="collapse{{$item->id}}">
+                                            <button class="btn btn-link w-100 text-left">
                                                 {{$item->title}}
-                                                   <i class="bx bx-caret-down float-right"></i>
+                                                <i class="bx bx-caret-down float-right"></i>
+
                                             </button>
                                         </h5>
                                     </div>
@@ -279,7 +279,7 @@
                                                 <li>
                                                     <b>Property Address:</b> {{$item->title}}
                                                 </li>
-                                              
+                                               
                                                 <li>
                                                     <b>Property Title:</b> {{$item->project_address}}
                                                 </li>

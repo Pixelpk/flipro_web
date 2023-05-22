@@ -63,7 +63,7 @@
                                                     $photo = $photo[count($photo) -2] . '/' . $photo[count($photo)-1];
                                                     }
                                                     @endphp
-                                                    <img src="/stream/{{$photo}}" width="440px;" alt="Image">
+                                                    <img src="/stream/{{$photo}}" style="width:550px; height:550px; object-fit:cover" alt="">
                                                 </div>
                                                 <div class="col-md-12 text-center mt-2">
                                                     <a href="#gallery"><button class="btn btn-primary">View
@@ -147,11 +147,11 @@
                                             <ul>
                                                 <li class="mb-1">
                                                     <b>Current Value:</b>
-                                                    ${{number_format((float)$project->current_property_value)}}
+                                                    ${{number_format($project->current_property_value)}}
                                                 </li>
                                                 <li class="mb-1">
                                                     <b>Property Debts:</b>
-                                                    ${{ number_format((float)$project->property_debt)}}
+                                                    ${{ number_format($project->property_debt)}}
                                                 </li>
 
                                                 <li class="mb-1">
@@ -178,12 +178,12 @@
                                                 <li class="mb-1">
                                                     <b>Area (Square Meters):</b>
 
-                                                    {{ number_format((float)$project->area)}}
+                                                    {{ number_format($project->area)}}
                                                 </li>
                                                 <li class="mb-1">
                                                     <b>Anticipated Budget:</b>
 
-                                                    ${{ number_format((float)$project->anticipated_budget)}}
+                                                    ${{ number_format($project->anticipated_budget)}}
                                                 </li>
                                                 {{-- <li class="mb-1">
                                                     <b>Project Title:</b>
@@ -947,7 +947,7 @@
                                                 </tr>
                                                 @foreach ($project->evaluations as $value)
                                                 <tr>
-                                                    <td>${{ number_format((float)$value->value)}}</td>
+                                                    <td>${{ number_format($value->value)}}</td>
                                                     <td>
                                                         @if ($value->client_satisfied !== null)
                                                         {{$value->client_satisfied == true ? "Yes" : "No"}}
