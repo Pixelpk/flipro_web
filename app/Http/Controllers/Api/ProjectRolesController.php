@@ -41,6 +41,7 @@ class ProjectRolesController extends Controller
 
 
         $result = [];
+        
         $requestedRoles = json_decode($request->roles, true);
         foreach($allRoles as $role){
             if(($role == 'review_progress' || $role == 'review_evaluation') &&  $user->user_type == 'home-owner'){
@@ -55,10 +56,13 @@ class ProjectRolesController extends Controller
             }
         }
 
-        if($roles) {
+        if($roles) 
+        {
             $roles->roles = $result;
             $roles->update();
-        } else {
+        } 
+        else
+         {
             ProjectAccess::forceCreate([
                 'project_id' => $request->project_id,
                 'roles' => $result,

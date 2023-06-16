@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Events\AdminPaymentRequest;
+use App\Exports\ProjectExport;
 use App\Models\Event;
 use App\Models\EventLog;
 use App\Models\Lead;
@@ -15,7 +16,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
-
+use Maatwebsite\Excel\Facades\Excel;
 class LiveProjectDetailComponent extends Component
 {
     public Project $project;
@@ -46,7 +47,7 @@ class LiveProjectDetailComponent extends Component
     public $eventLogs = [];
 
 
-    protected $listeners = ['projectClose', 'updatePrjectStatus'];
+    protected $listeners = ['projectClose', 'updatePrjectStatus', 'softDelete'];
 
     protected $rules = [
         'selectedTask.status' => 'required',
@@ -57,6 +58,7 @@ class LiveProjectDetailComponent extends Component
         'selectedTask.attached_user_id' => 'nullable',
         'selectedTask.lead_id' => 'nullable',
     ];
+
 
     protected $validationAttributes = [
 
@@ -69,6 +71,15 @@ class LiveProjectDetailComponent extends Component
         'selectedTask.lead_id' => 'lead',
     ];
 
+    public function softDelete()
+    {
+        if($this->project->status == 'closed')
+        {
+            Project::find($this->project->id)->delete();
+            return redirect()->route('projects');
+        }
+        
+    }
     public function getEventLog()
     {
         $this->eventLogs  = EventLog::where('project_id', $this->project->id)->orderBy('id', 'desc')->get();
@@ -198,38 +209,41 @@ class LiveProjectDetailComponent extends Component
 
     public function addUser($type)
     {
+        // dd($type);
+        
         $this->validate([
             'selectedUser' => 'required'
         ], [
             'selectedUser.required' => 'Please select a user'
         ]);
-        $oldRecord = $this->team->where('user_id', $this->selectedUser)->first();
+        // $oldRecord = $this->team->where('user_id', $this->selectedUser)->first();
 
         $roles = [];
-
+       
         foreach($this->roles as $role){
             $roles[$role] = false;
             if(in_array($role, $this->userRoles)){
                 $roles[$role] = true;
             }
         }
-
-        if($oldRecord){
-            $oldRecord->roles = $roles;
-            $oldRecord->update();
-        }else {
-            ProjectAccess::forceCreate([
-                'project_id' => $this->project->id,
-                'acting_as' => $type,
-                'roles' => $roles,
-                'user_id' => $this->selectedUser
-            ]);
-        }
+       
+        // if($oldRecord){
+        // $oldRecord->roles = $roles;
+        // $oldRecord->update();
+        // }else {
+        ProjectAccess::where('acting_as', $type)->where('acting_as', 'home-owner')->where('project_id', $this->project->id)->delete();
+        ProjectAccess::forceCreate([
+            'project_id' => $this->project->id,
+            'acting_as' => $type,
+            'roles' => $roles,
+            'user_id' => $this->selectedUser
+        ]);
+        // }
         $user = User::find($this->selectedUser);
         EventLog::forceCreate([
             'user_id' => Auth::user()->id,
             'project_id' => $this->project->id,
-            'description' =>  $oldRecord ? Auth::user()->name." edit the access of $user->name" : Auth::user()->name." assigned $user->name to project",
+            'description' =>   Auth::user()->name." assigned $user->name to project",
             'status' => 6,
             'data' => $roles ? $roles :  null
         ]);
@@ -262,6 +276,7 @@ class LiveProjectDetailComponent extends Component
 
         $this->getTeam();
         $this->project = $project;
+        $this->project['phone'] = ltrim($project->phone, "0");
         $this->getProjectTimeline();
         $this->tasks = Event::with('attachedUser', 'attachedLead', 'createdBy')->where('project_id', $this->project->id)
         ->orderBy('id', 'desc')
@@ -431,8 +446,11 @@ class LiveProjectDetailComponent extends Component
         $this->project->update();
         return redirect('/projects/' . $this->project->id);
     }
-    public function formatNumber()
+
+    public function export($projectId) 
     {
-        $this->model['current_property_value'] = number_format($this->model['current_property_value'], 0, '.', ',');
+        $project = Project::where('id', $projectId)->pluck('id')->toArray();
+       
+        return Excel::download(new ProjectExport($project), $this->project->title.'.xlsx');
     }
 }

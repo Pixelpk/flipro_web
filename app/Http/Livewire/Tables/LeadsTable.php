@@ -3,21 +3,13 @@
 namespace App\Http\Livewire\Tables;
 
 use App\Models\Lead;
-use App\Imports\LeadImport;
-use Livewire\WithFileUploads;
-use Maatwebsite\Excel\Facades\Excel;
 use Mediconesystems\LivewireDatatables\Column;
-use Mediconesystems\LivewireDatatables\DateColumn;
 use Mediconesystems\LivewireDatatables\Http\Livewire\LivewireDatatable;
-
-
+use Mediconesystems\LivewireDatatables\DateColumn;
 class LeadsTable extends LivewireDatatable
 {
-    use WithFileUploads;
-
     protected $listeners = ['refreshTable'];
     public $exportable = true;
-    public $exelfile;
 
     public function builder()
     {
@@ -27,22 +19,26 @@ class LeadsTable extends LivewireDatatable
     public function columns()
     {
         return [
+            Column::name("id")->defaultSort('desc')->hide(),
             DateColumn::raw('created_at')
             ->label('Created date')
             ->format('d-m-Y'),
             Column::name("name")->label("Name")->searchable(),
             Column::name("email")->label("Email")->searchable(),
             Column::callback(['phone_code', 'phone'], function($phoneCode, $phone){
-                return isset($phoneCode) ? $phoneCode . $phone : "123";
+                // return $phoneCode . $phone;
+                $phonemew = ltrim($phone, "0");
+                // return $phonemew;
+                return  $phoneCode . ' ' .substr($phonemew, 0, 3) . " " . substr($phonemew, 3, 3) . " " . substr($phonemew, 6);
             })->label("Phone")->searchable(),
-            Column::name("address")->label("Address")->searchable(),
+            Column::name("address")->label("Project Address"),
             Column::callback('id', function($id){
                 $tags = Lead::find($id)->tags;  
                 $tagstr = ''; 
                 foreach($tags as $item){
                     $tagstr .= '<div class="chip mr-1">
                                 <div class="chip-body">
-                                    <span class="chip-text">'.isset($item->name) ? $item->name: null.'</span>
+                                    <span class="chip-text">'.$item->name.'</span>
                                 </div>
                             </div>';
                 }
@@ -52,17 +48,25 @@ class LeadsTable extends LivewireDatatable
                 foreach($segments as $item){
                     $segmentstr .= '<div class="chip mr-1">
                                 <div class="chip-body">
-                                    <span class="chip-text">'.isset($item->name) ? $item->name: null.'</span>
+                                    <span class="chip-text">'.$item->name.'</span>
                                 </div>
                             </div>';
                 }
                 return "<b>Segments: </b>" . $segmentstr . "<br><b>Tags: </b>" . $tagstr;
-            })->label('Tags & Segments'),
-            Column::callback(['id'], function($ids){
-                $editAction = "<span wire:click='edit($ids)'><i class='bx bx-pencil'></i></span>";
-                $deleteAction = "<span wire:click='delete($ids)'><i class='bx bx-trash text-danger ml-2'></i></span>";
+            })->label('Tags & Segments')
+            ->excludeFromExport(),
+            // ->exportCallback(function ($value) {
+            //     if($value){
+            //         return "Active";
+            //     }else{
+            //         return "In-Active";
+            //     }
+            // }),
+            Column::callback(['id'], function($id){
+                $editAction = "<span wire:click='edit($id)'><i class='bx bx-pencil'></i></span>";
+                $deleteAction = "<span wire:click='delete($id)'><i class='bx bx-trash text-danger ml-2'></i></span>";
                 return (request()->user()->hasRole('update-leads') ? $editAction : '') . ' ' . (request()->user()->hasRole('delete-leads') ? $deleteAction : '');
-            })->label('Actions'),
+            })->excludeFromExport(),
         ];
     }
 
@@ -79,15 +83,5 @@ class LeadsTable extends LivewireDatatable
     public function refreshTable()
     {
         $this->refreshLivewireDatatable();
-    }
-    public function import()
-    {
-    //    dd($this->exelfile);
-        $this->validate([
-            'exelfile' => 'required|mimes:xlsx,xls,csv',
-        ]);
-       
-        Excel::import(new LeadImport, $this->exelfile);
-        return redirect()->to('leads');
     }
 }

@@ -15,6 +15,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <!-- BEGIN: Head-->
 
 <head>
+
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
@@ -56,12 +57,17 @@ License: You must have a valid license purchased only from themeforest(the above
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js" defer></script>
     <link rel="stylesheet" href="/app.css">
     @livewireStyles
+    <style>
+        p {
+            width: 100% !important
+        }
+    </style>
 </head>
 <!-- END: Head-->
 
 <!-- BEGIN: Body-->
 
-<body
+<body autocomplete="off"
     class="vertical-layout vertical-menu-modern boxicon-layout no-card-shadow content-left-sidebar email-application navbar-sticky footer-static  "
     data-open="click" data-menu="vertical-menu-modern" data-col="content-left-sidebar">
 
@@ -169,7 +175,6 @@ License: You must have a valid license purchased only from themeforest(the above
             })
       })
     </script>
- 
     <script>
         window.addEventListener('confirmation', event => {
             swal({
@@ -191,25 +196,12 @@ License: You must have a valid license purchased only from themeforest(the above
         });
 
     </script>
-      
 
     <style>
         .fc-license-message {
             display: none !important;
         }
-        #container {
-        width: 1000px;
-        margin: 20px auto;
-    }
-    .ck-editor__editable[role="textbox"] {
-        /* editing area */
-        min-height: 200px;
-    }
-    .ck-content .image {
-        /* block images */
-        max-width: 80%;
-        margin: 20px auto;
-    }
+        
     </style>
     <div id="calendarModal" class="modal fade">
         <div class="modal-dialog">

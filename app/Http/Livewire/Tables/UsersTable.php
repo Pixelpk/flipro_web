@@ -23,10 +23,13 @@ class UsersTable extends LivewireDatatable
             Column::name("id")->defaultSort('desc')->hide(),
             Column::name("name")->label("Name")->searchable(),
             Column::name("email")->label("Email")->searchable(),
-            Column::callback(['phone_code', 'phone'], function($phoneCode, $phone){
-                return $phoneCode . $phone;
-            })->label("Phone")->searchable(),
-            Column::name("address")->label("Address"),
+            Column::callback(['phone', 'phone_code'], function($phone, $phone_code) {
+                // return   '+'.$phone_code . ' ' . chunk_split($phone, 3, ' ');
+                $phone = ltrim($phone, "0");
+                // return   $phone_code . ' ' . chunk_split($phonenew, 4, ' ');
+                return $phone_code . ' ' .substr($phone, 0, 3) . " " . substr($phone, 3, 3) . " " . substr($phone, 6);
+            })->label('phone')->searchable(),
+            Column::name("address")->label("Address")->searchable(),
             Column::callback(['id'], function($id){
                 return "<span wire:click='edit($id)'><i class='bx bx-pencil'></i></span>";
             })

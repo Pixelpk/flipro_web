@@ -28,7 +28,7 @@ class LiveUserComponent extends Component
         'name' => 'required',
         'email' => 'required|email|unique:users,email',
         'address' => 'required',
-        'phone_code' => 'required',
+        'phone_code' => 'nullable',
         'phone' => 'required',
         'password' => 'required|min:6',
         'model' => 'nullable',
@@ -43,6 +43,7 @@ class LiveUserComponent extends Component
         $this->user = Auth::user();
 
         if(!$this->user->hasRole('view-' . $this->type)) abort(403);
+        $this->phone_code = "";
     }
 
     public function render()
@@ -57,7 +58,7 @@ class LiveUserComponent extends Component
             'name' => $this->name,
             'email' => $this->email,
             'phone_code' => $this->phone_code,
-            'phone' => $this->phone,
+            'phone' => str_replace(' ', '', $this->phone),
             'address' => $this->address,
             'user_type' => $this->type,
             'password' => \Hash::make($this->password),
@@ -95,7 +96,7 @@ class LiveUserComponent extends Component
         $this->model->name = $this->name;
         $this->model->email = $this->email;
         $this->model->phone_code = $this->phone_code;
-        $this->model->phone = $this->phone;
+        $this->model->phone = str_replace(' ', '', $this->phone);
         $this->model->address = $this->address;
         if($this->password){
             $this->model->password = \Hash::make($this->password);
@@ -126,6 +127,8 @@ class LiveUserComponent extends Component
         $this->reset([
             'name', 'email', 'address', 'phone_code', 'phone', 'model'
         ]);
+        $this->phone_code = "+61";
+       
     }
 
     public function edit(User $user)
@@ -136,6 +139,7 @@ class LiveUserComponent extends Component
         $this->address = $user->address;
         $this->phone_code = $user->phone_code;
         $this->phone = $user->phone;
+        $this->dispatchBrowserEvent('phone-updated', ['newPhone' => $this->phone]);
 
         $this->dispatchBrowserEvent('toggleModal', [
             'id' => "userCreateModal",

@@ -2,14 +2,15 @@
 
 namespace App\Models;
 
-use Exception;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use PDO;
+use Exception;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Project extends Model
 {
-    use HasFactory;
+    use HasFactory ,SoftDeletes;
 
     protected $appends = [
         'assigned',
@@ -37,9 +38,9 @@ class Project extends Model
     protected $casts = [
         'photos' => 'array',
         'videos' => 'array',
-        // 'anticipated_budget' => 'string',
-        // 'current_property_value' => 'string',
-        // 'property_debt' => 'string',
+        'anticipated_budget' => 'float',
+        'current_property_value' => 'float',
+        'property_debt' => 'float',
         'cross_collaterized' => 'integer'
     ];
 
@@ -119,7 +120,7 @@ class Project extends Model
         $actions = [];
         if($scopes){
             if($this->status == "new" || $this->status == "in-progress"){
-                if($scopes['upload_progress']){
+                if(isset($scopes['upload_progress'])){
                     $actions[] = 'upload-progress';
                 }
             }
@@ -165,27 +166,38 @@ class Project extends Model
         return $videos;
     }
 
+    // public function getFranchiseeAttribute()
+    // {
+    //     $user = User::find($this->user_id);
+    //     if(!$user) return null;
+    //     $roles = ProjectAccess::where('user_id', $this->user_id)->where('project_id', $this->id)->first();
+    //     $rolesResult = [];
+
+    //     $allRoles = config('roles.projectRoles');
+    //     if($roles) {
+    //         $roles = $roles->roles;
+    //     }
+    //     else {
+    //         $roles = [];
+    //     }
+
+    //     foreach($allRoles as $role){
+    //         $rolesResult[$role] = isset($roles[$role]) ? $roles[$role] : false;
+    //     }
+
+    //     $user->roles = json_encode($rolesResult);
+    //     return $user;
+    // }
+
     public function getFranchiseeAttribute()
     {
-        $user = User::find($this->user_id);
-        if(!$user) return null;
-        $roles = ProjectAccess::where('user_id', $this->user_id)->where('project_id', $this->id)->first();
-        $rolesResult = [];
-
-        $allRoles = config('roles.projectRoles');
-        if($roles) {
-            $roles = $roles->roles;
+        if($this->id != null){
+            return User::join('project_accesses',function($join){
+                $join->on('project_accesses.project_id', \DB::raw($this->id));
+                $join->on('project_accesses.user_id', 'users.id');
+            })->select('users.*', 'project_accesses.roles')->where('user_type', 'franchise')->get();
         }
-        else {
-            $roles = [];
-        }
-
-        foreach($allRoles as $role){
-            $rolesResult[$role] = isset($roles[$role]) ? $roles[$role] : false;
-        }
-
-        $user->roles = json_encode($rolesResult);
-        return $user;
+        return [];
     }
 
     public function getLeadAttribute()

@@ -31,7 +31,7 @@ class Kernel extends ConsoleKernel
         $schedule->call(function(){
             $inboxService = new EmailInboxController();
             $inboxService->cron();
-        })->name('fetch_inboxes')->withoutOverlapping(1);
+        })->name('fetch_inboxes')->withoutOverlapping(1)->everyThreeMinutes();
         
         $schedule->call(function(){
             $envelopeService = new EnvelopeController();
@@ -39,12 +39,12 @@ class Kernel extends ConsoleKernel
             ->each(function($item) use($envelopeService) {
                 $envelopeService->updateStatus(null, $item);
             });
-        })->name('update_contract_status')->withoutOverlapping(1);
+        })->name('update_contract_status')->withoutOverlapping(1)->everyTwoMinutes();;
         
         $schedule->call(function(){
             $service = new CampaignEventsController();
             $service->handle();
-        })->name('campaign_event_tasks')->withoutOverlapping(1);
+        })->name('campaign_event_tasks')->withoutOverlapping(1)->everyTenMinutes();
 
         
 

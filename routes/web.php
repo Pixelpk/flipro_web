@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CampaignEventsController;
+use App\Http\Controllers\CommonController;
 use App\Http\Controllers\EnvelopeController;
 use App\Http\Controllers\EventsController;
 use App\Http\Controllers\StreamsController;
@@ -23,6 +24,8 @@ use App\Http\Livewire\LiveSegmentComponent;
 use App\Http\Livewire\LiveSettingsComponent;
 use App\Http\Livewire\LiveTagComponent;
 use App\Http\Livewire\LiveUserComponent;
+use App\Http\Livewire\Widget\ProjectExportComponent;
+use App\Http\Livewire\Widget\ProjectGallery;
 use App\Models\EmailCampaignEvent;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -48,7 +51,7 @@ Route::get('/logout', function(){
 
 
 Route::group(['middleware' => ['auth']], function(){
-    Route::get('/', LiveDashboardComponent::class);
+    Route::get('/', LiveDashboardComponent::class)->name('dashboard');
     Route::get('/users/{type}', LiveUserComponent::class);
     Route::get('/leads', LiveLeadComponent::class);
     Route::get('/segments', LiveSegmentComponent::class);
@@ -66,8 +69,10 @@ Route::group(['middleware' => ['auth']], function(){
     Route::get('/builder/template/stream', [TemplateBuilderController::class, 'stream']);
 
     Route::get('/documents/create', LiveDocusignComponent::class);
-    Route::get('/projects', LiveProjectComponent::class);
+    Route::get('/projects', LiveProjectComponent::class)->name('projects');
     Route::get('/projects/{project}', LiveProjectDetailComponent::class);
+    Route::get('/project/gallery/{project}', ProjectGallery::class)->name('project.gallery');
+    Route::get('/project/export/{project}', ProjectExportComponent::class)->name('project.export');
     Route::get('/inbox', LiveInboxComponent::class);
     Route::get('/stream/attachment/{email}/{index}/{name?}', [StreamsController::class, 'attachment']);
 
@@ -86,9 +91,13 @@ Route::group(['middleware' => ['auth']], function(){
 
 
 Route::get('waqar', function($hash = null){
-    // return Lead::first();
-    // return \Hash::make($hash);
-    return number_format((float)2323123123, 0);
+    $string = "+612222222222";
+    
+    
+    // Example usage:
+    $mobileNumber = '+14155552671';
+    $formattedNumber = CommonController::formatMobileNumber($string);
+    echo $formattedNumber; // Output: +1 (415) 555-2671
 });
 
 Route::get('/cron', [CampaignEventsController::class, 'handle']);

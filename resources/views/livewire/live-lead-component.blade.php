@@ -95,25 +95,6 @@
                                                                 <span class="text-danger">{{ $message }}</span>
                                                             @enderror
                                                         </div>
-                                                        @error('exelfile') <span class="text-danger">{{ $message
-                                                            }}</span> @enderror
-                                                    </div>
-                                                    
-                                                   
-                                                
-                                                </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-light-secondary"
-                                                    data-dismiss="modal">
-                                                    <i class="bx bx-x d-block d-sm-none"></i>
-                                                    <span class="d-none d-sm-block">Close</span>
-                                                </button>
-                                                @if(!$model)
-                                                <button  wire:loading.attr="disabled" type="submit" wire:click='import'
-                                                    class="btn btn-primary ml-1">
-                                                    <i class="bx bx-check d-block d-sm-none"></i>
-                                                    <span class="d-none d-sm-block">Import</span>
 
 
 
@@ -203,16 +184,20 @@
                                                             <div class="position-relative">
                                                                 <div class="input-group">
                                                                     <div class="input-group-prepend">
-                                                                        <select wire:model='phone_code'
+                                                                        <select style="width: 99px;" wire:model='phone_code'
                                                                             class="form-control input-group-text">
                                                                             <option value="">Country</option>
-                                                                            <option value="61">+61 (Australia)
+                                                                            @foreach(config('countrycode') as $index => $item)
+                                                                            <option value="{{ $index }}">{{ $item }}
                                                                             </option>
+                                                                            @endforeach
                                                                         </select>
                                                                     </div>
-                                                                    <input wire:model='phone' type="number"
-                                                                        class="form-control" placeholder="Phone"
-                                                                        aria-describedby="basic-addon1">
+                                                                    <input 
+                                                                    type="text" class="form-control" placeholder="Phone" 
+                                                                    aria-describedby="basic-addon1"
+                                                                     oninput="formatPhoneNumber(this)">
+                                                                   
                                                                 </div>
                                                             </div>
                                                             @error('phone')
@@ -263,13 +248,13 @@
                                                             @enderror
                                                         </div>
                                                         <div class="col-md-4">
-                                                            <label>Address</label>
+                                                            <label>Project Address</label>
                                                         </div>
                                                         <div class="col-md-8 form-group">
                                                             <div class="position-relative has-icon-left">
                                                                 <input wire:model='address' type="text"
                                                                     id="contact-icon" class="form-control"
-                                                                    name="contact-icon" placeholder="Address">
+                                                                    name="contact-icon" placeholder="Project Address">
                                                                 <div class="form-control-position">
                                                                     <i class="bx bx-pin"></i>
                                                                 </div>
@@ -353,3 +338,27 @@
         </div>
     </div>
 </div>
+<script>
+     window.addEventListener('phone-updated', event => {
+      
+        document.getElementById("phone").value =  event.detail.newPhone.replace(/(\d{3})(\d{3})(\d{3})/, '$1 $2 $3'); 
+    })
+    function formatPhoneNumber(input) {
+        // Remove all non-digit characters from the input value
+        var phoneNumber = input.value.replace(/\D/g, '');
+
+        // Check if the phone number exceeds the limit
+        if (phoneNumber.length > 9) {
+            // Truncate the phone number to the limit
+            phoneNumber = phoneNumber.substr(0, 10);
+        }
+
+        // Format the phone number as per the Australian format
+        var formattedPhoneNumber = phoneNumber.replace(/(\d{3})(\d{3})(\d{3})/, '$1 $2 $3');
+
+        // Set the formatted phone number back to the input value
+        input.value = formattedPhoneNumber;
+        @this.set('phone', formattedPhoneNumber);
+    }
+
+</script>

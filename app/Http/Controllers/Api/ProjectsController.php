@@ -8,6 +8,8 @@ use App\Events\ProjectRejected;
 use App\Http\Controllers\Controller;
 use App\Libs\Firebase\Firebase;
 use App\Models\EventLog;
+use App\Models\PaymentRequest;
+use App\Models\Progress;
 use App\Models\Project;
 use App\Models\ProjectAccess;
 use App\Models\PropertyValue;
@@ -357,5 +359,63 @@ class ProjectsController extends Controller
                 'data' => null,
             ], 403);
         }
+    }
+
+    public function destory(Request $request)
+    {
+        $request->validate([
+            'project_id' => 'required|exists:projects,id',
+        ]);
+
+        if ($request->user()->hasRole('administrator')) {
+            $project = Project::find($request->project_id);
+            if(!$project) {
+                return response([
+                    'message' => 'Project not found',
+                    'data' => null,
+                ], 403);
+            }
+            if($project->status == 'closed') {
+                $project->delete();
+                return [
+                    'message' => 'success',
+                    'data' => null,
+                ];
+            }else{
+                return response([
+                    'message' => 'Project is not closed status',
+                    'data' => null,
+                ], 403);
+            }
+            
+        } else {
+            return response([
+                'message' => 'Access denied',
+                'data' => null,
+            ], 403);
+        }
+    }
+
+    function gallery(Request $request)
+    {
+        
+        if (isset($request->filters['byId'])) 
+        {    
+             $project = Project::where('id', $request->filters['byId'])->first();
+             $paymentRequest = PaymentRequest::where('project_id', $request->filters['byId'])->get();
+             $progress = Progress::where('project_id', $request->filters['byId'])->orderBy('id', 'desc')->get();
+
+            return [
+                'message' => 'success',
+                'data' => [
+                    'projectImages' => $project->photos,
+                    'projectVideos' => $project->videos,
+                    'paymentRequest' => $paymentRequest,
+                    'progress' => $progress,
+                ]
+            ];
+        }
+
+       
     }
 }

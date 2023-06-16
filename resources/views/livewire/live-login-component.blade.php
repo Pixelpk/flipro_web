@@ -34,13 +34,13 @@
                                                 @error('password') <span class="text-danger">{{ $message }}</span> @enderror
                                             </div>
                                             <div class="form-group d-flex flex-md-row flex-column justify-content-between align-items-center">
-                                                <!-- <div class="text-left">
+                                                <div class="text-left">
                                                     <div class="checkbox checkbox-sm">
-                                                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                                        <label class="checkboxsmall" for="exampleCheck1"><small>Keep me logged
-                                                                in</small></label>
+                                                        <input wire:model="remember" type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                        <label class="checkboxsmall" for="exampleCheck1"><small>Remember Me
+                                                                </small></label>
                                                     </div>
-                                                </div> -->
+                                                </div>
                                                 <div class="text-right"><a href="{{ route('forgot.password') }}" class="card-link"><small>Forgot Password?</small></a></div>
                                             </div>
                                             <button wire:target='login'  wire:loading.attr="disabled" type="submit" wire:click='login' class="btn btn-primary glow w-100 position-relative">Login<i id="icon-arrow" class="bx bx-loader bx-spin" wire:loading wire:target='login'></i></button>

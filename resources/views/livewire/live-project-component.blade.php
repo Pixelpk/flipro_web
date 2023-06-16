@@ -26,15 +26,19 @@
                             <div class="card-header">
                                 <h4 class="card-title">Projects</h4>
                             </div>
+
+
                             <div class="card-content">
                                 <div class="card-body">
                                     @if ($user->hasRole('create-projects'))
-                                        <button type="button" wire:click='openModal'
+                                        <button wire:click="assignValue()" type="button" wire:click='openModal'
                                             class="btn btn-outline-primary mb-3" data-toggle="modal"
                                             data-target="#createModal">
                                             <i class="bx bx-plus"></i> Add Project
                                         </button>
                                     @endif
+
+
                                     @livewire('tables.project-table', [
                                         'params' => [
                                             'user_id' => $user->id,
@@ -71,6 +75,11 @@
                                                                     type="text" id="fapplicant_name-icon"
                                                                     class="form-control" name="fapplicant_name-id-icon"
                                                                     placeholder="Applicant Name">
+                                                                    <div class="checkbox checkbox-sm">
+                                                                        <input wire:change="checkSameowner" wire:model="same_owner" type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                                        <label class="checkboxsmall" for="exampleCheck1"><small>Same as Register Owner
+                                                                                </small></label>
+                                                                    </div>
                                                                 <div class="form-control-position">
                                                                     <i class="bx bx-note"></i>
                                                                 </div>
@@ -104,15 +113,19 @@
                                                                 <div class="input-group">
                                                                     <div class="input-group-prepend">
                                                                         <select wire:model.defer='model.phone_code'
-                                                                            class="form-control input-group-text">
-
-                                                                            <option value="61">+61 (Australia)
+                                                                            class="form-control ">
+                                                                            @foreach(config('countrycode') as $index => $item)
+                                                                            <option value="{{ $index }}">{{ $item }}
                                                                             </option>
+                                                                            @endforeach
                                                                         </select>
                                                                     </div>
-                                                                    <input wire:model.defer='model.phone' type="number"
-                                                                        class="form-control" placeholder="Phone"
-                                                                        aria-describedby="basic-addon1">
+                                                                    <input id="phone" type="text" class="form-control"
+                                                                        placeholder="Phone"
+                                                                        aria-describedby="basic-addon1"
+                                                                        onkeyup="formatPhoneNumber(this)">
+
+
                                                                 </div>
                                                             </div>
                                                             @error('model.phone')
@@ -129,7 +142,7 @@
                                                         </div>
                                                         <div class="col-md-4 form-group">
                                                             <div class="position-relative has-icon-left">
-                                                                <input wire:model.defer='model.registered_owners'
+                                                                <input  {{ $same_owner ? 'disabled' : '' }} wire:model.defer='model.registered_owners'
                                                                     type="text" id="fregistered_owners-icon"
                                                                     class="form-control"
                                                                     name="fregistered_owners-id-icon"
@@ -149,15 +162,14 @@
                                                         <div class="col-md-2">
                                                             <label>Current Value</label>
                                                         </div>
-                                                      
                                                         <div class="col-md-4 form-group">
                                                             <div class="position-relative has-icon-left">
-                                                                <input wire:model.defer="model.current_property_value"
-                                                                type="text"
-                                                                id="fcurrent_property_value-icon"
-                                                                class="form-control"
-                                                                name="fcurrent_property_value-id-icon"
-                                                                placeholder="Current Value">
+                                                                <input id="fcurrent_property_value" type="text"
+                                                                    class="form-control"
+                                                                    name="fcurrent_property_value-id-icon"
+                                                                    value="0"
+                                                                    wire:model.defer="model.current_property_value"
+                                                                    placeholder="Current Value">
                                                                 <div class="form-control-position">
                                                                     <i class="bx bx-money"></i>
                                                                 </div>
@@ -171,9 +183,9 @@
                                                         </div>
                                                         <div class="col-md-4 form-group">
                                                             <div class="position-relative has-icon-left">
-                                                                <input wire:model.defer='model.property_debt'
-                                                                    type="text" id="fproperty_debt-icon"
+                                                                <input type="text" id="fproperty_debt"
                                                                     class="form-control" name="fproperty_debt-id-icon"
+                                                                    wire:model.defer="model.property_debt"
                                                                     placeholder="Property Debts">
                                                                 <div class="form-control-position">
                                                                     <i class="bx bx-money"></i>
@@ -223,14 +235,14 @@
                                                             @enderror
                                                         </div>
                                                         <div class="col-md-2">
-                                                            <label>Area (square meters)</label>
+                                                            <label>Area (square metre)</label>
                                                         </div>
                                                         <div class="col-md-4 form-group ">
                                                             <div class="position-relative has-icon-left">
-                                                                <input onkeyup="format(this)" type="text"
+                                                                <input wire:model.defer='model.area' type="text"
                                                                     id="area" class="form-control"
                                                                     name="ftitle-icon"
-                                                                    placeholder="Area (square meters)">
+                                                                    placeholder="Area (square metre)">
                                                                 <div class="form-control-position">
                                                                     <i class="bx bx-text"></i>
                                                                 </div>
@@ -244,9 +256,9 @@
                                                         </div>
                                                         <div class="col-md-4 form-group">
                                                             <div class="position-relative has-icon-left">
-                                                                <input wire:model.defer='model.anticipated_budget'
-                                                                    type="text" id="fanticipatedbudget-icon"
+                                                                <input type="text" id="fanticipatedbudget"
                                                                     class="form-control"
+                                                                    wire:model.defer="model.anticipated_budget"
                                                                     name="fanticipatedbudget-id-icon"
                                                                     placeholder="Anticipated Budget">
                                                                 <div class="form-control-position">
@@ -303,10 +315,30 @@
                                                                 <input wire:model.defer='model.project_state'
                                                                     type="text" id="fproject_address-icon"
                                                                     class="form-control"
-                                                                    name="fproject_address-id-icon"
+                                                                    name="fproject_address-id-icon" value="0"
                                                                     placeholder="Suburb, State and Postcode">
                                                                 <div class="form-control-position">
                                                                     <i class="bx bx-pin"></i>
+                                                                </div>
+                                                            </div>
+                                                            @error('model.project_state')
+                                                                <span class="text-danger">{{ $message }}</span>
+                                                            @enderror
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <label>Lead</label>
+                                                        </div>
+                                                        <div class="col-md-4 form-group">
+                                                            <div class="position-relative has-icon-left">
+                                                                <select wire:model="lead_id" wire:change='getLeadData'
+                                                                     class="form-control">
+                                                                    <option value="">Select</option>
+                                                                    @foreach($leads as $lead)
+                                                                    <option value="{{$lead->id}}">{{$lead->name}}</option>
+                                                                    @endforeach
+                                                                </select>
+                                                                <div class="form-control-position">
+                                                                    <i class="bx bx-user"></i>
                                                                 </div>
                                                             </div>
                                                             @error('model.project_state')
@@ -332,10 +364,6 @@
                                                                 class="text-danger">{{ $message
                                                                 }}</span> @enderror
                                                         </div>  --}}
-
-
-
-
                                                     </div>
                                                     <div class="row">
                                                         <div class="col-md-2">
@@ -568,30 +596,71 @@
         </div>
     </div>
 </div>
+{{-- <script src="../../demo/assets/vendor/libs/select2/select2.js"></script> --}}
 
 <script>
+    //function toggleDiv() {
+    //var div = document.getElementById("usersDiv");
+    //if (div.style.display === "none") {
+    //div.style.display = "block";
+    //} else {
+    //div.style.display = "none";
+    //}
+    //}
+    window.addEventListener('phone-updated', event => {
+      
+        document.getElementById("phone").value =  event.detail.newPhone.replace(/(\d{3})(\d{3})(\d{3})/, '$1 $2 $3'); 
+    })
+    function formatPhoneNumber(input) {
+        // Remove all non-digit characters from the input value
+        var phoneNumber = input.value.replace(/\D/g, '');
 
-document.getElementById('fanticipatedbudget-icon').addEventListener('input', function(event) {
-        var inputString = event.target.value.replace(/[^0-9]/g, '');
-        var formattedNumber = inputString.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        event.target.value = formattedNumber;
-        Livewire.components['your-component'].set('model.anticipated_budget', inputString);
-    });
-       document.getElementById('fproperty_debt-icon').addEventListener('input', function(event) {
-        var inputString = event.target.value.replace(/[^0-9]/g, '');
-        var formattedNumber = inputString.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        event.target.value = formattedNumber;
-        Livewire.components['your-component'].set('model.property_debt', inputString);
-    });
-    document.getElementById('fcurrent_property_value-icon').addEventListener('input', function(event) {
-        var inputString = event.target.value.replace(/[^0-9]/g, '');
-        var formattedNumber = inputString.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        event.target.value = formattedNumber;
-        Livewire.components['your-component'].set('model.current_property_value', inputString);
-    });
- 
-    
+        // Check if the phone number exceeds the limit
+        if (phoneNumber.length > 9) {
+            // Truncate the phone number to the limit
+            phoneNumber = phoneNumber.substr(0, 10);
+        }
+
+        // Format the phone number as per the Australian format
+        var formattedPhoneNumber = phoneNumber.replace(/(\d{3})(\d{3})(\d{3})/, '$1 $2 $3');
+
+        // Set the formatted phone number back to the input value
+        input.value = formattedPhoneNumber;
+        @this.set('model.phone', formattedPhoneNumber);
+    }
+
+
+
+    //function format(input) 
+    //{
+
+    //var nStr = input.value ? input.value : '0';
+    //nStr = nStr.replace(/\,/g, "");
+    //x = nStr.split('.');
+    //x1 = x[0];
+    //x2 = x.length > 1 ? '.' + x[1] : '';
+    //var rgx = /(\d+)(\d{3})/;
+    //while (rgx.test(x1)) {
+    //  x1 = x1.replace(rgx, '$1' + ',' + '$2');
+    //}
+    //input.value = x1 + x2;
+    // alert(input.value);
+
+    //if(input.id == 'fcurrent_property_value') 
+    //{
+    //@this.set('model.current_property_value', nStr);
+    //}
+    //if(input.id == 'fproperty_debt') 
+    //{
+    //@this.set('model.property_debt', nStr);
+    //}
+    //if(input.id == 'fanticipatedbudget') 
+    //{
+    // @this.set('model.anticipated_budget', nStr);
+    //}
+    //if(input.id == 'area') 
+    //{
+    //@this.set('model.area', nStr);
+    //}
+    //}
 </script>
-
-
-

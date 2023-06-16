@@ -9,6 +9,7 @@ class LiveLoginComponent extends Component
 {
     public $email;
     public $password;
+    public $remember;
 
     protected $rules = [
             'email' => 'required|email',
@@ -23,12 +24,14 @@ class LiveLoginComponent extends Component
     public function login()
     {
         $this->validate();
+        $credentials = [
+            'email' => $this->email,'password' => $this->password,'user_type' => 'admin'
+        ];
 
-        if(Auth::attempt([
-            'email' => $this->email,
-            'password' => $this->password,
-            'user_type' => 'admin',
-        ])){
+        if (Auth::attempt($credentials, $this->remember)) {
+            return redirect()->route('dashboard');
+        }
+        {
             return redirect("/");
         }
        

@@ -75,7 +75,7 @@ $user = \Auth::user();
                     </li>
                     @endif
                     @if($user->hasRole("view-evaluator"))
-                    <li class="{{Request::path() == 'users/evaluator' ? 'active' : ''}}"><a href="/users/evaluator"><i class="bx bx-right-arrow-alt"></i><span class="menu-item" data-i18n="Fixed navbar">Evaluators</span></a>
+                    <li class="{{Request::path() == 'users/valuers' ? 'active' : ''}}"><a href="/users/evaluator"><i class="bx bx-right-arrow-alt"></i><span class="menu-item" data-i18n="Fixed navbar">Valuers</span></a>
                     </li>
                     @endif
                     @if($user->hasRole('view-home-owner'))
@@ -83,7 +83,7 @@ $user = \Auth::user();
                     </li>
                     @endif
                     @if($user->hasRole('view-builder'))
-                    <li class="{{Request::path() == 'users/builder' ? 'active' : ''}}"><a href="/users/builder"><i class="bx bx-right-arrow-alt"></i><span class="menu-item" data-i18n="Static layout">Builders</span></a>
+                    <li class="{{Request::path() == 'users/builder' ? 'active' : ''}}"><a href="/users/builder"><i class="bx bx-right-arrow-alt"></i><span class="menu-item" data-i18n="Static layout">Agents/Trades</span></a>
                     </li>
                     @endif
                 </ul>
