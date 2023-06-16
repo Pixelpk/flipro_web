@@ -15,7 +15,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                             </svg>
                         </div>
-                        <input wire:model.debounce.500ms="search" class="form-control pl-3" placeholder="Search.." type="text" />
+                        <input  wire:model.debounce.500ms="search" class="form-control pl-3" placeholder="Search.." type="text" />
                         <div class="absolute inset-y-0 right-0 pr-2 flex items-center">
                             <button wire:click="$set('search', null)" class="text-gray-300 hover:text-red-600 focus:outline-none">
                                 <x-icons.x-circle class="h-5 w-5 stroke-current" />
@@ -143,7 +143,12 @@
                                 @elseif($column['type'] === 'label')
                                     @include('datatables::label')
                                 @else
-                                    <div class="table-cell px-6 py-2 whitespace-no-wrap @if($column['align'] === 'right') text-right @elseif($column['align'] === 'center') text-center @else text-left @endif {{ $this->cellClasses($row, $column) }}">
+                                    <div class="table-cell px-2 py-1 whitespace-no-wrap @if($column['align'] === 'right') text-right @elseif($column['align'] === 'center') text-center @else text-left @endif {{ $this->cellClasses($row, $column) }}">
+                                        <style>
+                                         p {
+                                            width:100% !important
+                                         }
+                                        </style>
                                         {!! $row->{$column['name']} !!}
                                     </div>
                                 @endif

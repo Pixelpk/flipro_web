@@ -23,13 +23,18 @@ class PaymentRequest extends Model
 
     public function getProjectAttribute()
     {
-        return Project::find($this->project_id)->only([
-            'id',
-            'title',
-            'description',
-            'cover_photo',
-            'project_address'
-        ]);
+        $project = Project::find($this->project_id);
+        if(isset($project))
+        {
+            return Project::find($this->project_id)->only([
+                'id',
+                'title',
+                'description',
+                'cover_photo',
+                'project_address'
+            ]);
+        }
+        
     }
 
     public function getProjectIdAttribute($value)

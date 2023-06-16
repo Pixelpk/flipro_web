@@ -42,33 +42,39 @@ class ProjectTable extends LivewireDatatable
             })->label('Title'),
 
 
-            Column::name("area")->hide(),
-            Column::name("description")->hide(),
-            Column::name("approved")->hide(),
-            Column::name("registered_owners")->hide(),
+            Column::name("area")->hide()->label('Area'),
+            Column::name("description")->hide()->label('Description'),
+            Column::name("approved")->hide()->label('Approved'),
+            Column::name("registered_owners")->hide()->label('Registered Owner'),
             
-            Column::name('applicant_name')->searchable(),
+            Column::name('applicant_name')->searchable()->label('Applicant Name'),
             
             Column::callback(['anticipated_budget'], function($value){
                 return '$'.number_format((float)$value);
-            })->label('anticipated_budget'),
+            })->label('Anticipated Budget'),
             
             // Column::name('anticipated_budget')->searchable(),
-            Column::name('project_address')->searchable(),
-            Column::name('project_state')->searchable(),
+            Column::name('project_address')->searchable()->label('Project Address'),
+            Column::name('project_state')->searchable()->label('Project State'),
             // Column::name('phone')->searchable(),
-            Column::callback(['phone', 'phone_code'], function($phone, $phone_code) {
-                return   $phone_code . ' ' . chunk_split($phone, 4, ' ');
-            })->label('phone')->searchable(),
-            Column::name('email')->searchable(),
+            
+            Column::callback(['phone', 'phone_code'], function($phone, $phone_code) 
+            {
+                $phone = ltrim($phone, "0");
+                return   $phone_code . ' ' . substr($phone, 0, 3) . " " . substr($phone, 3, 3) . " " . substr($phone, 6);
+                
+            })->searchable()->label('Phone'),
+
+            
+            Column::name('email')->searchable()->label('Email'),
             // Column::name('current_property_value')->searchable(),
             Column::callback(['current_property_value'], function($value){
                 return '$'.number_format((float)$value);
-            })->label('current_property_value'),
+            })->label('Current Property Value'),
             // Column::name('property_debt'),
             Column::callback(['property_debt'], function($value){
                 return '$'.number_format((float)$value);
-            })->label('current_property_value'),
+            })->label('Property Debt'),
             Column::callback(['cross_collaterized'], function($value){
                 return $value ? 'Yes' : 'No';
             })->label('Cross Collaterized'),
@@ -88,7 +94,7 @@ class ProjectTable extends LivewireDatatable
                     return "<div style='width:100px'> <a href='/projects/$id'><i class='bx bx-show-alt'></i></a></div>";
                 }
 
-            }),
+            })->label('Action'),
         ];
     }
 

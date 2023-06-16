@@ -50,6 +50,7 @@ class LiveLeadComponent extends Component
 
     public function mount()
     {
+        $this->phone_code  = "+61";
         $this->user = Auth::user();
 
         if(!$this->user->hasRole('view-leads')) abort(403);
@@ -65,7 +66,7 @@ class LiveLeadComponent extends Component
             'name' => $this->name,
             'email' => $this->email,
             'phone_code' => $this->phone_code,
-            'phone' => $this->phone,
+            'phone' =>  str_replace(' ', '', $this->phone),
             'address' => $this->address,
             'user_id' => $this->user->id,
         ]);
@@ -122,7 +123,7 @@ class LiveLeadComponent extends Component
 
         $this->model->name = $this->name;
         $this->model->email = $this->email;
-        $this->model->phone_code = $this->phone_code;
+        $this->model->phone_code =  str_replace(' ', '', $this->phone_code);
         $this->model->phone = $this->phone;
         $this->model->address = $this->address;
 
@@ -185,6 +186,7 @@ class LiveLeadComponent extends Component
         $this->reset([
             'name', 'email', 'address', 'phone_code', 'phone', 'selectedSegments', 'selectedTags', 'model'
         ]);
+        $this->phone_code = "+61";
     }
     public function openModalexel()
     {
@@ -201,7 +203,9 @@ class LiveLeadComponent extends Component
         $this->address = $lead->address;
         $this->phone_code = $lead->phone_code;
         $this->phone = $lead->phone;
+        $this->dispatchBrowserEvent('phone-updated', ['newPhone' => $lead->phone]);
         $this->selectedSegments = $this->model->segments->pluck('id')->toArray();
+       
         $this->selectedTags = $this->model->tags->pluck('id')->toArray();
 
         $this->dispatchBrowserEvent('toggleModal', [
@@ -240,6 +244,7 @@ class LiveLeadComponent extends Component
     }
     public function render()
     {
+        // dd('asd');
         return view('livewire.live-lead-component');
     }
     public function import()
@@ -248,7 +253,7 @@ class LiveLeadComponent extends Component
         $this->validate([
             'exelfile' => 'required|mimes:xlsx,xls,csv',
         ]);
-       
+      
         Excel::import(new LeadImport, $this->exelfile);
         return redirect()->to('leads');
     }

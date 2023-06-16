@@ -55,7 +55,7 @@
                                             <b>Applicant Email:</b> {{$item->email}}
                                         </li>
                                         <li>
-                                            <b>Applicant Phone:</b> {{$item->phone}}
+                                            <b>Applicant Phone:</b>  @php  $phoneoffice = ltrim($item->phone, "0")    @endphp  {{  $item->phone_code . ' ' .substr($phoneoffice, 0, 3) . " " . substr($phoneoffice, 3, 3) . " " . substr($phoneoffice, 6)}}
                                         </li>
                                         <li>
                                             <b>Property State:</b> {{$item->project_state}}
@@ -124,7 +124,7 @@
                                             <b>Applicant Email:</b> {{$item->email}}
                                         </li>
                                         <li>
-                                            <b>Applicant Phone:</b> {{$item->phone}}
+                                            <b>Applicant Phone:</b>  @php  $phoneoffice = ltrim($item->phone, "0")    @endphp  {{  $item->phone_code . ' ' .substr($phoneoffice, 0, 3) . " " . substr($phoneoffice, 3, 3) . " " . substr($phoneoffice, 6)}}
                                         </li>
                                         <li>
                                             <b>Property State:</b> {{$item->project_state}}
@@ -197,7 +197,7 @@
                                                     <b>Applicant Email:</b> {{$item->email}}
                                                 </li>
                                                 <li>
-                                                    <b>Applicant Phone:</b> {{$item->phone}}
+                                                    <b>Applicant Phone:</b>  @php  $phoneoffice = ltrim($item->phone, "0")    @endphp  {{  $item->phone_code . ' ' .substr($phoneoffice, 0, 3) . " " . substr($phoneoffice, 3, 3) . " " . substr($phoneoffice, 6)}}
                                                 </li>
                                                 <li>
                                                     <b>Property State:</b> {{$item->project_state}}
@@ -271,7 +271,7 @@
                                                     <b>Applicant Email:</b> {{$item->email}}
                                                 </li>
                                                 <li>
-                                                    <b>Applicant Phone:</b> {{$item->phone}}
+                                                    <b>Applicant Phone:</b>  @php  $phoneoffice = ltrim($item->phone, "0")    @endphp  {{  $item->phone_code . ' ' .substr($phoneoffice, 0, 3) . " " . substr($phoneoffice, 3, 3) . " " . substr($phoneoffice, 6)}}
                                                 </li>
                                                 <li>
                                                     <b>Property State:</b> {{$item->project_state}}
@@ -356,7 +356,7 @@
                                             <b>Applicant Email:</b> {{$item->email}}
                                         </li>
                                         <li>
-                                            <b>Applicant Phone:</b> {{$item->phone}}
+                                            <b>Applicant Phone:</b>  @php  $phoneoffice = ltrim($item->phone, "0")    @endphp  {{  $item->phone_code . ' ' .substr($phoneoffice, 0, 3) . " " . substr($phoneoffice, 3, 3) . " " . substr($phoneoffice, 6)}}
                                         </li>
                                         <li>
                                             <b>Property State:</b> {{$item->project_state}}
@@ -428,7 +428,7 @@
                                                     <b>Applicant Email:</b> {{$item->email}}
                                                 </li>
                                                 <li>
-                                                    <b>Applicant Phone:</b> {{$item->phone}}
+                                                    <b>Applicant Phone:</b>  @php  $phoneoffice = ltrim($item->phone, "0")    @endphp  {{  $item->phone_code . ' ' .substr($phoneoffice, 0, 3) . " " . substr($phoneoffice, 3, 3) . " " . substr($phoneoffice, 6)}}
                                                 </li>
                                                 <li>
                                                     <b>Property State:</b> {{$item->project_state}}
@@ -511,7 +511,7 @@
                                         <b>Applicant Email:</b> {{$item->email}}
                                     </li>
                                     <li>
-                                        <b>Applicant Phone:</b> {{$item->phone}}
+                                        <b>Applicant Phone:</b>  @php  $phoneoffice = ltrim($item->phone, "0")    @endphp  {{  $item->phone_code . ' ' .substr($phoneoffice, 0, 3) . " " . substr($phoneoffice, 3, 3) . " " . substr($phoneoffice, 6)}}
                                     </li>
                                     <li>
                                         <b>Property State:</b> {{$item->project_state}}
@@ -581,7 +581,7 @@
                                                 <b>Applicant Email:</b> {{$item->email}}
                                             </li>
                                             <li>
-                                                <b>Applicant Phone:</b> {{$item->phone}}
+                                                <b>Applicant Phone:</b>  @php  $phoneoffice = ltrim($item->phone, "0")    @endphp  {{  $item->phone_code . ' ' .substr($phoneoffice, 0, 3) . " " . substr($phoneoffice, 3, 3) . " " . substr($phoneoffice, 6)}}
                                             </li>
                                             <li>
                                                 <b>Property State:</b> {{$item->project_state}}
@@ -647,7 +647,7 @@
                                                 <b>Applicant Email:</b> {{$item->email}}
                                             </li>
                                             <li>
-                                                <b>Applicant Phone:</b> {{$item->phone}}
+                                                <b>Applicant Phone:</b>  @php  $phoneoffice = ltrim($item->phone, "0")    @endphp  {{  $item->phone_code . ' ' .substr($phoneoffice, 0, 3) . " " . substr($phoneoffice, 3, 3) . " " . substr($phoneoffice, 6)}}
                                             </li>
                                             <li>
                                                 <b>Property State:</b> {{$item->project_state}}
@@ -721,7 +721,7 @@
                                                 <b>Applicant Email:</b> {{$item->email}}
                                             </li>
                                             <li>
-                                                <b>Applicant Phone:</b> {{$item->phone}}
+                                                <b>Applicant Phone:</b>  @php  $phoneoffice = ltrim($item->phone, "0")    @endphp  {{  $item->phone_code . ' ' .substr($phoneoffice, 0, 3) . " " . substr($phoneoffice, 3, 3) . " " . substr($phoneoffice, 6)}}
                                             </li>
                                             <li>
                                                 <b>Property State:</b> {{$item->project_state}}
@@ -806,7 +806,11 @@
                                                 <b>Applicant Email:</b> {{$item->email}}
                                             </li>
                                             <li>
-                                                <b>Applicant Phone:</b> {{$item->phone}}
+                                                <b>Applicant Phone:</b>  @php  $phoneoffice = ltrim($item->phone, "0")    @endphp  {{  $item->phone_code . ' ' .substr($phoneoffice, 0, 3) . " " . substr($phoneoffice, 3, 3) . " " . substr($phoneoffice, 6)}}
+                                                 
+                                                       
+                                                  
+                                                   
                                             </li>
                                             <li>
                                                 <b>Property State:</b> {{$item->project_state}}

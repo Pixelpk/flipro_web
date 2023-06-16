@@ -9,7 +9,8 @@
         <div class="content-header row">
             <?php
             $text = ($type == 'evaluator') ? 'Valuer' : str_replace('-', ' ', ($type == 'franchise') ? 'Partner' : $type);
-
+            if($type == 'builder')
+            $text  = 'Agents/Trades'
             ?>
             <div class="content-header-left col-12 mb-2 mt-1">
                 <div class="row breadcrumbs-top">
@@ -76,7 +77,7 @@
                                                         </div>
                                                         <div class="col-md-8 form-group">
                                                             <div class="position-relative has-icon-left">
-                                                                <input wire:model='email' type="email" id="email-icon" class="form-control"
+                                                                <input autocomplete="new-email"wire:model='email' type="email" id="email-icon" class="form-control"
                                                                     name="email-id-icon" placeholder="Email">
                                                                 <div class="form-control-position">
                                                                     <i class="bx bx-mail-send"></i>
@@ -91,12 +92,15 @@
                                                             <div class="position-relative">
                                                                 <div class="input-group">
                                                                     <div class="input-group-prepend">
-                                                                        <select wire:model='phone_code' class="form-control input-group-text">
+                                                                        <select style="width: 99px;" wire:model='phone_code' class="form-control input-group-text">
                                                                             <option value="">Country</option>
-                                                                            <option value="61">+61 (Australia)</option>
+                                                                            @foreach(config('countrycode') as $index => $item)
+                                                                            <option value="{{ $index }}">{{ $item }}
+                                                                            </option>
+                                                                            @endforeach
                                                                         </select>
                                                                     </div>
-                                                                    <input wire:model='phone' type="number" class="form-control" placeholder="Phone" aria-describedby="basic-addon1">
+                                                                    <input id="phone" onkeyup="formatPhoneNumber(this)" type="text" class="form-control" placeholder="Phone" aria-describedby="basic-addon1">
                                                                 </div>
                                                             </div>
                                                             @error('phone') <span class="text-danger">{{ $message }}</span> @enderror
@@ -120,7 +124,7 @@
                                                         </div>
                                                         <div class="col-md-8 form-group">
                                                             <div class="position-relative has-icon-left">
-                                                                <input wire:model='password' type="password" id="pass-icon" class="form-control"
+                                                                <input autocomplete="new-password" wire:model='password' type="password" id="pass-icon" class="form-control"
                                                                     name="contact-icon" placeholder="Password">
                                                                 <div class="form-control-position">
                                                                     <i class="bx bx-lock"></i>
@@ -160,3 +164,26 @@
         </div>
     </div>
 </div>
+<script>
+    window.addEventListener('phone-updated', event => {
+       
+        document.getElementById("phone").value =  event.detail.newPhone.replace(/(\d{3})(\d{3})(\d{3})/, '$1 $2 $3'); 
+    })
+    function formatPhoneNumber(input) {
+        // Remove all non-digit characters from the input value
+        var phoneNumber = input.value.replace(/\D/g, '');
+
+        // Check if the phone number exceeds the limit
+        if (phoneNumber.length > 9) {
+            // Truncate the phone number to the limit
+            phoneNumber = phoneNumber.substr(0, 10);
+        }
+
+        // Format the phone number as per the Australian format
+        var formattedPhoneNumber = phoneNumber.replace(/(\d{3})(\d{3})(\d{3})/, '$1 $2 $3');
+
+        // Set the formatted phone number back to the input value
+        input.value = formattedPhoneNumber;
+        @this.set('phone', formattedPhoneNumber);
+    }
+</script>

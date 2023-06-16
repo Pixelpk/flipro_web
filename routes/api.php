@@ -38,6 +38,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('users', [RegistrationsController::class, 'create']);
     Route::patch('users', [RegistrationsController::class, 'update']);
     Route::get('/projects', [ProjectsController::class, 'list']);
+    Route::post('/project/delete', [ProjectsController::class, 'destory']);
     Route::post('projects', [ProjectsController::class, 'create']);
     Route::post('projects/search', [ProjectsController::class, 'search']);
     Route::patch('projects', [ProjectsController::class, 'update']);
@@ -47,6 +48,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('galleries', [GalleriesController::class, 'create']);
     Route::get('accesses', [ProjectRolesController::class, 'get']);
     Route::post('accesses', [ProjectRolesController::class, 'update']);
+    Route::get('project/gallery', [ProjectsController::class, 'gallery']);
     Route::get('notes', [NotesController::class, 'list']);
     Route::get('event/log', [EventLogController::class, 'list']);
     Route::post('notes', [NotesController::class, 'create']);
@@ -62,6 +64,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('projects/value/review', [ProjectValuesController::class, 'addReview']);
     Route::post('projects/progress/review', [ProjectReviewsController::class, 'addReview']);
 });
+
 Route::get('test/fcm', function () {
     return Project::first()->partTakerFcmTokens();
     // $fcm = new Firebase();

@@ -26,9 +26,12 @@ class LeadsTable extends LivewireDatatable
             Column::name("name")->label("Name")->searchable(),
             Column::name("email")->label("Email")->searchable(),
             Column::callback(['phone_code', 'phone'], function($phoneCode, $phone){
-                return $phoneCode . $phone;
+                // return $phoneCode . $phone;
+                $phonemew = ltrim($phone, "0");
+                // return $phonemew;
+                return  $phoneCode . ' ' .substr($phonemew, 0, 3) . " " . substr($phonemew, 3, 3) . " " . substr($phonemew, 6);
             })->label("Phone")->searchable(),
-            Column::name("address")->label("Address"),
+            Column::name("address")->label("Project Address"),
             Column::callback('id', function($id){
                 $tags = Lead::find($id)->tags;  
                 $tagstr = ''; 
@@ -50,12 +53,20 @@ class LeadsTable extends LivewireDatatable
                             </div>';
                 }
                 return "<b>Segments: </b>" . $segmentstr . "<br><b>Tags: </b>" . $tagstr;
-            })->label('Tags & Segments'),
+            })->label('Tags & Segments')
+            ->excludeFromExport(),
+            // ->exportCallback(function ($value) {
+            //     if($value){
+            //         return "Active";
+            //     }else{
+            //         return "In-Active";
+            //     }
+            // }),
             Column::callback(['id'], function($id){
                 $editAction = "<span wire:click='edit($id)'><i class='bx bx-pencil'></i></span>";
                 $deleteAction = "<span wire:click='delete($id)'><i class='bx bx-trash text-danger ml-2'></i></span>";
                 return (request()->user()->hasRole('update-leads') ? $editAction : '') . ' ' . (request()->user()->hasRole('delete-leads') ? $deleteAction : '');
-            })
+            })->excludeFromExport(),
         ];
     }
 

@@ -9,6 +9,8 @@ class GalleriesController extends Controller
 {
     public function create(Request $request)
     {
+
+       
         $request->validate([
             'file' => 'required',
         ]);

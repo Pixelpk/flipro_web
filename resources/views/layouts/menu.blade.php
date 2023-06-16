@@ -83,7 +83,7 @@ $user = \Auth::user();
                     </li>
                     @endif
                     @if($user->hasRole('view-builder'))
-                    <li class="{{Request::path() == 'users/builder' ? 'active' : ''}}"><a href="/users/builder"><i class="bx bx-right-arrow-alt"></i><span class="menu-item" data-i18n="Static layout">Builders</span></a>
+                    <li class="{{Request::path() == 'users/builder' ? 'active' : ''}}"><a href="/users/builder"><i class="bx bx-right-arrow-alt"></i><span class="menu-item" data-i18n="Static layout">Agents/Trades</span></a>
                     </li>
                     @endif
                 </ul>

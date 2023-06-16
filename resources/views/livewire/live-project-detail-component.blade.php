@@ -6,7 +6,7 @@
     top: 80%;
     z-index: 99; border-bottom-right-radius: 0px; border-bottom-left-radius: 0px">
         Progress Timeline</button>
-    @if(Auth::user()->user_type == 'admin')
+    @if (Auth::user()->user_type == 'admin')
     <button data-toggle="modal" data-target="#exampleModal90" class="btn btn-lg btn-primary rotate" style="
     position: fixed;
     right: -75px;
@@ -14,7 +14,7 @@
     z-index: 99; border-bottom-right-radius: 0px; border-bottom-left-radius: 0px">
         Activity Timeline</button>
     @endif
-    @if(Auth::user()->user_type == 'franchise' && $finalProgress && ($project->status == 'complete'))
+    @if (Auth::user()->user_type == 'franchise' && $finalProgress && $project->status == 'complete')
     <button data-toggle="modal" data-target="#exampleModal11" class="btn btn-lg btn-primary rotate" style="
     position: fixed;
     right: -37px;
@@ -47,7 +47,7 @@
                     <div class="col-md-12 col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">{{$project->project_address}}</h4>
+                                <h4 class="card-title">{{ $project->project_address }}</h4>
                             </div>
                             <div class="card-content">
                                 <div class="card-body">
@@ -57,19 +57,25 @@
                                                 <div class="col-md-12">
                                                     @php
                                                     $photo = $project->photos[0] ?? '/no-image.png';
-                                                    if($photo)
-                                                    if(filter_var($photo, FILTER_VALIDATE_URL)){
-                                                    $photo = explode("/", $photo);
-                                                    $photo = $photo[count($photo) -2] . '/' . $photo[count($photo)-1];
+                                                    if ($photo) {
+                                                    if (filter_var($photo, FILTER_VALIDATE_URL)) {
+                                                    $photo = explode('/', $photo);
+                                                    $photo = $photo[count($photo) - 2] . '/' . $photo[count($photo) -
+                                                    1];
+                                                    }
                                                     }
                                                     @endphp
-                                                    <img src="/stream/{{$photo}}" width="440px;" alt="Image">
+                                                    <img src="/stream/{{ $photo }}" width="440px;" alt="Image">
                                                 </div>
                                                 <div class="col-md-12 text-center mt-2">
                                                     <a href="#gallery"><button class="btn btn-primary">View
                                                             All</button></a>
+<<<<<<< HEAD
                                                             <button wire:click="softDelete" class="btn btn-danger">Delete
                                                                 </button>
+=======
+
+>>>>>>> 03a323a4f4a537adb0c93f407d78e4c22de4512c
                                                 </div>
                                             </div>
                                         </div>
@@ -77,8 +83,21 @@
                                             <h4 class="display-4 mb-1" style="font-size:2.5rem;">Applicant Information
                                             </h4>
                                             <ul>
-                                                @if(Auth::user()->user_type == 'admin')
-                                                @if($project->approved == 'pending')
+
+                                                @if (Auth::user()->user_type == 'admin')
+                                                @if ($project->status == 'closed')
+                                                <li class="mb-1">
+                                                    <button wire:click="statusConfirmation('softDelete')"
+                                                        class="btn btn-danger">Project Delete
+                                                    </button>
+                                                    <button wire:click="export({{ $project->id }})"
+                                                        class="btn btn-success">Export Project
+                                                    </button>
+                                                </li>
+                                                @endif
+                                                @endif
+                                                @if (Auth::user()->user_type == 'admin')
+                                                @if ($project->approved == 'pending')
                                                 <li class="mb-1">
                                                     <button wire:loading.attr="disabled" class="btn btn-success"
                                                         wire:click="confirmProjectStatus('approved')">Approve
@@ -112,27 +131,32 @@
                                                     <b>Created date:</b>
                                                     {{ date('d-m-Y', strtotime($project->created_at)) }}
                                                 </li>
-                                                @if($project->approved == 'rejected')
+                                                @if ($project->approved == 'rejected')
                                                 <li class="mb-1">
                                                     <b>Project Status:</b> Rejected
                                                 </li>
                                                 @endif
-                                                @if($project->approved == 'approved')
+                                                @if ($project->approved == 'approved')
                                                 <li class="mb-1">
-                                                    <b>Project Status:</b> {{$project->status}}
+                                                    <b>Project Status:</b> {{ $project->status }}
                                                 </li>
                                                 @endif
                                                 <li class="mb-1">
-                                                    <b>Applicant Name:</b> {{$project->applicant_name}}
+                                                    <b>Applicant Name:</b> {{ $project->applicant_name }}
                                                 </li>
                                                 <li class="mb-1">
-                                                    <b>Applicant Email:</b> {{$project->email}}
+                                                    <b>Applicant Email:</b> {{ $project->email }}
                                                 </li>
                                                 <li class="mb-1">
-                                                    <b>Applicant Phone:</b> {{$project->phone}}
+                                                    <b>Applicant Phone:</b>
+                                                    @php 
+                                                        $phoneoffice = ltrim($project->phone, "0")
+                                                    @endphp
+                                                    {{  $project->phone_code . ' ' .substr($phoneoffice, 0, 3) . " " . substr($phoneoffice, 3, 3) . " " . substr($phoneoffice, 6)}}
+
                                                 </li>
                                                 <li class="mb-1">
-                                                    <b>Register Owner:</b> {{$project->registered_owners}}
+                                                    <b>Register Owner:</b> {{ $project->registered_owners }}
                                                 </li>
                                                 {{--  <li class="mb-1">
                                                     <b>Property State:</b> {{$project->project_state}}
@@ -149,16 +173,16 @@
                                             <ul>
                                                 <li class="mb-1">
                                                     <b>Current Value:</b>
-                                                    ${{number_format((float)$project->current_property_value)}}
+                                                    ${{ number_format((float) $project->current_property_value) }}
                                                 </li>
                                                 <li class="mb-1">
                                                     <b>Property Debts:</b>
-                                                    ${{ number_format((float)$project->property_debt)}}
+                                                    ${{ number_format((float) $project->property_debt) }}
                                                 </li>
 
                                                 <li class="mb-1">
                                                     <b>Cross Collaterized:</b>
-                                                    @if($project->cross_collaterized == 1)
+                                                    @if ($project->cross_collaterized == 1)
                                                     Yes
                                                     @else
                                                     No
@@ -180,12 +204,12 @@
                                                 <li class="mb-1">
                                                     <b>Area (Square Metre):</b>
 
-                                                    {{ number_format((float)$project->area)}}
+                                                    {{ number_format((float) $project->area) }}
                                                 </li>
                                                 <li class="mb-1">
                                                     <b>Anticipated Budget:</b>
 
-                                                    ${{ number_format((float)$project->anticipated_budget)}}
+                                                    ${{ number_format((float) $project->anticipated_budget) }}
                                                 </li>
                                                 {{-- <li class="mb-1">
                                                     <b>Project Title:</b>
@@ -206,7 +230,7 @@
 
                                                 <li class="mb-1">
                                                     <b>Existing Queries:</b>
-                                                    @if($project->contractor_supplier_details == 1)
+                                                    @if ($project->contractor_supplier_details == 1)
                                                     Yes
                                                     @else
                                                     No
@@ -246,7 +270,7 @@
                                                 <li class="nav-item">
                                                     <a wire:ignore.self class="nav-link" id="profile-tab"
                                                         data-toggle="tab" href="#builder" role="tab"
-                                                        aria-controls="profile" aria-selected="false">Builders</a>
+                                                        aria-controls="profile" aria-selected="false">Agents/Trades</a>
                                                 </li>
                                                 <li class="nav-item">
                                                     <a wire:ignore.self class="nav-link" id="contact-tab"
@@ -271,14 +295,14 @@
                                                                     Select
                                                                 </option>
                                                                 @foreach ($user->homeOwners()->get() as $item)
-                                                                <option value="{{$item->id}}">
-                                                                    {{$item->name}}
+                                                                <option value="{{ $item->id }}">
+                                                                    {{ $item->name }}
                                                                 </option>
                                                                 @endforeach
                                                             </select>
                                                             </select>
                                                             @error('selectedUser')
-                                                            <span class="text-danger">{{$message}}</span>
+                                                            <span class="text-danger">{{ $message }}</span>
                                                             @enderror
                                                         </div>
                                                         <div class="col-md-4">
@@ -291,17 +315,16 @@
                                                             <div class="form-check">
                                                                 <input wire:loading.attr="disabled"
                                                                     wire:model="userRoles" class="form-check-input"
-                                                                    type="checkbox" value="{{$item}}" id="{{ $key }}">
+                                                                    type="checkbox" value="{{ $item }}" id="{{ $key }}">
                                                                 <label class="form-check-label" for="{{ $key }}">
-                                                                    {{ucfirst(str_replace('_', ' ',
-                                                            $item))}}
+                                                                    {{ ucfirst(str_replace('_', ' ', $item)) }}
                                                                 </label>
                                                             </div>
                                                             @endif
                                                             @endforeach
                                                         </div>
                                                         <div class="col-md-6">
-                                                            @if($project->approved == 'approved')
+                                                            @if ($project->approved == 'approved')
                                                             <button wire:loading.attr="disabled" class="btn btn-primary"
                                                                 wire:click='addUser("home-owner")'>Add
                                                                 <span wire:loading wire:target="addUser"
@@ -319,7 +342,7 @@
                                                                     <th>
                                                                         Email
                                                                     </th>
-                                                                      <th>
+                                                                    <th>
                                                                         Phone
                                                                     </th>
                                                                     <th>
@@ -330,25 +353,31 @@
                                                                 @foreach ($this->homeOwners as $homeOwner)
                                                                 <tr>
                                                                     <td>
-                                                                        {{$homeOwner->user->name}}
+                                                                        {{ $homeOwner->user->name }}
                                                                     </td>
                                                                     <td>
-                                                                        {{$homeOwner->user->email}}
+                                                                        {{ $homeOwner->user->email }}
                                                                     </td>
-                                                                     <td>
-                                                                        {{$homeOwner->user->phone}}
+                                                                    <td>
+                                                                        {{-- {{ $homeOwner->user->phone }} --}}
+                                                                        {{-- {{  $homeOwner->user->phone_code . ' ' . chunk_split(ltrim($homeOwner->user->phone, "0"), 4, ' ') }} --}}
+                                                                        @php $phone = ltrim($homeOwner->user->phone, "0") @endphp
+                                                                        {{  $homeOwner->user->phone_code . ' ' .substr($phone, 0, 3) . " " . substr($phone, 3, 3) . " " . substr($phone, 6)}}
+                                                                    
                                                                     </td>
                                                                     <td>
                                                                         <ul>
                                                                             @foreach ($homeOwner->roles as $key =>
                                                                             $role)
                                                                             @if (in_array($key, $homeOwnerRoles))
-                                                                            <li><b>{{$key}}: </b> {!!$role ? '<i
+                                                                            <li><b>{{ $key }}:
+                                                                                </b> {!! $role
+                                                                                ? '<i
                                                                                     class="bx bx-check-circle text-success"></i>'
                                                                                 : '<i
-                                                                                    class="bx bx-x-circle text-danger"></i>'!!}
+                                                                                    class="bx bx-x-circle text-danger"></i>'
+                                                                                !!}
                                                                             </li>
-
                                                                             @endif
                                                                             @endforeach
                                                                         </ul>
@@ -374,14 +403,14 @@
                                                                     Select
                                                                 </option>
                                                                 @foreach ($user->builders()->get() as $item)
-                                                                <option value="{{$item->id}}">
-                                                                    {{$item->name}}
+                                                                <option value="{{ $item->id }}">
+                                                                    {{ $item->name }}
                                                                 </option>
                                                                 @endforeach
                                                             </select>
                                                             </select>
                                                             @error('selectedUser')
-                                                            <span class="text-danger">{{$message}}</span>
+                                                            <span class="text-danger">{{ $message }}</span>
                                                             @enderror
                                                         </div>
                                                         <div class="col-md-4">
@@ -389,13 +418,13 @@
                                                             @foreach ($roles as $item)
                                                             @if (in_array($item, $builderRoles))
                                                             <input wire:loading.attr="disabled" wire:model="userRoles"
-                                                                type="checkbox" value="{{$item}}"> {{ucfirst(str_replace('_', ' ',
-                                                            $item))}}
+                                                                type="checkbox" value="{{ $item }}">
+                                                            {{ ucfirst(str_replace('_', ' ', $item)) }}
                                                             @endif
                                                             @endforeach
                                                         </div>
                                                         <div class="col-md-6">
-                                                            @if($project->approved == 'approved')
+                                                            @if ($project->approved == 'approved')
                                                             <button wire:loading.attr="disabled" class="btn btn-primary"
                                                                 wire:click='addUser("builder")'>Add
                                                                 <span wire:loading wire:target="addUser"
@@ -413,7 +442,7 @@
                                                                     <th>
                                                                         Email
                                                                     </th>
-                                                                     <th>
+                                                                    <th>
                                                                         Phone
                                                                     </th>
 
@@ -425,13 +454,17 @@
                                                                 @foreach ($this->builders as $builder)
                                                                 <tr>
                                                                     <td>
-                                                                        {{$builder->user->name}}
+                                                                        {{ $builder->user->name }}
                                                                     </td>
                                                                     <td>
-                                                                        {{$builder->user->email}}
+                                                                        {{ $builder->user->email }}
                                                                     </td>
                                                                     <td>
-                                                                        {{$builder->user->phone}}
+                                                                        {{-- {{ $builder->user->phone }} --}}
+                                                                        {{-- {{  $builder->user->phone_code . ' ' . chunk_split(ltrim($builder->user->phone, "0"), 4, ' ') }} --}}
+                                                                        @php $phone = ltrim($builder->user->phone, "0") @endphp
+                                                                         {{  $builder->user->phone_code . ' ' .substr($phone, 0, 3) . " " . substr($phone, 3, 3) . " " . substr($phone, 6)}}
+                                                                        
                                                                     </td>
                                                                     <td>
                                                                         <ul>
@@ -439,21 +472,24 @@
                                                                                 @foreach ($builder->roles as $key =>
                                                                                 $role)
                                                                                 @if (in_array($key, $builderRoles))
-                                                                                <li><b>{{$key}}: </b> {!!$role ? '<i
+                                                                                <li><b>{{ $key }}:
+                                                                                    </b>
+                                                                                    {!! $role
+                                                                                    ? '<i
                                                                                         class="bx bx-check-circle text-success"></i>'
                                                                                     : '<i
-                                                                                        class="bx bx-x-circle text-danger"></i>'!!}
+                                                                                        class="bx bx-x-circle text-danger"></i>'
+                                                                                    !!}
                                                                                 </li>
-
                                                                                 @endif
                                                                                 @endforeach
                                                                             </ul>
                                                                         </ul>
                                                                     </td>
                                                                     <td>
-                                                                        {{--  <button class="btn btn-danger"
+                                                                        <button class="btn btn-danger"
                                                                             wire:click="deleteUser({{$builder}})">Delete</button>
-                                                                        --}}
+
                                                                     </td>
                                                                 </tr>
                                                                 @endforeach
@@ -472,14 +508,14 @@
                                                                     Select
                                                                 </option>
                                                                 @foreach ($user->franchises()->get() as $item)
-                                                                <option value="{{$item->id}}">
-                                                                    {{$item->name}}
+                                                                <option value="{{ $item->id }}">
+                                                                    {{ $item->name }}
                                                                 </option>
                                                                 @endforeach
                                                             </select>
                                                             </select>
                                                             @error('selectedUser')
-                                                            <span class="text-danger">{{$message}}</span>
+                                                            <span class="text-danger">{{ $message }}</span>
                                                             @enderror
                                                         </div>
                                                         <div class="col-md-4">
@@ -492,17 +528,16 @@
                                                             <div class="form-check">
                                                                 <input wire:loading.attr="disabled"
                                                                     wire:model="userRoles" class="form-check-input"
-                                                                    type="checkbox" value="{{$item}}" id="{{ $key }}">
+                                                                    type="checkbox" value="{{ $item }}" id="{{ $key }}">
                                                                 <label class="form-check-label" for="{{ $key }}">
-                                                                    {{ucfirst(str_replace('_', ' ',
-                                                                    $item))}}
+                                                                    {{ ucfirst(str_replace('_', ' ', $item)) }}
                                                                 </label>
                                                             </div>
                                                             @endif
                                                             @endforeach
                                                         </div>
                                                         <div class="col-md-6">
-                                                            @if($project->approved == 'approved')
+                                                            @if ($project->approved == 'approved')
                                                             <button wire:loading.attr="disabled" class="btn btn-primary"
                                                                 wire:click='addUser("franchise")'>
                                                                 Add
@@ -532,13 +567,17 @@
                                                                 @foreach ($this->franchises as $franchise)
                                                                 <tr>
                                                                     <td>
-                                                                        {{$franchise->user->name}}
+                                                                        {{ $franchise->user->name }}
                                                                     </td>
                                                                     <td>
-                                                                        {{$franchise->user->email}}
+                                                                        {{ $franchise->user->email }}
                                                                     </td>
-                                                                     <td>
-                                                                        {{$franchise->user->phone}}
+                                                                    <td>
+                                                                        {{-- {{ $franchise->user->phone }} --}}
+                                                                        {{-- {{  $franchise->user->phone_code . ' ' . chunk_split(ltrim($franchise->user->phone, "0"), 4, ' ') }} --}}
+                                                                        @php $phone = ltrim($franchise->user->phone, "0") @endphp
+                                                                         {{  $franchise->user->phone_code . ' ' .substr($phone, 0, 3) . " " . substr($phone, 3, 3) . " " . substr($phone, 6)}}
+                                                                    
                                                                     </td>
                                                                     <td>
                                                                         <ul>
@@ -546,10 +585,14 @@
                                                                                 @foreach ($franchise->roles as $key =>
                                                                                 $role)
                                                                                 @if (in_array($key, $franchiseRoles))
-                                                                                <li><b>{{$key}}: </b> {!!$role ? '<i
+                                                                                <li><b>{{ $key }}:
+                                                                                    </b>
+                                                                                    {!! $role
+                                                                                    ? '<i
                                                                                         class="bx bx-check-circle text-success"></i>'
                                                                                     : '<i
-                                                                                        class="bx bx-x-circle text-danger"></i>'!!}
+                                                                                        class="bx bx-x-circle text-danger"></i>'
+                                                                                    !!}
                                                                                 </li>
                                                                                 @endif
                                                                                 @endforeach
@@ -557,9 +600,9 @@
                                                                         </ul>
                                                                     </td>
                                                                     <td>
-                                                                        {{--  <button class="btn btn-danger"
+                                                                        <button class="btn btn-danger"
                                                                             wire:click='deleteUser({{$franchise}})'>Delete</button>
-                                                                        --}}
+
                                                                     </td>
                                                                 </tr>
                                                                 @endforeach
@@ -578,13 +621,13 @@
                                                                     Select
                                                                 </option>
                                                                 @foreach ($user->evaluators()->get() as $item)
-                                                                <option value="{{$item->id}}">
-                                                                    {{$item->name}}
+                                                                <option value="{{ $item->id }}">
+                                                                    {{ $item->name }}
                                                                 </option>
                                                                 @endforeach
                                                             </select>
                                                             @error('selectedUser')
-                                                            <span class="text-danger">{{$message}}</span>
+                                                            <span class="text-danger">{{ $message }}</span>
                                                             @enderror
                                                         </div>
                                                         <div class="col-md-4">
@@ -592,13 +635,13 @@
                                                             @foreach ($roles as $item)
                                                             @if (in_array($item, $valuerRoles))
                                                             <input wire:loading.attr="disabled" wire:model="userRoles"
-                                                                type="checkbox" value="{{$item}}"> {{ucfirst(str_replace('_', ' ',
-                                                            $item))}}
+                                                                type="checkbox" value="{{ $item }}">
+                                                            {{ ucfirst(str_replace('_', ' ', $item)) }}
                                                             @endif
                                                             @endforeach
                                                         </div>
                                                         <div class="col-md-6">
-                                                            @if($project->approved == 'approved')
+                                                            @if ($project->approved == 'approved')
                                                             <button wire:loading.attr="disabled" class="btn btn-primary"
                                                                 wire:click='addUser("evaluator")'>Add
                                                                 <span wire:loading wire:target="addUser"
@@ -616,7 +659,7 @@
                                                                     <th>
                                                                         Email
                                                                     </th>
-                                                                      <th>
+                                                                    <th>
                                                                         Phone
                                                                     </th>
                                                                     <th>
@@ -629,13 +672,17 @@
                                                                 @foreach ($this->evaluators as $evaluator)
                                                                 <tr>
                                                                     <td>
-                                                                        {{$evaluator->user->name}}
+                                                                        {{ $evaluator->user->name }}
                                                                     </td>
                                                                     <td>
-                                                                        {{$evaluator->user->email}}
+                                                                        {{ $evaluator->user->email }}
                                                                     </td>
-                                                                      <td>
-                                                                        {{$evaluator->user->phone}}
+                                                                    <td>
+                                                                        {{-- {{ $evaluator->user->phone }} --}}
+                                                                        {{-- {{  $evaluator->user->phone_code . ' ' . chunk_split(ltrim($evaluator->user->phone, "0"), 4, ' ') }} --}}
+                                                                        @php $phone = ltrim($evaluator->user->phone, "0") @endphp
+                                                                         {{  $evaluator->user->phone_code . ' ' .substr($phone, 0, 3) . " " . substr($phone, 3, 3) . " " . substr($phone, 6)}}
+                                                                        
                                                                     </td>
                                                                     <td>
                                                                         <ul>
@@ -643,10 +690,14 @@
                                                                                 @foreach ($evaluator->roles as $key =>
                                                                                 $role)
                                                                                 @if (in_array($key, $valuerRoles))
-                                                                                <li><b>{{$key}}: </b> {!!$role ? '<i
+                                                                                <li><b>{{ $key }}:
+                                                                                    </b>
+                                                                                    {!! $role
+                                                                                    ? '<i
                                                                                         class="bx bx-check-circle text-success"></i>'
                                                                                     : '<i
-                                                                                        class="bx bx-x-circle text-danger"></i>'!!}
+                                                                                        class="bx bx-x-circle text-danger"></i>'
+                                                                                    !!}
                                                                                 </li>
                                                                                 @endif
                                                                                 @endforeach
@@ -654,9 +705,9 @@
                                                                         </ul>
                                                                     </td>
                                                                     <td>
-                                                                        {{--  <button class="btn btn-danger"
+                                                                        <button class="btn btn-danger"
                                                                             wire:click='deleteUser({{$evaluator}})'>Delete</button>
-                                                                        --}}
+
                                                                     </td>
                                                                 </tr>
                                                                 @endforeach
@@ -680,7 +731,7 @@
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-12 table-responsive">
-                                            @if($project->approved == 'approved')
+                                            @if ($project->approved == 'approved')
                                             <button class="btn-primary btn" wire:click='openTaskModal'>Create
                                                 Task</button>
                                             @endif
@@ -697,19 +748,20 @@
                                                 </tr>
                                                 @foreach ($tasks as $task)
                                                 <tr>
-                                                    <td>{{$task->title}}</td>
-                                                    <td>{{$task->description}}</td>
-                                                    <td>{{\Carbon\Carbon::create($task->event_date)->format('d-m-Y h:i
-                                                        a')}}</td>
-                                                    <td>{{$project->title}}</td>
-                                                    <td>{{$task->createdBy->name ?? ""}}</td>
+                                                    <td>{{ $task->title }}</td>
+                                                    <td>{{ $task->description }}</td>
+                                                    <td>{{ \Carbon\Carbon::create($task->event_date)->format('d-m-Y h:i
+                                                                                                            a') }}
+                                                    </td>
+                                                    <td>{{ $project->title }}</td>
+                                                    <td>{{ $task->createdBy->name ?? '' }}</td>
                                                     <td>
-                                                        {{$task->action_taken}}
+                                                        {{ $task->action_taken }}
                                                     </td>
                                                     <td>
-                                                        {{$task->status}}
+                                                        {{ $task->status }}
                                                     </td>
-                                                    <td><i class="bx bx-pencil" wire:click='selectTask({{$task}})'
+                                                    <td><i class="bx bx-pencil" wire:click='selectTask({{ $task }})'
                                                             data-toggle="modal" data-target="#taskModal"></i></td>
                                                 </tr>
                                                 @endforeach
@@ -733,7 +785,7 @@
                                                                     <input type="text" class="form-control"
                                                                         wire:model='selectedTask.title'>
                                                                     @error('selectedTask.title')
-                                                                    <span class="text-danger">{{$message}}</span>
+                                                                    <span class="text-danger">{{ $message }}</span>
                                                                     @enderror
                                                                 </div>
                                                                 <div class="col-3 mt-1"><b>Description:</b></div>
@@ -743,10 +795,11 @@
                                                                 </div>
                                                                 @if ($selectedTask->project_id ?? false)
                                                                 <div class="col-3 mt-1"><b>Project:</b></div>
-                                                                <div class="col-3 mt-1">{{$project->title}}</div>
+                                                                <div class="col-3 mt-1">{{ $project->title }}
+                                                                </div>
                                                                 <div class="col-3 mt-1"><b>Created By:</b></div>
                                                                 <div class="col-3 mt-1">
-                                                                    {{$selectedTask->createdBy->name}}
+                                                                    {{ $selectedTask->createdBy->name }}
                                                                 </div>
                                                                 @endif
                                                                 <div class="col-3 mt-1"><b>Scheduled Date:</b></div>
@@ -754,20 +807,22 @@
                                                                     <input wire:model='selectedTask.event_date'
                                                                         type="datetime-local" class="form-control">
                                                                     @error('selectedTask.event_date')
-                                                                    <span class="text-danger">{{$message}}</span>
+                                                                    <span class="text-danger">{{ $message }}</span>
                                                                     @enderror
                                                                 </div>
                                                                 <div class="col-3 mt-1"><b>Status:</b></div>
                                                                 <div class="col-3 mt-1">
                                                                     <select class="form-control"
                                                                         wire:model='selectedTask.status'>
-                                                                        <option value="">--Select Status--</option>
+                                                                        <option value="">--Select Status--
+                                                                        </option>
                                                                         <option value="new">new</option>
-                                                                        <option value="in-progress">In Progress</option>
+                                                                        <option value="in-progress">In Progress
+                                                                        </option>
                                                                         <option value="completed">Completed</option>
                                                                     </select>
                                                                     @error('selectedTask.status')
-                                                                    <span class="text-danger">{{$message}}</span>
+                                                                    <span class="text-danger">{{ $message }}</span>
                                                                     @enderror
                                                                 </div>
                                                                 <div class="col-3 mt-1"><b>User:</b></div>
@@ -776,13 +831,15 @@
                                                                         wire:model='selectedTask.attached_user_id'>
                                                                         <option value="">--Select User--</option>
                                                                         @foreach ($users as $user)
-                                                                        <option value="{{$user->id}}">{{$user->name}}
-                                                                            ({{$user->email}})/option>
+                                                                        <option value="{{ $user->id }}">
+                                                                            {{ $user->name }}
+                                                                            ({{ $user->email }})
+                                                                            /option>
                                                                             @endforeach
                                                                     </select>
 
                                                                     @error('selectedTask.attached_user_id')
-                                                                    <span class="text-danger">{{$message}}</span>
+                                                                    <span class="text-danger">{{ $message }}</span>
                                                                     @enderror
                                                                 </div>
                                                                 <div class="col-3 mt-1"><b>Lead:</b></div>
@@ -791,12 +848,14 @@
                                                                         wire:model='selectedTask.lead_id'>
                                                                         <option value="">--Select Lead--</option>
                                                                         @foreach ($leads as $lead)
-                                                                        <option value="{{$lead->id}}">{{$lead->name}}
-                                                                            ({{$lead->email}})/option>
+                                                                        <option value="{{ $lead->id }}">
+                                                                            {{ $lead->name }}
+                                                                            ({{ $lead->email }})
+                                                                            /option>
                                                                             @endforeach
                                                                     </select>
                                                                     @error('selectedTask.lead_id')
-                                                                    <span class="text-danger">{{$message}}</span>
+                                                                    <span class="text-danger">{{ $message }}</span>
                                                                     @enderror
                                                                 </div>
                                                                 <div class="col-3 mt-1"><b>Action Taken:</b></div>
@@ -804,23 +863,24 @@
                                                                     <textarea class="form-control"
                                                                         wire:model='selectedTask.action_taken'></textarea>
                                                                     @error('selectedTask.action_taken')
-                                                                    <span class="text-danger">{{$message}}</span>
+                                                                    <span class="text-danger">{{ $message }}</span>
                                                                     @enderror
                                                                 </div>
 
                                                             </div>
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <button wire:loading.attr="disabled"  type="button" class="btn btn-secondary"
+                                                            <button wire:loading.attr="disabled" type="button"
+                                                                class="btn btn-secondary"
                                                                 data-dismiss="modal">Close</button>
                                                             <button type="button" wire:click='saveTask'
                                                                 class="btn btn-primary">Save
                                                                 changes
-                                                                
-                                                                 <span wire:loading wire:target="saveTask"
-                                                        class="spinner-grow spinner-grow-sm" role="status"
-                                                        aria-hidden="true"></span>
-                                                                </button>
+
+                                                                <span wire:loading wire:target="saveTask"
+                                                                    class="spinner-grow spinner-grow-sm" role="status"
+                                                                    aria-hidden="true"></span>
+                                                            </button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -841,10 +901,10 @@
                                                             <div class="row">
                                                                 <div class="col-3 mt-1"><b>Add Value:</b></div>
                                                                 <div class="col-9 mt-1">
-                                                                    <input onkeyup="format(this)" id="valueadd" type="text" class="form-control"
-                                                                      >
+                                                                    <input onkeyup="format(this)" id="valueadd"
+                                                                        type="text" class="form-control">
                                                                     @error('propertyValue')
-                                                                    <span class="text-danger">{{$message}}</span>
+                                                                    <span class="text-danger">{{ $message }}</span>
                                                                     @enderror
                                                                 </div>
 
@@ -852,15 +912,15 @@
                                                             </div>
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <button  type="button" class="btn btn-secondary"
+                                                            <button type="button" class="btn btn-secondary"
                                                                 data-dismiss="modal">Close</button>
-                                                            <button wire:loading.attr="disabled"  type="button" wire:click='saveValue'
-                                                                class="btn btn-primary">Save
+                                                            <button wire:loading.attr="disabled" type="button"
+                                                                wire:click='saveValue' class="btn btn-primary">Save
                                                                 changes
-                                                                
-                                                                 <span wire:loading wire:target="saveValue"
-                                                        class="spinner-grow spinner-grow-sm" role="status"
-                                                        aria-hidden="true"></span>
+
+                                                                <span wire:loading wire:target="saveValue"
+                                                                    class="spinner-grow spinner-grow-sm" role="status"
+                                                                    aria-hidden="true"></span>
                                                             </button>
                                                         </div>
                                                     </div>
@@ -886,7 +946,7 @@
                                                                     <input type="text" class="form-control"
                                                                         wire:model='paymentRequestReason'>
                                                                     @error('paymentRequestReason')
-                                                                    <span class="text-danger">{{$message}}</span>
+                                                                    <span class="text-danger">{{ $message }}</span>
                                                                     @enderror
                                                                 </div>
 
@@ -913,30 +973,33 @@
                     <div class="col-md-12 col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">Price Valuer</h4>
+                                <h4 class="card-title">Price Valuations</h4>
                             </div>
                             <div class="card-content">
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-12">
-                                            @if(Auth::user()->hasRole('administrator'))
-                                            @if($project->approved == 'approved')
+                                            @if (Auth::user()->hasRole('administrator'))
+                                            @if ($project->approved == 'approved')
                                             <button class="btn-primary btn" wire:click="openAddValueModal">Add
                                                 Value</button>
                                             @endif
-                                            @if($project->status == "complete" && $project->evaluations->count() > 0 &&
+                                            @if ($project->status == 'complete' && $project->evaluations->count() > 0 &&
                                             $client_satisfied)
-                                            @if($project->approved == 'approved')
+                                            @if ($project->approved == 'approved')
                                             <button class="btn-danger btn"
                                                 wire:click="statusConfirmation('projectClose')">Project
                                                 Close</button>
                                             @endif
                                             @endif
                                             @endif
-                                            @if(!Auth::user()->hasRole('administrator') && $projectAccess &&
+                                            @if (
+                                            !Auth::user()->hasRole('administrator') &&
+                                            $projectAccess &&
                                             isset($projectAccess->roles['add_value']) &&
-                                            $projectAccess->roles['add_value'])
-                                            @if($project->approved == 'approved')
+                                            $projectAccess->roles['add_value']
+                                            )
+                                            @if ($project->approved == 'approved')
                                             <button class="btn-primary btn" wire:click="openAddValueModal">Add
                                                 Value</button>
                                             @endif
@@ -949,17 +1012,17 @@
                                                 </tr>
                                                 @foreach ($project->evaluations as $value)
                                                 <tr>
-                                                    <td>${{ number_format((float)$value->value)}}</td>
+                                                    <td>${{ number_format((float) $value->value) }}</td>
                                                     <td>
                                                         @if ($value->client_satisfied !== null)
-                                                        {{$value->client_satisfied == true ? "Yes" : "No"}}
+                                                        {{ $value->client_satisfied == true ? 'Yes' : 'No' }}
                                                         @else
                                                         Not Provided
                                                         @endif
                                                     </td>
                                                     <td>
                                                         @if ($value->client_reviews !== null)
-                                                        {{$value->client_reviews}}
+                                                        {{ $value->client_reviews }}
                                                         @else
                                                         Not Provided
                                                         @endif
@@ -973,7 +1036,7 @@
                             </div>
                         </div>
                     </div>
-                    @if($finalProgressReviews->count() > 0)
+                    @if ($finalProgressReviews->count() > 0)
                     <div class="col-md-12 col-12">
                         <div class="card">
                             <div class="card-header">
@@ -994,9 +1057,9 @@
                                                 </tr>
                                                 @foreach ($finalProgressReviews as $item)
                                                 <tr>
-                                                    <td>{{$item->user->name}}</td>
+                                                    <td>{{ $item->user->name }}</td>
                                                     <td>
-                                                        @if($item->client_satisfied == 1)
+                                                        @if ($item->client_satisfied == 1)
                                                         Yes
                                                         @else
                                                         No
@@ -1017,7 +1080,7 @@
                         </div>
                     </div>
                     @endif
-                    @if($project->paymentRequest->count() > 0)
+                    @if ($project->paymentRequest->count() > 0)
                     <div class="col-md-12 col-12">
                         <div class="card">
                             <div class="card-header">
@@ -1036,19 +1099,19 @@
                                                     <td>Status</td>
                                                     <td>Reason</td>
                                                     <td>Media</td>
-                                                    @if(Auth::user()->hasRole('administrator'))
+                                                    @if (Auth::user()->hasRole('administrator'))
                                                     <td>Action</td>
                                                     @endif
                                                 </tr>
                                                 @foreach ($project->paymentRequest as $item)
                                                 <tr>
-                                                    <td>{{$item->user->name}}</td>
-                                                    <td> ${{number_format($item->amount)}}</td>
-                                                    <td>{{$item->description}}</td>
+                                                    <td>{{ $item->user->name }}</td>
+                                                    <td> ${{ number_format($item->amount) }}</td>
+                                                    <td>{{ $item->description }}</td>
                                                     <td>
                                                         {{ ucfirst($item->status) }}
                                                     </td>
-                                                    <td>{{$item->reason ?? ''}}</td>
+                                                    <td>{{ $item->reason ?? '' }}</td>
                                                     <td>
 
                                                         <button data-toggle="modal"
@@ -1071,41 +1134,49 @@
                                                                     <div class="modal-body">
                                                                         <div class="row">
                                                                             <div class="col-md-12">
-                                                                                <h3 class="display-4">Photos</h3>
+                                                                                <h3 class="display-8"
+                                                                                    style="font-weight: 700;">Photos
+                                                                                </h3>
                                                                             </div>
-                                                                            @foreach ((array)$item->images as $image)
+                                                                            @foreach ((array) $item->images as $image)
                                                                             @php
                                                                             $photo = $image;
-                                                                            if($photo)
-                                                                            if(filter_var($photo, FILTER_VALIDATE_URL)){
-                                                                            $photo = explode("/", $photo);
-                                                                            $photo = $photo[count($photo) -2] . '/' .
-                                                                            $photo[count($photo)-1];
+                                                                            if ($photo) {
+                                                                            if (filter_var($photo, FILTER_VALIDATE_URL))
+                                                                            {
+                                                                            $photo = explode('/', $photo);
+                                                                            $photo = $photo[count($photo) - 2] . '/' .
+                                                                            $photo[count($photo) - 1];
+                                                                            }
                                                                             }
                                                                             @endphp
 
-                                                                            <div class="col-md-2">
+                                                                            <div class="col-md-2 py-2">
                                                                                 <a target="_blank"
-                                                                                    href="/stream/{{$photo}}">
-                                                                                    <img src="/stream/{{$photo}}"
+                                                                                    href="/stream/{{ $photo }}">
+                                                                                    <img src="/stream/{{ $photo }}"
                                                                                         width="100%" alt="logo">
                                                                                 </a>
                                                                             </div>
                                                                             @endforeach
-                                                                            <div class="col-md-12">
-                                                                                <h3 class="display-4">Videos</h3>
+
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <div class="col-md-12 py-2">
+                                                                                <h3 class="display-8"
+                                                                                    style="font-weight: 700;">Videos
+                                                                                </h3>
                                                                             </div>
-                                                                            @if ((array)$item->videos)
-                                                                            @foreach ((array)$item->videos as $video)
-                                                                            <div class="col-md-4">
-                                                                                <video src="{{$video['file']}}"
+                                                                            @if ((array) $item->videos)
+                                                                            @foreach ((array) $item->videos as $video)
+                                                                            <div class="col-md-2 py-2">
+                                                                                <video src="{{ $video['file'] }}"
                                                                                     width="100%" controls="true"
                                                                                     autoplay="false">
-                                                                                    <source src="{{$video['file']}}">
+                                                                                    <source src="{{ $video['file'] }}">
                                                                                 </video>
                                                                             </div>
                                                                             @endforeach
-
                                                                             @endif
                                                                         </div>
                                                                     </div>
@@ -1116,18 +1187,18 @@
                                                             </div>
                                                         </div>
                                                     </td>
-                                                    @if(Auth::user()->hasRole('administrator'))
+                                                    @if (Auth::user()->hasRole('administrator'))
                                                     <td>
 
-                                                        @if($project->status != 'complete' || $project->status !=
+                                                        @if ($project->status != 'complete' || $project->status !=
                                                         'closed')
-                                                        @if($item->status == 'pending')
+                                                        @if ($item->status == 'pending')
                                                         <button class="btn-success btn"
                                                             wire:click='openPaymentRequestModel({{ $item->id }}, "approved")'>Approve</button>
                                                         <button class="btn-danger btn"
                                                             wire:click='openPaymentRequestModel({{ $item->id }}, "rejected")'>Reject</button>
                                                         @endif
-                                                        @if($item->status == 'rejected')
+                                                        @if ($item->status == 'rejected')
                                                         <button class="btn-success btn"
                                                             wire:click='openPaymentRequestModel({{ $item->id }}, "approved")'>Approve</button>
                                                         @endif
@@ -1145,7 +1216,7 @@
                         </div>
                     </div>
                     @endif
-                    @if($project->eventLog->count() > 0)
+                    @if ($project->eventLog->count() > 0)
                     <div class="col-md-12 col-12">
                         <div class="card">
                             <div class="card-header">
@@ -1163,8 +1234,8 @@
                                                 </tr>
                                                 @foreach ($project->eventLog as $item)
                                                 <tr>
-                                                    <td>{{$item->user->name}}</td>
-                                                    <td>{{$item->description}}</td>
+                                                    <td>{{ $item->user->name }}</td>
+                                                    <td>{{ $item->description }}</td>
                                                 </tr>
                                                 @endforeach
                                             </table>
@@ -1193,13 +1264,13 @@
                                                 </tr>
                                                 @foreach ($project->notes as $value)
                                                 <tr>
-                                                    <td>{{$value->user->name}}</td>
+                                                    <td>{{ $value->user->name }}</td>
                                                     <td>
-                                                        {{$value->notes}}
+                                                        {{ $value->notes }}
                                                     </td>
                                                     <td>
-                                                        {{\Carbon\Carbon::create($value->created_at)->format('d-m-Y h:i
-                                                        a')}}
+                                                        {{ \Carbon\Carbon::create($value->created_at)->format('d-m-Y h:i
+                                                                                                                    a') }}
                                                     </td>
                                                 </tr>
                                                 @endforeach
@@ -1219,15 +1290,17 @@
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-md-12">
-                                            @if($project->approved == 'approved')
-                                            <a href="/contracts/create/{{$project->id}}"><button
+                                            @if ($project->approved == 'approved')
+                                            <a href="/contracts/create/{{ $project->id }}"><button
                                                     class="btn btn-primary">Create New Contract</button></a>
                                             @endif
                                         </div>
                                         <div class="col-md-12">
-                                            @livewire('tables.project-contract-table', ['params' => [
-                                            'project_id' => $project->id
-                                            ]])
+                                            @livewire('tables.project-contract-table', [
+                                            'params' => [
+                                            'project_id' => $project->id,
+                                            ],
+                                            ])
                                         </div>
                                     </div>
                                 </div>
@@ -1239,186 +1312,209 @@
                             <div class="card-header">
                                 <h4 class="card-title">Project Gallery</h4>
                             </div>
+
                             <div class="card-content">
                                 <div class="card-body">
                                     <div class="row">
-                                        <div class="col-md-12">
+                                        {{-- <div class="col-md-12">
                                             <h3 class="display-4">Photos</h3>
-                                        </div>
-                                        @foreach ((array)$project->photos as $item)
-                                        @php
-                                        $photo = $item;
-                                        if($photo)
-                                        if(filter_var($photo, FILTER_VALIDATE_URL)){
-                                        $photo = explode("/", $photo);
-                                        $photo = $photo[count($photo) -2] . '/' . $photo[count($photo)-1];
-                                        }
-                                        @endphp
+                                        </div> --}}
 
-                                        <div class="col-md-2">
-                                            <a target="_blank" href="/stream/{{$photo}}">
-                                                <img src="/stream/{{$photo}}" width="100%" alt="">
-                                            </a>
-                                        </div>
-                                        @endforeach
-                                        <div class="col-md-12">
-                                            <h3 class="display-4">Videos</h3>
-                                        </div>
-                                        @if ((array)$project->videos)
-                                        @foreach ((array)$project->videos as $item)
-                                        <div class="col-md-4">
-                                            <video src="{{$item['file']}}" width="100%" controls="true"
-                                                autoplay="false">
-                                                <source src="{{$item['file']}}">
-                                            </video>
-                                        </div>
-                                        @endforeach
+                                        {{-- @foreach ((array) array_slice($project->photos, 0, 2) as $getPhoto)
+                                        
+                                            @php
+                                                $photo = $getPhoto;
+                                                if ($photo) {
+                                                    if (filter_var($photo, FILTER_VALIDATE_URL)) {
+                                                        $photo = explode('/', $photo);
+                                                        $photo = $photo[count($photo) - 2] . '/' . $photo[count($photo) - 1];
+                                                    }
+                                                }
+                                            @endphp
 
-                                        @endif
+                                            <div class="col-md-2 mt-2">
+                                                <a target="_blank" href="/stream/{{ $photo }}">
+                                        <img src="/stream/{{ $photo }}" width="100%" alt="">
+                                        </a>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </div>
-    </div>
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-xl" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Progress Timeline</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <ul class="timeline">
-                        @foreach ($timeLine as $item)
-                        <li>
-                            <a target="#">{{$item->title}}</a>
-                            <a href="#" class="float-right">{{\Carbon\Carbon::create($item->created_at)->format('d-m-Y
-                                H:i:s')}}</a>
-                            <p>{{$item->description}}</p>
-                            <div class="row">
-                                @if(isset($item->photos))
-                                @foreach ($item->photos as $photo)
-                                <div class="col-2">
-                                    <a target="_blank" href="{{$photo}}">
-                                        <img src="{{$photo}}">
-                                    </a>
-                                </div>
-
-                                @endforeach
-                                @endif
-                                @if ((array)$item->videos)
-                                @foreach ((array)$item->videos as $item)
-                                <div class="col-2">
-                                    <video src="{{$item['file']}}" width="100%" controls="true" autoplay="false">
-                                        <source src="{{$item['file']}}">
+                                    @endforeach --}}
+                                    {{-- <div class="col-md-12">
+                                            <h3 class="display-4">Videos</h3>
+                                        </div> --}}
+                                    {{-- @if ((array) $project->videos)
+                                            @foreach ((array) $project->videos as $item)
+                                                <div class="col-md-2">
+                                                    <video src="{{ $item['file'] }}" width="100%" controls="true"
+                                    autoplay="false">
+                                    <source src="{{ $item['file'] }}">
                                     </video>
                                 </div>
                                 @endforeach
-                                @endif
 
+                                @endif --}}
                             </div>
-                        </li>
-                        @endforeach
-                    </ul>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    @if(Auth::user()->user_type == 'franchise' && $finalProgress && ($project->status == 'complete'))
-    <div wire:ignore.self class="modal fade" id="exampleModal11" tabindex="-1" role="dialog"
-        aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-xl" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Add Progress</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-3 mt-1"><b>Satisfaction:</b></div>
-                        <div class="col-9 mt-1">
-                            <select class="form-control" wire:model="progress.satisfaction">
-                                <option value="">Select</option>
-                                <option value="1">Yes</option>
-                                <option value="0">No</option>
-                            </select>
-                            @error('progress.satisfaction')
-                            <span class="text-danger">{{$message}}</span>
-                            @enderror
-                        </div>
-                        <div class="col-3 mt-1"><b>Reason:</b></div>
-                        <div class="col-9 mt-1">
-                            <input wire:model="progress.reason" type="text" class="form-control"
-                                wire:model="selectedTask.title">
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-info" wire:click="addProggress()">Save</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    @endif
-    @if(Auth::user()->user_type == 'admin')
-    <div wire:ignore.self class="modal fade" id="exampleModal90" tabindex="-1" role="dialog"
-        aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-xl" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Activity Timeline</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-12">
-                            <table class="table">
-                                <tr>
-                                    <td>User</td>
-                                    <td>Description</td>
-                                    <td>Date</td>
-                                </tr>
-                                @foreach ($eventLogs as $item)
-                                <tr>
-                                    <td>{{$item->user->name}}</td>
-                                    <td>{{$item->description}}</td>
-                                    <td>{{date('Y-m-d h:i A', strtotime($item->created_at))}}</td>
-                                </tr>
-                                @endforeach
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
+                            <div class="d-md-flex">
+                                <div class="col-md-6">
+                                    <img src="/stream/{{ $photo }}" width="50%;" alt="Image">
+                                </div>
+                                <div class="col-md-6">
+                                    <img src="/stream/{{ $photo }}" width="50%;" alt="Image">
+                                </div>
+                            </div>
 
+                            <a target="__blank" href="{{ route('project.gallery', ['project' => $project->id]) }}"
+                                class="btn btn-primary">Show All Photos</a>
+                        </div>
+                    </div>
+                   
                 </div>
+        </div>
+    </div>
+    </section>
+</div>
+</div>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Progress Timeline</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <ul class="timeline">
+                    @foreach ($timeLine as $item)
+                    <li>
+                        <a target="#">{{ $item->title }}</a>
+                        <a href="#" class="float-right">{{ \Carbon\Carbon::create($item->created_at)->format('d-m-Y
+                                                                    H:i:s') }}</a>
+                        <p>{{ $item->description }}</p>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h3 class="display-8" style="font-weight: 700;">Photos
+                                </h3>
+                            </div>
+                            @if (isset($item->photos))
+                            @foreach ($item->photos as $photo)
+                            <div class="col-2 py-2">
+                                <a target="_blank" href="{{ $photo }}">
+                                    <img src="{{ $photo }}">
+                                </a>
+                            </div>
+                            @endforeach
+                            @endif
+
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h3 class="display-8" style="font-weight: 700;">Videos
+                                </h3>
+                            </div>
+                            @if ((array) $item->videos)
+                            @foreach ((array) $item->videos as $item)
+                            <div class="col-2 py-2">
+                                <video src="{{ $item['file'] }}" width="100%" controls="true" autoplay="false">
+                                    <source src="{{ $item['file'] }}">
+                                </video>
+                            </div>
+                            @endforeach
+                            @endif
+                        </div>
+                    </li>
+                    @endforeach
+                </ul>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
-    @endif
+</div>
+@if (Auth::user()->user_type == 'franchise' && $finalProgress && $project->status == 'complete')
+<div wire:ignore.self class="modal fade" id="exampleModal11" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add Progress</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-3 mt-1"><b>Satisfaction:</b></div>
+                    <div class="col-9 mt-1">
+                        <select class="form-control" wire:model="progress.satisfaction">
+                            <option value="">Select</option>
+                            <option value="1">Yes</option>
+                            <option value="0">No</option>
+                        </select>
+                        @error('progress.satisfaction')
+                        <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <div class="col-3 mt-1"><b>Reason:</b></div>
+                    <div class="col-9 mt-1">
+                        <input wire:model="progress.reason" type="text" class="form-control"
+                            wire:model="selectedTask.title">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info" wire:click="addProggress()">Save</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+@endif
+@if (Auth::user()->user_type == 'admin')
+<div wire:ignore.self class="modal fade" id="exampleModal90" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Activity Timeline</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12">
+                        <table class="table">
+                            <tr>
+                                <td>User</td>
+                                <td>Description</td>
+                                <td>Date</td>
+                            </tr>
+                            @foreach ($eventLogs as $item)
+                            <tr>
+                                <td>{{ $item->user->name }}</td>
+                                <td>{{ $item->description }}</td>
+                                <td>{{ date('Y-m-d h:i A', strtotime($item->created_at)) }}</td>
+                            </tr>
+                            @endforeach
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+
+            </div>
+        </div>
+    </div>
+</div>
+@endif
 
 </div>
 <script>
-    
+    function format(input) {
 
-    function format(input) 
-    {
-       
         var nStr = input.value + '';
         nStr = nStr.replace(/\,/g, "");
         x = nStr.split('.');
@@ -1429,10 +1525,10 @@
             x1 = x1.replace(rgx, '$1' + ',' + '$2');
         }
         input.value = x1 + x2;
-        
-        if(input.id == 'valueadd') 
-        {
+
+        if (input.id == 'valueadd') {
             @this.set('propertyValue', nStr);
         }
     }
+
 </script>
