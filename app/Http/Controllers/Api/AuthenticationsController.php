@@ -37,29 +37,31 @@ class AuthenticationsController extends Controller
 
         $user = User::where('email', $request->email)->first();
 
-        // if($request->app == 'tradesmen' && ($user->user_type != 'builder' || $user->user_type != 'evaluator' || $user->user_type != 'home-owner'))
-        // {
-        //     return response([
-        //         'message' => 'Please login into your respected app '.$user->user_type,
-        //         'data' => []
-        //     ], 300);
-        // }
+        if($request->app == 'tradesmen' && ($user->user_type != 'builder' && $user->user_type != 'evaluator' && $user->user_type != 'home-owner'))
+        {
+            return response([
+                'message' => 'Please login into your respective app '.$user->user_type,
+                'data' => []
+            ], 300);
+        }
 
         if($request->app == 'franchise' && $user->user_type != 'franchise')
         {
             return response([
-                'message' => 'Please login into your respected app '.$user->user_type,
+                'message' => 'Please login into your respective app '.$user->user_type,
                 'data' => []
             ], 300);
         }
+        
 
         elseif($request->app == 'admin' && $user->user_type != 'admin')
         {
             return response([
-                'message' => 'Please login into your respected app '.$user->user_type,
+                'message' => 'Please login into your respective app '.$user->user_type,
                 'data' => []
             ], 300);
         }
+        
 
         $fcm = Fcm::where('user_id', $user->id)->first();
         if($fcm && $request->fcm){

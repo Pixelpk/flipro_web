@@ -15,6 +15,7 @@ class UsersController extends Controller
 
     public function get(Request $request)
     {
+       
         $users = new User();
 
         #NOTE: If byId will return single record with given id

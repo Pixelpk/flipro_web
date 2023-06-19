@@ -58,6 +58,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::patch('payment-requests', [PaymentActionsController::class, 'update']);
     Route::post('payment-requests', [PaymentActionsController::class, 'create']);
     Route::patch('profile', [UserProfilesController::class, 'update']);
+    Route::get('profile', [UserProfilesController::class, 'profile']);
     Route::patch('password', [UserProfilesController::class, 'changePassword']);
     Route::post('logout', [UserProfilesController::class, 'logout']);
     Route::post('projects/value', [ProjectValuesController::class, 'create']);

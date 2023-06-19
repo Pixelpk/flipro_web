@@ -146,4 +146,14 @@ class UserProfilesController extends Controller
             'data' => 'null'
         ], 403);
     }
+
+    public function profile(Request $request)
+    {
+        $user = $request->user();
+
+        return response([
+            'message' => 'Profile found',
+            'data' => $user,
+        ]);
+    }
 }

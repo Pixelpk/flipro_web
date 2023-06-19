@@ -70,12 +70,6 @@
                                                 <div class="col-md-12 text-center mt-2">
                                                     <a href="#gallery"><button class="btn btn-primary">View
                                                             All</button></a>
-<<<<<<< HEAD
-                                                            <button wire:click="softDelete" class="btn btn-danger">Delete
-                                                                </button>
-=======
-
->>>>>>> 03a323a4f4a537adb0c93f407d78e4c22de4512c
                                                 </div>
                                             </div>
                                         </div>
